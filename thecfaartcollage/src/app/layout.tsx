@@ -1,21 +1,29 @@
-import Footer from '../components/layouts/Footer'
-import Header from '../components/layouts/Header'
-import Navbar from '../components/layouts/Navbar'
-import './globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Navbar from '../components/layouts/Navbar';
+import Footer from '../components/common/Footer';
 
-export const metadata = {
-  title: 'CFA Clone',
-  description: 'A clone of the CFA website',
-}
 
-export default function RootLayout({ children }:any) {
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'College of Fine Arts',
+  description: 'Premier institution for visual arts education in Bangalore',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
-        <Header/>
+      <body className={inter.className}>
+        <Navbar />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
-  )
-};
+  );
+}
