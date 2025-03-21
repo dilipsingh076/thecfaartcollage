@@ -39,32 +39,52 @@ export default function Navbar() {
         scrolled ? 'bg-white/95 backdrop-blur-sm' : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-2">
-            <div className="flex items-center space-x-6 text-sm text-white">
+          <div className="flex justify-between items-center py-1">
+            <div className="flex items-center space-x-6 text-sm">
               <div className="flex items-center">
                 <ClockIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span>Mon - Fri 8 AM - 5 PM</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-white'}>Mon - Fri 8 AM - 5 PM</span>
               </div>
               <div className="flex items-center">
                 <PhoneIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span>+2342 5446 67</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-white'}>+2342 5446 67</span>
               </div>
               <div className="flex items-center">
                 <LocationIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span>Greenpoint, Brooklyn</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-white'}>Greenpoint, Brooklyn</span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="#" className="text-white hover:text-red-500 transition-colors">
+              <Link 
+                href="#" 
+                className={`${
+                  scrolled ? 'text-gray-800' : 'text-white'
+                } hover:text-red-500 transition-colors`}
+              >
                 <TwitterIcon className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-white hover:text-red-500 transition-colors">
+              <Link 
+                href="#" 
+                className={`${
+                  scrolled ? 'text-gray-800' : 'text-white'
+                } hover:text-red-500 transition-colors`}
+              >
                 <FacebookIcon className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-white hover:text-red-500 transition-colors">
+              <Link 
+                href="#" 
+                className={`${
+                  scrolled ? 'text-gray-800' : 'text-white'
+                } hover:text-red-500 transition-colors`}
+              >
                 <YoutubeIcon className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-white hover:text-red-500 transition-colors">
+              <Link 
+                href="#" 
+                className={`${
+                  scrolled ? 'text-gray-800' : 'text-white'
+                } hover:text-red-500 transition-colors`}
+              >
                 <InstagramIcon className="w-5 h-5" />
               </Link>
             </div>
@@ -74,33 +94,33 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <nav className={`w-full transition-all duration-300 ${
-        scrolled ? 'py-2 bg-white/95 backdrop-blur-sm shadow-sm' : 'py-4'
+        scrolled ? 'py-1 bg-white/95 backdrop-blur-sm shadow-sm' : 'py-2'
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center h-12">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <Logo />
+              <Logo className="h-8 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6">
               {navLinks.map((link, index) => (
                 <div key={link.name} className="relative group">
                   <Link 
                     href={link.href} 
                     className={`text-base font-medium transition-colors duration-300 ${
                       scrolled 
-                        ? 'text-gray-800 hover:text-red-500' 
-                        : 'text-white hover:text-red-500'
-                    }`}
+                        ? 'text-gray-800' 
+                        : 'text-gray-800'
+                    } hover:text-red-500`}
                     onMouseEnter={() => link.dropdownItems.length > 0 ? setActiveDropdown(index) : undefined}
                     onMouseLeave={() => link.dropdownItems.length > 0 ? setActiveDropdown(null) : undefined}
                   >
                     <span className="flex items-center">
                       {link.name}
                       {link.dropdownItems.length > 0 && (
-                        <DropdownIcon className={`ml-1 w-4 h-4 ${scrolled ? 'text-gray-800' : 'text-white'}`} />
+                        <DropdownIcon className={`ml-1 w-4 h-4 text-gray-800`} />
                       )}
                     </span>
                   </Link>
@@ -140,11 +160,11 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+              className="lg:hidden p-1 rounded-lg hover:bg-white/10 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
             >
               <svg
-                className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`}
+                className="w-6 h-6 text-gray-800"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

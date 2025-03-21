@@ -1,8 +1,6 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import collagelogo from '../../Images/logo-2.png'
 export default function Logo() {
   return (
     // <Link href="/">
