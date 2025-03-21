@@ -101,12 +101,12 @@ const newsItems = [
 ];
 
 export default function HomePage() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      // setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     const handleScroll = () => {
