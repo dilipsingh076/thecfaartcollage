@@ -1,13 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import TriangleCarousel from '../components/common/TriangleCarousel';
-import ArtImage from '../components/common/ArtImage';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
-
+import { awards, departments, features, newsItems, notifications, testimonials } from '../constants/homeData';
 
 const slides = [
   {
@@ -18,31 +14,17 @@ const slides = [
     heroDescription: 'Develop your drawing skills with expert guidance and practice',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-0 w-[500px] h-[500px]">
+      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          {/* White Circle Background */}
-          <div className="absolute inset-0 rounded-full bg-white"></div>
-          
-          {/* Sketch Image */}
-          <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
             <div className="w-full h-full relative">
               <Image
-                src="https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?q=80&w=2070&auto=format&fit=crop"
-                alt="Sketch"
+                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-1.png"
+                alt="Art"
                 fill
-                className="object-cover"
+                className="object-cover p-4 lg:p-6"
               />
             </div>
-          </div>
-
-          {/* Decorative Elements */}
-          <div className="absolute -top-4 right-4 w-16 h-16 rounded-full bg-[#4A90E2] z-10"></div>
-          <div className="absolute top-1/2 -right-4 w-24 h-24 bg-[#FF6B6B] z-10"></div>
-          <div className="absolute bottom-1/4 right-0 w-20 h-20 bg-[#FFD700] z-10"></div>
-          
-          {/* Ink Splatter */}
-          <div className="absolute -top-8 -left-8 w-32 h-32">
-            <div className="w-full h-full bg-black opacity-20 rounded-full transform rotate-45"></div>
           </div>
         </div>
       </div>
@@ -56,31 +38,18 @@ const slides = [
     heroDescription: 'Create three-dimensional masterpieces with our sculpture program',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-0 w-[500px] h-[500px]">
+      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          {/* White Circle Background */}
-          <div className="absolute inset-0 rounded-full bg-white"></div>
-          
-          {/* Student Image */}
-          <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
             <div className="w-full h-full relative">
               <Image
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=2069&auto=format&fit=crop"
-                alt="Student"
+                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/Psittaciformes.png"
+                alt="Sculpture"
                 fill
-                className="object-cover"
+                className="object-cover p-4 lg:p-6"
+                priority
               />
             </div>
-          </div>
-
-          {/* Decorative Elements */}
-          <div className="absolute -top-4 left-4 w-16 h-16 rounded-full bg-[#4A90E2] z-10"></div>
-          <div className="absolute bottom-1/3 -left-4 w-24 h-24 bg-[#FF6B6B] z-10"></div>
-          <div className="absolute top-1/4 -right-4 w-20 h-20 bg-[#FFD700] z-10"></div>
-          
-          {/* Ink Splatter */}
-          <div className="absolute -top-8 -right-8 w-32 h-32">
-            <div className="w-full h-full bg-black opacity-20 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -94,31 +63,17 @@ const slides = [
     heroDescription: 'Learn modern digital art techniques and animation',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-0 w-[500px] h-[500px]">
+      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          {/* White Circle Background */}
-          <div className="absolute inset-0 rounded-full bg-white"></div>
-          
-          {/* Bird Image */}
-          <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
             <div className="w-full h-full relative">
               <Image
-                src="https://images.unsplash.com/photo-1444464666168-49d633b86797?q=80&w=2069&auto=format&fit=crop"
-                alt="Bird"
+                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-2.png"
+                alt="Digital Art"
                 fill
-                className="object-cover"
+                className="object-cover p-4 lg:p-6"
               />
             </div>
-          </div>
-
-          {/* Decorative Elements */}
-          <div className="absolute top-0 right-4 w-16 h-16 rounded-full bg-[#4A90E2] z-10"></div>
-          <div className="absolute bottom-1/4 right-0 w-24 h-24 bg-[#FF6B6B] z-10"></div>
-          <div className="absolute top-1/2 -right-4 w-20 h-20 bg-[#FFD700] z-10"></div>
-          
-          {/* Ink Splatter */}
-          <div className="absolute -top-8 -left-8 w-32 h-32">
-            <div className="w-full h-full bg-black opacity-20 rounded-full transform -rotate-45"></div>
           </div>
         </div>
       </div>
@@ -126,152 +81,10 @@ const slides = [
   }
 ];
 
-const features = [
-  {
-    title: 'Expert Faculty',
-    description: 'Learn from experienced artists and educators who are leaders in their fields',
-    icon: '🎨'
-  },
-  {
-    title: 'Modern Facilities',
-    description: 'Access state-of-the-art studios, workshops, and digital labs',
-    icon: '🏛️'
-  },
-  {
-    title: 'Industry Connections',
-    description: 'Connect with art galleries, museums, and creative industries',
-    icon: '🤝'
-  },
-  {
-    title: 'Creative Environment',
-    description: 'Immerse yourself in a vibrant artistic community',
-    icon: '✨'
-  }
-];
 
-const departments = [
-  {
-    title: 'BVA Foundation',
-    description: 'Foundation studies in visual arts for first-year students',
-    link: '/departments/bva-foundation'
-  },
-  {
-    title: 'Painting',
-    description: 'Explore various painting techniques and styles',
-    link: '/departments/painting'
-  },
-  {
-    title: 'Sculpture',
-    description: 'Learn three-dimensional art forms and techniques',
-    link: '/departments/sculpture'
-  },
-  {
-    title: 'Graphic Art',
-    description: 'Digital and traditional graphic design',
-    link: '/departments/graphic-art'
-  }
-];
 
-const newsItems = [
-  {
-    title: 'Admissions Open for 2024-25',
-    date: 'March 15, 2024',
-    description: 'Apply now for our BVA and MVA programs. Limited seats available.',
-    link: '/admission'
-  },
-  {
-    title: 'Annual Art Exhibition',
-    date: 'April 5, 2024',
-    description: 'Join us for our annual student art exhibition showcasing creative excellence.',
-    link: '/events'
-  },
-  {
-    title: 'New Digital Art Lab',
-    date: 'March 1, 2024',
-    description: 'State-of-the-art digital art lab now open for students.',
-    link: '/departments/graphic-art'
-  }
-];
 
-const notifications = [
-  {
-    title: "Upcoming Exhibition",
-    date: "April 2024",
-    content: "Student Art Exhibition showcasing the best works of 2024 batch"
-  },
-  {
-    title: "Workshop Series",
-    date: "May 2024",
-    content: "Special workshops on contemporary art techniques by industry experts"
-  },
-  {
-    title: "Alumni Meet",
-    date: "June 2024",
-    content: "Annual alumni gathering celebrating 60 years of artistic excellence"
-  },
-  {
-    title: "International Art Fair",
-    date: "July 2024",
-    content: "CFA students to participate in International Art Fair 2024"
-  },
-  {
-    title: "Guest Lecture Series",
-    date: "August 2024",
-    content: "Distinguished artists and educators sharing their expertise"
-  },
-  {
-    title: "Cultural Festival",
-    date: "September 2024",
-    content: "Annual cultural celebration featuring performances and exhibitions"
-  }
-];
 
-const testimonials = [
-  {
-    quote: "The College of Fine Arts has been instrumental in shaping the artistic landscape of our region. Their commitment to excellence and innovation in art education is truly remarkable.",
-    author: "Dr. Rajesh Kumar",
-    position: "Art Historian",
-    organization: "National Gallery of Modern Art",
-    rating: 5
-  },
-  {
-    quote: "A beacon of artistic excellence, fostering creativity and nurturing talent. The institution's dedication to preserving traditional art forms while embracing modern techniques is commendable.",
-    author: "Prof. Sarah Chen",
-    position: "Art Curator",
-    organization: "International Art Foundation",
-    rating: 5
-  },
-  {
-    quote: "The quality of education and the level of artistic talent that emerges from CFA is exceptional. Their holistic approach to art education sets them apart.",
-    author: "Mr. Arun Patel",
-    position: "Gallery Director",
-    organization: "Contemporary Arts Center",
-    rating: 5
-  }
-];
-
-const awards = [
-  {
-    title: "Best Art Institution",
-    year: "2023",
-    provider: "Education Excellence Awards"
-  },
-  {
-    title: "Outstanding Cultural Contribution",
-    year: "2022",
-    provider: "Karnataka State Awards"
-  },
-  {
-    title: "Heritage Preservation Award",
-    year: "2021",
-    provider: "Art & Culture Foundation"
-  },
-  {
-    title: "Excellence in Art Education",
-    year: "2020",
-    provider: "National Education Board"
-  }
-];
 
 const SixtyYearsLogo = () => (
   <svg viewBox="0 0 80 60" className="w-32 mb-8">
@@ -457,6 +270,416 @@ const TestimonialCarousel = () => {
   );
 };
 
+interface DepartmentContent {
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
+interface Department {
+  id: number;
+  title: string;
+  heading: string;
+  content: DepartmentContent;
+  icon: React.ReactNode;
+}
+
+const departmentData: Department[] = [
+  {
+    id: 1,
+    title: "Proof Of Concept & Prototype",
+    heading: "01",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    ),
+    content: {
+      title: "Proof Of Concept & Prototype",
+      subtitle: "Validating Ideas Through Detailed Proof of Concept and Prototyping",
+      description: "Before diving into full-scale development, we help you validate your ideas with a well-crafted proof of concept and prototype. This critical step allows you to test feasibility, gather user feedback, and make informed decisions, ensuring your project starts on solid ground."
+    }
+  },
+  {
+    id: 2,
+    title: "LLM Development & Integration",
+    heading: "02",
+    content: {
+      title: "LLM Development & Integration",
+      subtitle: "Leveraging Language Models for Enhanced Intelligence",
+      description: "We excel at integrating Large Language Models (LLM) into your systems. Our expertise brings advanced AI capabilities to your applications, enhancing automation, customer interactions, and data insights. Unlock smarter solutions with our tailored LLM integration."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 3,
+    title: "Web & Mobile App Development",
+    heading: "03",
+    content: {
+      title: "Web & Mobile App Development",
+      subtitle: "Crafting Digital Experiences Across Platforms",
+      description: "Whether you need a dynamic web platform or a mobile app, our team develops customized solutions that align perfectly with your business objectives. From design to deployment, we ensure your digital products are robust, user-friendly, and scalable."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 4,
+    title: "Minimum Viable Product",
+    heading: "04",
+    content: {
+      title: "Minimum Viable Product Development",
+      subtitle: "Rapidly Developing MVPs to Bring Your Vision to Market",
+      description: "We help startups and established businesses alike to quickly bring their ideas to life with Minimum Viable Products (MVPs). Our approach focuses on delivering core functionalities, allowing you to test the market and gather valuable feedback for future iterations."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 5,
+    title: "Startup Idea Validation",
+    heading: "05",
+    content: {
+      title: "Startup Idea Validation & Consulting",
+      subtitle: "Expert Consulting to Validate and Refine Your Ideas",
+      description: "Before you invest significant time and resources, we offer comprehensive idea validation and consulting services. Our experts work with you to assess market potential, identify challenges, and refine your business concept, setting you up for success from the start."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 6,
+    title: "Progressive Web Apps",
+    heading: "06",
+    content: {
+      title: "Progressive Web Apps",
+      subtitle: "Building High-Performance PWAs for Seamless Experience",
+      description: "We design and develop Progressive Web Apps (PWAs) that offer the performance and user experience of native apps, combined with the reach of the web. PWAs are fast, reliable, and engage users across multiple devices, providing a seamless experience."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 7,
+    title: "UI/UX Design Services",
+    heading: "07",
+    content: {
+      title: "UI/UX Design Services",
+      subtitle: "Creating Intuitive and Engaging User Experiences",
+      description: "Our UI/UX design services focus on creating visually appealing and highly functional interfaces that resonate with users. We prioritize user experience at every step, ensuring your digital products are not only beautiful but also easy to use."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 8,
+    title: "Digital Transformation",
+    heading: "08",
+    content: {
+      title: "Digital Transformation",
+      subtitle: "Modernizing Your Business for the Digital Age",
+      description: "We guide organizations through comprehensive digital transformation journeys. Our expertise helps you leverage cutting-edge technologies to improve efficiency, enhance customer experience, and stay competitive in the digital landscape."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 9,
+    title: "Cloud Solutions",
+    heading: "09",
+    content: {
+      title: "Cloud Solutions",
+      subtitle: "Scalable and Secure Cloud Infrastructure",
+      description: "Our cloud solutions help businesses leverage the power of cloud computing for improved scalability, security, and performance. We design and implement cloud architectures that align with your business needs and growth objectives."
+    },
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+      </svg>
+    )
+  },
+  {
+    id: 10,
+    title: "AI & Machine Learning",
+    heading: "10",
+    content: {
+      title: "AI & Machine Learning",
+      subtitle: "Intelligent Solutions for Complex Challenges",
+      description: "We develop sophisticated AI and machine learning solutions that help businesses automate processes, gain insights from data, and make better decisions. Our expertise spans across various AI technologies and applications."
+    },
+     icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
+          <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
+          <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
+        </svg>
+      )
+  }
+];
+
+const InteractiveContentSection: React.FC = () => {
+  const [activeBox, setActiveBox] = useState(1);
+  const [isRightSideSticky, setIsRightSideSticky] = useState(false);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rightSideRef = useRef<HTMLDivElement>(null);
+
+  const setRef = (index: number) => (el: HTMLDivElement | null) => {
+    sectionRefs.current[index] = el;
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !containerRef.current || !rightSideRef.current) return;
+      
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const sectionInView = sectionRect.top <= windowHeight && sectionRect.bottom >= 0;
+      
+      const shouldBeSticky = sectionInView && 
+                         containerRect.top <= windowHeight/2 && 
+                         containerRect.bottom >= windowHeight/2;
+
+      setIsRightSideSticky(shouldBeSticky);
+
+      if (sectionInView) {
+        const sections = sectionRefs.current;
+        let newActiveSection = activeBox;
+
+        sections.forEach((section, index) => {
+          if (!section) return;
+          
+          const rect = section.getBoundingClientRect();
+          const triggerPoint = windowHeight * 0.6;
+          if (rect.top <= triggerPoint && rect.bottom >= windowHeight/2) {
+            newActiveSection = index + 1;
+          }
+        });
+
+        if (newActiveSection !== activeBox) {
+          setActiveBox(newActiveSection);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeBox]);
+
+  const activeContent = departmentData.find((dept) => dept.id === activeBox)?.content;
+
+  return (
+    <section ref={sectionRef} className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="mb-16">
+          <p className="text-blue-600 font-medium flex items-center gap-2 mb-2">
+            Solutions
+            <span className="w-12 h-[1px] bg-blue-600 ml-2"></span>
+          </p>
+          <div className="mb-4">
+            <h2 className="text-4xl font-medium text-gray-900">
+              <div className="font-semibold">Transforming Ideas into Reality</div>
+            </h2>
+          </div>
+          <p className="text-gray-600 text-lg leading-relaxed">
+            Comprehensive Solutions to Drive Your Digital Success
+          </p>
+        </div>
+
+        <div ref={containerRef} className="flex flex-col lg:flex-row gap-0 min-h-[800px] relative">
+          {/* Left side - Department list */}
+          <div className="lg:w-[45%] relative z-30">
+            <div className="space-y-3">
+              {departmentData.map((dept, index) => (
+                <div
+                  key={dept.id}
+                  ref={setRef(index)}
+                  data-id={dept.id}
+                  className={`w-full max-w-[520px] transition-all duration-300 relative z-10 hover:z-20`}
+                >
+                  <div
+                    onClick={() => {
+                      setActiveBox(dept.id);
+                      const element = sectionRefs.current[index];
+                      element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }}
+                    className={`group cursor-pointer p-5 flex items-center transition-all duration-300 ${
+                      activeBox === dept.id 
+                        ? 'bg-gradient-to-r from-[#fafbff] to-[#f5f7ff] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)]' 
+                        : 'bg-white hover:bg-gray-50/60'
+                    }`}
+                  >
+                    <div className="flex items-center gap-5 flex-1">
+                      <div className={`relative flex items-center justify-center ${
+                        activeBox === dept.id ? 'text-black' : 'text-gray-400'
+                      }`}>
+                        {/* Icon container */}
+                        <div className={`w-[48px] h-[48px] flex items-center justify-center rounded-xl transition-all duration-300 ${
+                          activeBox === dept.id 
+                            ? 'bg-[#f5f7ff] shadow-sm' 
+                            : 'bg-[#fafafa]'
+                        }`}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none" className="transition-all duration-300">
+                            <path fill="currentColor" d="M14.495 29a2.637 2.637 0 0 0 .88-5.12V12.3a.879.879 0 1 0-1.758 0v11.58a2.637 2.637 0 0 0 .878 5.12Zm0-3.516a.88.88 0 1 1 0 1.758.88.88 0 0 1 0-1.758ZM11.863 19.486v-4.545a.879.879 0 1 0-1.758 0v4.545a.886.886 0 0 1-.257.622l-1.246 1.245a2.647 2.647 0 1 0 1.243 1.243l1.245-1.246a2.617 2.617 0 0 0 .773-1.864ZM7.469 24.61a.879.879 0 1 1 0-1.757.879.879 0 0 1 0 1.757ZM21.543 26.366a2.637 2.637 0 1 0-1.134-5.013l-1.245-1.245a.886.886 0 0 1-.258-.622v-4.545a.879.879 0 1 0-1.758 0v4.545a2.62 2.62 0 0 0 .773 1.864l1.245 1.246a2.63 2.63 0 0 0 2.377 3.77Zm.879-2.636a.878.878 0 1 1-1.757 0 .878.878 0 0 1 1.757 0Z"/>
+                            <path fill="currentColor" d="M2.637 20.214H7.47a.879.879 0 0 0 0-1.758H2.637a.879.879 0 0 1-.88-.879V6.152h25.488v11.425a.878.878 0 0 1-.88.88h-4.833a.879.879 0 1 0 0 1.757h4.834a2.64 2.64 0 0 0 2.636-2.637V2.637A2.64 2.64 0 0 0 26.366 0H2.636A2.64 2.64 0 0 0 0 2.637v14.94a2.64 2.64 0 0 0 2.637 2.637Zm0-18.456h23.729a.879.879 0 0 1 .879.879v1.757H1.758V2.637a.879.879 0 0 1 .879-.88Z"/>
+                            <path fill="currentColor" d="M3.082 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758ZM5.27 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758ZM7.473 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758Z"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <h6 className={`text-[15px] font-medium leading-snug transition-colors duration-300 ${
+                          activeBox === dept.id ? 'text-black' : 'text-gray-600'
+                        }`}>
+                          {dept.title}
+                        </h6>
+                        <div className={`text-[28px] font-semibold leading-none mt-1 transition-colors duration-300 ${
+                          activeBox === dept.id ? 'text-black' : 'text-gray-300'
+                        }`}>
+                          {dept.heading}
+                        </div>
+                      </div>
+                      <div className={`transform transition-all duration-300 ml-auto ${
+                        activeBox === dept.id 
+                          ? 'opacity-100 translate-x-0' 
+                          : 'opacity-0 -translate-x-2'
+                      }`}>
+                        <div className="w-[30px] h-[30px] rounded-full flex items-center justify-center bg-black">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" className="text-white scale-[0.6]">
+                            <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                              <path d="M15 26.25c6.213 0 11.25-5.037 11.25-11.25S21.213 3.75 15 3.75 3.75 8.787 3.75 15 8.787 26.25 15 26.25ZM18.75 18.75l-7.5-7.5"/>
+                              <path d="M18.75 13.125v5.625h-5.625"/>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right side - Department Content */}
+          <div ref={rightSideRef} className="lg:w-[65%] relative -ml-[10%] z-20">
+            <div className={`${
+              isRightSideSticky 
+                ? 'fixed top-1/2 -translate-y-1/2 w-[calc(65%-2rem)] max-w-[1000px]' 
+                : 'relative w-full'
+            } transition-all duration-300`}>
+              <div className="bg-gradient-to-br from-[#002B5B] to-[#1B4B79] rounded-[2.5rem] p-16 shadow-2xl min-h-[600px] flex flex-col relative overflow-hidden">
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={`https://ik.imagekit.io/demo/img/default-image.jpg?tr=w-1200,h-800`}
+                    alt="Background"
+                    fill
+                    sizes="100vw"
+                    priority={true}
+                    className="object-cover opacity-5"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#002B5B]/90 to-[#1B4B79]/90"></div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-grow relative z-10">
+                  <h3 className="text-[2.75rem] font-bold text-white mb-8 leading-[1.2]">
+                    {activeContent?.title}
+                  </h3>
+                  <h5 className="text-2xl text-blue-100 mb-10 leading-normal">
+                    {activeContent?.subtitle}
+                  </h5>
+                  <p className="text-blue-50/90 mb-16 text-xl leading-relaxed">
+                    {activeContent?.description}
+                  </p>
+                </div>
+                <div className="relative z-10">
+                  <button className="text-white text-xl font-medium hover:text-blue-200 transition-colors flex items-center gap-4 group">
+                    <span>Explore</span>
+                    <svg 
+                      className="transform transition-transform group-hover:translate-x-1 w-7 h-7" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-0 left-0 w-[700px] h-[700px] bg-blue-600/10 rounded-full blur-[140px]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Add custom scrollbar styles to your global CSS
+const styles = `
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #e2e8f0 #ffffff;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #e2e8f0;
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #cbd5e1;
+  }
+`;
+
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -479,415 +702,413 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              currentSlide === index ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            {/* Background Image without dark overlay */}
-            <div className=" flex relative h-full">
-              <Image
-                src={slide.imageUrl}
-                alt={slide.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              
-              {/* Content section - removed dark overlay div */}
-              <div className="relative z-10 h-full flex items-center">
-                <div className="container mx-auto px-4">
-                  <div className="max-w-3xl">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900">
-                      {slide.heroTitle}
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-800 font-medium">
-                      {slide.heroDescription}
-                    </p>
-                    <div className="mt-8">
-                      <button className="bg-[#963B25] text-white px-8 py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0">
-                    {slide.circleContent}
-              </div>
-            </div>
-          </div>
-        ))}
-        
-        {/* Navigation arrows with Lucide icons */}
-        <button
-          onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-[#963B25] p-2 rounded-full hover:bg-white transition-colors duration-300"
-        >
-          <ChevronLeft size={24} strokeWidth={2} />
-        </button>
-        <button
-          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-[#963B25] p-2 rounded-full hover:bg-white transition-colors duration-300"
-        >
-          <ChevronRight size={24} strokeWidth={2} />
-        </button>
-      </section>
-
-      {/* Admissions Banner Section */}
-      <section className="bg-gradient-to-r from-blue-800 to-blue-600 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Admissions Open 2024-2025
-              </h2>
-              <p className="text-white/90 text-lg">
-                Join our prestigious art programs
-              </p>
-            </div>
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <Link
-                href="/admission"
-                className="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 font-semibold rounded-full hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap text-center"
-              >
-                Click Here to download BVA Prospectus and Application Form
-              </Link>
-              <div className="hidden md:flex flex-col items-center bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                <div className="grid grid-cols-8 grid-rows-8 gap-0.5 w-16 h-16">
-                  {Array(64).fill(null).map((_, index) => (
-                    <div
-                      key={index}
-                      className={`w-2 h-2 ${
-                        Math.random() > 0.5 ? 'bg-blue-900' : 'bg-transparent'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-xs mt-2 text-blue-900 font-medium">Scan QR Code</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* After Admissions Banner Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Left Side - Logo and Content */}
-            <div>
-              <div className="flex gap-6 mb-8">
-                <SixtyYearsLogo />
-                <div className="space-y-1 self-center">
-                  <h2 className="text-2xl font-bold text-[#38B2AC]">
-                    ARTISTIC EXCELLENCE
-                  </h2>
-                  <p className="text-lg text-[#38B2AC] font-medium tracking-wide">
-                    CULTIVATING STUDENT CREATIVITY
-                  </p>
-                </div>
-              </div>
-
-              <div className="prose prose-lg max-w-none text-gray-600">
-                <div className="text-justify space-y-4">
-                  <p>
-                    The College of Fine Arts has a rich history dating back to 1964 when it was initially established as 'Chitrakala Vidyalaya' under the guidance of Karnataka Chitrakala Parishath. It owes its establishment to Sri M Aryamurthy the Founder President, and led by the visionary leadership of Prof. M.S. Nanjunda Rao, appointed as the Founder Secretary and first Principal. Sri S. S Kukke briefly assumed the role of Principal during the early stages.
-                  </p>
-                  <p>
-                    In 1983, CFA was elevated to the status of a degree college, offering undergraduate programs. It further expanded its offerings in 1990 to include postgraduate and post-diploma courses. Today, College of Fine Arts stands as a testament to the enduring legacy of its founders and its vibrant community of faculty, staff, students, and alumni in shaping the institution into a renowned center of Artistic excellence.
-                  </p>
-                  <p>
-                    The College of Fine Arts, Karnataka Chitrakala Parishath, is affiliated with Bangalore University and offers undergraduate and postgraduate programs in Visual Arts. The Bachelor of Visual Arts (BVA) is a comprehensive 4-year program spanning 8 semesters, including 2 semesters of foundational studies and 6 semesters of specialization. The Master of Visual Arts (MVA) is a 2-year program divided into 4 semesters, designed for advanced study and research in Visual arts.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Notifications Slider */}
-            <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-[600px]">
-              <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-800 to-blue-600 text-white py-4 px-6 z-10">
-                <h3 className="text-2xl font-bold">Latest Updates</h3>
-              </div>
-              
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white z-[5]"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white z-[5]"></div>
-              
-              <div className="pt-20 pb-6 px-6 h-full overflow-hidden">
-                <div className="space-y-4 animate-scroll">
-                  {[...notifications, ...notifications].map((notification, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-500 hover:shadow-md transition-shadow"
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-semibold text-lg text-gray-900">
-                          {notification.title}
-                        </h4>
-                        <span className="text-sm text-blue-600 font-medium">
-                          {notification.date}
-                        </span>
+    <main className="min-h-screen bg-[#FDF6E9]">
+      <style jsx global>{styles}</style>
+      <div className="relative">
+        {/* Hero Section */}
+        <section className="relative min-h-screen lg:h-[90vh]">
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                currentSlide === index ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              {/* Background Image without dark overlay */}
+              <div className="flex relative h-full">
+                <Image
+                  src={slide.imageUrl}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                
+                {/* Content section - removed dark overlay div */}
+                <div className="relative z-10 h-full w-full flex items-center">
+                  <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center justify-around">
+                      {/* Left Content */}
+                      <div className="max-w-xl">
+                        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900">
+                          {slide.heroTitle}
+                        </h1>
+                        <p className="text-xl md:text-2xl text-gray-800 font-medium">
+                          {slide.heroDescription}
+                        </p>
+                        <div className="mt-8">
+                          <button className="bg-[#963B25] text-white px-8 py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300">
+                            Learn More
+                          </button>
+                        </div>
                       </div>
-                      <p className="text-gray-600">{notification.content}</p>
+                      
+                      {/* Right Content - Circle Image */}
+                      <div className="relative flex items-center justify-center lg:justify-end">
+                        {slide.circleContent}
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
+        </section>
 
-          {/* Academic Structure and Departments Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-800">
-              <h3 className="text-xl font-semibold mb-4 text-gray-900">Academic Structure</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-600">
-                <li>B.V.A - 4 years (8 semesters)
-                  <ul className="pl-6 mt-1 space-y-1 text-gray-500">
-                    <li>• 2 Semesters of Foundation</li>
-                    <li>• 6 Semesters of Specialization</li>
-                  </ul>
-                </li>
-                <li>M.V.A - 2 years (4 semesters)</li>
-                <li>Certificate Courses - 6 months
-                  <ul className="pl-6 mt-1 space-y-1 text-gray-500">
-                    <li>• Drawing</li>
-                    <li>• Painting</li>
-                    <li>• Sculpture</li>
-                    <li>• Printmaking</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <h3 className="text-xl font-semibold mb-4 text-gray-900">Departments & Activities</h3>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Painting</li>
-                    <li>• Printmaking</li>
-                    <li>• Art History</li>
-                    <li>• Animation</li>
-                  </ul>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Sculpture</li>
-                    <li>• Applied Art</li>
-                    <li>• Ceramics</li>
-                  </ul>
-                </div>
-                <p className="text-gray-600 mt-4">
-                  Each department organizes frequent educational excursions that encompass visits to historical monuments, art galleries, museums and industries/corporate sectors. Additionally, students undertake project assignments for internal assessment and internships as part of their academic experience.
-                </p>
-                <p className="text-gray-600">
-                  Distinguished visiting scholars, artists and industry experts are regularly invited to engage with students, sharing their insights and expertise through lectures, demonstrations and workshops.
+        {/* Admissions Banner Section */}
+        <section className="bg-gradient-to-r from-blue-800 to-blue-600 py-8">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  Admissions Open 2024-2025
+                </h2>
+                <p className="text-white/90 text-lg">
+                  Join our prestigious art programs
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Awards & Achievements Section */}
-      <section className="py-20 relative overflow-hidden">
-        {/* Background Design Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative">
-          {/* Section Header with new design */}
-          <div className="mb-16 text-center">
-            <div className="inline-block">
-              <div className="flex items-center gap-3 mb-4 justify-center">
-                <div className="h-[1px] w-12 bg-blue-600"></div>
-                <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                  Digital Experience
-                </span>
-                <div className="h-[1px] w-12 bg-blue-600"></div>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Awards & Achievements
-              </h2>
-              <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Awards Grid - 7 columns */}
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {awards.map((award, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative group border border-gray-100"
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <Link
+                  href="/admission"
+                  className="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 font-semibold rounded-full hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap text-center"
                 >
-                  <div className="absolute top-6 right-6 text-amber-500 transform group-hover:rotate-12 transition-transform duration-300">
-                    <AwardLeafIcon />
+                  Click Here to download BVA Prospectus and Application Form
+                </Link>
+                <div className="hidden md:flex flex-col items-center bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="grid grid-cols-8 grid-rows-8 gap-0.5 w-16 h-16">
+                    {Array(64).fill(null).map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-2 h-2 ${
+                          Math.random() > 0.5 ? 'bg-blue-900' : 'bg-transparent'
+                        }`}
+                      />
+                    ))}
                   </div>
-                  <div className="pr-12">
-                    <div className="text-sm text-blue-600 font-medium mb-2">{award.year}</div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
-                      {award.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">{award.provider}</p>
+                  <span className="text-xs mt-2 text-blue-900 font-medium">Scan QR Code</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+ 
+        {/* After Admissions Banner Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Left Side - Logo and Content */}
+              <div>
+                <div className="flex gap-6 mb-8">
+                  <SixtyYearsLogo />
+                  <div className="space-y-1 self-center">
+                    <h2 className="text-2xl font-bold text-[#38B2AC]">
+                      ARTISTIC EXCELLENCE
+                    </h2>
+                    <p className="text-lg text-[#38B2AC] font-medium tracking-wide">
+                      CULTIVATING STUDENT CREATIVITY
+                    </p>
                   </div>
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-600 to-amber-500 group-hover:w-full transition-all duration-300"></div>
+                </div>
+
+                <div className="prose prose-lg max-w-none text-gray-600">
+                  <div className="text-justify space-y-4">
+                    <p>
+                      The College of Fine Arts has a rich history dating back to 1964 when it was initially established as 'Chitrakala Vidyalaya' under the guidance of Karnataka Chitrakala Parishath. It owes its establishment to Sri M Aryamurthy the Founder President, and led by the visionary leadership of Prof. M.S. Nanjunda Rao, appointed as the Founder Secretary and first Principal. Sri S. S Kukke briefly assumed the role of Principal during the early stages.
+                    </p>
+                    <p>
+                      In 1983, CFA was elevated to the status of a degree college, offering undergraduate programs. It further expanded its offerings in 1990 to include postgraduate and post-diploma courses. Today, College of Fine Arts stands as a testament to the enduring legacy of its founders and its vibrant community of faculty, staff, students, and alumni in shaping the institution into a renowned center of Artistic excellence.
+                    </p>
+                    <p>
+                      The College of Fine Arts, Karnataka Chitrakala Parishath, is affiliated with Bangalore University and offers undergraduate and postgraduate programs in Visual Arts. The Bachelor of Visual Arts (BVA) is a comprehensive 4-year program spanning 8 semesters, including 2 semesters of foundational studies and 6 semesters of specialization. The Master of Visual Arts (MVA) is a 2-year program divided into 4 semesters, designed for advanced study and research in Visual arts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Notifications Slider */}
+              <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-[600px]">
+                <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-800 to-blue-600 text-white py-4 px-6 z-10">
+                  <h3 className="text-2xl font-bold">Latest Updates</h3>
+                </div>
+                
+                <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white z-[5]"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white z-[5]"></div>
+                
+                <div className="pt-20 pb-6 px-6 h-full overflow-hidden">
+                  <div className="space-y-4 animate-scroll">
+                    {[...notifications, ...notifications].map((notification, index) => (
+                      <div
+                        key={index}
+                        className="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-500 hover:shadow-md transition-shadow"
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <h4 className="font-semibold text-lg text-gray-900">
+                            {notification.title}
+                          </h4>
+                          <span className="text-sm text-blue-600 font-medium">
+                            {notification.date}
+                          </span>
+                        </div>
+                        <p className="text-gray-600">{notification.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Academic Structure and Departments Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+              <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-800">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900">Academic Structure</h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-600">
+                  <li>B.V.A - 4 years (8 semesters)
+                    <ul className="pl-6 mt-1 space-y-1 text-gray-500">
+                      <li>• 2 Semesters of Foundation</li>
+                      <li>• 6 Semesters of Specialization</li>
+                    </ul>
+                  </li>
+                  <li>M.V.A - 2 years (4 semesters)</li>
+                  <li>Certificate Courses - 6 months
+                    <ul className="pl-6 mt-1 space-y-1 text-gray-500">
+                      <li>• Drawing</li>
+                      <li>• Painting</li>
+                      <li>• Sculpture</li>
+                      <li>• Printmaking</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900">Departments & Activities</h3>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <ul className="space-y-2 text-gray-600">
+                      <li>• Painting</li>
+                      <li>• Printmaking</li>
+                      <li>• Art History</li>
+                      <li>• Animation</li>
+                    </ul>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>• Sculpture</li>
+                      <li>• Applied Art</li>
+                      <li>• Ceramics</li>
+                    </ul>
+                  </div>
+                  <p className="text-gray-600 mt-4">
+                    Each department organizes frequent educational excursions that encompass visits to historical monuments, art galleries, museums and industries/corporate sectors. Additionally, students undertake project assignments for internal assessment and internships as part of their academic experience.
+                  </p>
+                  <p className="text-gray-600">
+                    Distinguished visiting scholars, artists and industry experts are regularly invited to engage with students, sharing their insights and expertise through lectures, demonstrations and workshops.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Awards & Achievements Section */}
+        <section className="py-20 relative overflow-hidden">
+          {/* Background Design Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50">
+            <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative">
+            {/* Section Header with new design */}
+            <div className="mb-16 text-center">
+              <div className="inline-block">
+                <div className="flex items-center gap-3 mb-4 justify-center">
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                  <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                    Digital Experience
+                  </span>
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  Awards & Achievements
+                </h2>
+                <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Awards Grid - 7 columns */}
+              <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {awards.map((award, index) => (
+                  <div 
+                    key={index}
+                    className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative group border border-gray-100"
+                  >
+                    <div className="absolute top-6 right-6 text-amber-500 transform group-hover:rotate-12 transition-transform duration-300">
+                      <AwardLeafIcon />
+                    </div>
+                    <div className="pr-12">
+                      <div className="text-sm text-blue-600 font-medium mb-2">{award.year}</div>
+                      <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {award.title}
+                      </h3>
+                      <p className="text-sm text-gray-500">{award.provider}</p>
+                    </div>
+                    <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-600 to-amber-500 group-hover:w-full transition-all duration-300"></div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Testimonial Carousel - 5 columns */}
+              <div className="lg:col-span-5">
+                <TestimonialCarousel />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Chitrasanthe Welcome Banner */}
+        <section className="py-12 bg-[#963B25] relative">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center justify-center text-center text-white space-y-4">
+              <div className="max-w-3xl">
+                <h2 className="text-2xl md:text-4xl font-bold leading-tight">
+                  Welcomes you to 22nd chitrasanthe, to be held on{' '}
+                  <span className="block mt-1">
+                    Sunday, 05.01.2025
+                  </span>
+                </h2>
+              </div>
+              
+              <Link
+                href="/registration"
+                className="inline-block px-6 py-3 bg-[#FFC107] text-black font-bold text-lg rounded-lg hover:bg-[#FFD54F] transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Artist Registration
+              </Link>
+            </div>
+          </div>
+
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: '20px 20px'
+            }}></div>
+          </div>
+        </section>
+
+        {/* Interactive Content Section */}
+        <InteractiveContentSection />
+
+        {/* Features Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Why Choose CFA?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature) => (
+                <div key={feature.title} className="bg-white p-8 rounded-xl shadow-lg text-center">
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
               ))}
             </div>
-
-            {/* Testimonial Carousel - 5 columns */}
-            <div className="lg:col-span-5">
-              <TestimonialCarousel />
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Chitrasanthe Welcome Banner */}
-      <section className="py-12 bg-[#963B25] relative">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center justify-center text-center text-white space-y-4">
-            <div className="max-w-3xl">
-              <h2 className="text-2xl md:text-4xl font-bold leading-tight">
-                Welcomes you to 22nd chitrasanthe, to be held on{' '}
-                <span className="block mt-1">
-                  Sunday, 05.01.2025
-                </span>
-              </h2>
-            </div>
-            
-            <Link
-              href="/registration"
-              className="inline-block px-6 py-3 bg-[#FFC107] text-black font-bold text-lg rounded-lg hover:bg-[#FFD54F] transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Artist Registration
-            </Link>
-          </div>
-        </div>
-
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '20px 20px'
-          }}></div>
-        </div>
-      </section>
-      {/* Features Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Why Choose CFA?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature) => (
-              <div key={feature.title} className="bg-white p-8 rounded-xl shadow-lg text-center">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Departments Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Our Departments</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {departments.map((department) => (
-              <Link
-                key={department.title}
-                href={department.link}
-                className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <h3 className="text-2xl font-bold mb-4 text-[#1a1a1a] group-hover:text-[#FFD700] transition-colors">
-                  {department.title}
-                </h3>
-                <p className="text-gray-600">{department.description}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              href="/departments"
-              className="inline-block px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-full hover:bg-[#FFC000] transition-colors"
-            >
-              View All Departments
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* News & Updates Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">News & Updates</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {newsItems.map((news) => (
-              <div key={news.title} className="bg-white rounded-xl p-8 shadow-lg">
-                <div className="text-sm text-gray-500 mb-2">{news.date}</div>
-                <h3 className="text-xl font-bold mb-4">{news.title}</h3>
-                <p className="text-gray-600 mb-6">{news.description}</p>
+        {/* Departments Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Our Departments</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {departments.map((department) => (
                 <Link
-                  href={news.link}
-                  className="text-[#FFD700] font-semibold hover:text-[#FFC000] transition-colors"
+                  key={department.title}
+                  href={department.link}
+                  className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
                 >
-                  Read More →
+                  <h3 className="text-2xl font-bold mb-4 text-[#1a1a1a] group-hover:text-[#FFD700] transition-colors">
+                    {department.title}
+                  </h3>
+                  <p className="text-gray-600">{department.description}</p>
                 </Link>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="text-center mt-12">
+              <Link
+                href="/departments"
+                className="inline-block px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-full hover:bg-[#FFC000] transition-colors"
+              >
+                View All Departments
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
-            <p className="text-xl text-gray-600 mb-12">
-              Have questions about our programs? Our admission team is here to help.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-bold mb-4">Contact Info</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Phone:</span> +91 1234567890
-                  </p>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Email:</span> admission@thecfa.art
-                  </p>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Address:</span> 123 Art Street, Creative City, 12345
-                  </p>
+        {/* News & Updates Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">News & Updates</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {newsItems.map((news) => (
+                <div key={news.title} className="bg-white rounded-xl p-8 shadow-lg">
+                  <div className="text-sm text-gray-500 mb-2">{news.date}</div>
+                  <h3 className="text-xl font-bold mb-4">{news.title}</h3>
+                  <p className="text-gray-600 mb-6">{news.description}</p>
+                  <Link
+                    href={news.link}
+                    className="text-[#FFD700] font-semibold hover:text-[#FFC000] transition-colors"
+                  >
+                    Read More →
+                  </Link>
                 </div>
-              </div>
-              <div className="bg-white p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-bold mb-4">Office Hours</h3>
-                <div className="space-y-4">
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Monday - Friday:</span> 9:00 AM - 5:00 PM
-                  </p>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Saturday:</span> 10:00 AM - 2:00 PM
-                  </p>
-                  <p className="text-gray-600">
-                    <span className="font-semibold">Sunday:</span> Closed
-                  </p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
+              <p className="text-xl text-gray-600 mb-12">
+                Have questions about our programs? Our admission team is here to help.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white p-8 rounded-xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-4">Contact Info</h3>
+                  <div className="space-y-4">
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Phone:</span> +91 1234567890
+                    </p>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Email:</span> admission@thecfa.art
+                    </p>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Address:</span> 123 Art Street, Creative City, 12345
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-white p-8 rounded-xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-4">Office Hours</h3>
+                  <div className="space-y-4">
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Monday - Friday:</span> 9:00 AM - 5:00 PM
+                    </p>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Saturday:</span> 10:00 AM - 2:00 PM
+                    </p>
+                    <p className="text-gray-600">
+                      <span className="font-semibold">Sunday:</span> Closed
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }

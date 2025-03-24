@@ -43,22 +43,22 @@ export default function Navbar() {
             <div className="flex items-center space-x-6 text-sm">
               <div className="flex items-center">
                 <ClockIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : 'text-white'}>Mon - Fri 8 AM - 5 PM</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-gray-800'}>Mon - Fri 8 AM - 5 PM</span>
               </div>
               <div className="flex items-center">
                 <PhoneIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : 'text-white'}>+2342 5446 67</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-gray-800'}>+2342 5446 67</span>
               </div>
               <div className="flex items-center">
                 <LocationIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : 'text-white'}>Greenpoint, Brooklyn</span>
+                <span className={scrolled ? 'text-gray-800' : 'text-gray-800'}>Greenpoint, Brooklyn</span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <Link 
                 href="#" 
                 className={`${
-                  scrolled ? 'text-gray-800' : 'text-white'
+                  scrolled ? 'text-gray-800' : 'text-gray-800'
                 } hover:text-red-500 transition-colors`}
               >
                 <TwitterIcon className="w-5 h-5" />
@@ -66,7 +66,7 @@ export default function Navbar() {
               <Link 
                 href="#" 
                 className={`${
-                  scrolled ? 'text-gray-800' : 'text-white'
+                  scrolled ? 'text-gray-800' : 'text-gray-800'
                 } hover:text-red-500 transition-colors`}
               >
                 <FacebookIcon className="w-5 h-5" />
@@ -74,7 +74,7 @@ export default function Navbar() {
               <Link 
                 href="#" 
                 className={`${
-                  scrolled ? 'text-gray-800' : 'text-white'
+                  scrolled ? 'text-gray-800' : 'text-gray-800'
                 } hover:text-red-500 transition-colors`}
               >
                 <YoutubeIcon className="w-5 h-5" />
@@ -82,7 +82,7 @@ export default function Navbar() {
               <Link 
                 href="#" 
                 className={`${
-                  scrolled ? 'text-gray-800' : 'text-white'
+                  scrolled ? 'text-gray-800' : 'text-gray-800'
                 } hover:text-red-500 transition-colors`}
               >
                 <InstagramIcon className="w-5 h-5" />
@@ -100,7 +100,7 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-12">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <Logo className="h-8 w-auto" />
+              <Logo  />
             </Link>
 
             {/* Desktop Navigation */}
