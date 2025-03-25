@@ -271,182 +271,20 @@ const TestimonialCarousel = () => {
   );
 };
 
-interface DepartmentContent {
-  title: string;
-  subtitle: string;
-  description: string;
-}
+// interface DepartmentContent {
+//   title: string;
+//   subtitle: string;
+//   description: string;
+// }
 
-interface Department {
-  id: number;
-  title: string;
-  heading: string;
-  content: DepartmentContent;
-  icon: React.ReactNode;
-}
+// interface Department {
+//   id: number;
+//   title: string;
+//   heading: string;
+//   content: DepartmentContent;
+//   icon: React.ReactNode;
+// }
 
-const departmentData: Department[] = [
-  {
-    id: 1,
-    title: "Proof Of Concept & Prototype",
-    heading: "01",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    ),
-    content: {
-      title: "Proof Of Concept & Prototype",
-      subtitle: "Validating Ideas Through Detailed Proof of Concept and Prototyping",
-      description: "Before diving into full-scale development, we help you validate your ideas with a well-crafted proof of concept and prototype. This critical step allows you to test feasibility, gather user feedback, and make informed decisions, ensuring your project starts on solid ground."
-    }
-  },
-  {
-    id: 2,
-    title: "LLM Development & Integration",
-    heading: "02",
-    content: {
-      title: "LLM Development & Integration",
-      subtitle: "Leveraging Language Models for Enhanced Intelligence",
-      description: "We excel at integrating Large Language Models (LLM) into your systems. Our expertise brings advanced AI capabilities to your applications, enhancing automation, customer interactions, and data insights. Unlock smarter solutions with our tailored LLM integration."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 3,
-    title: "Web & Mobile App Development",
-    heading: "03",
-    content: {
-      title: "Web & Mobile App Development",
-      subtitle: "Crafting Digital Experiences Across Platforms",
-      description: "Whether you need a dynamic web platform or a mobile app, our team develops customized solutions that align perfectly with your business objectives. From design to deployment, we ensure your digital products are robust, user-friendly, and scalable."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 4,
-    title: "Minimum Viable Product",
-    heading: "04",
-    content: {
-      title: "Minimum Viable Product Development",
-      subtitle: "Rapidly Developing MVPs to Bring Your Vision to Market",
-      description: "We help startups and established businesses alike to quickly bring their ideas to life with Minimum Viable Products (MVPs). Our approach focuses on delivering core functionalities, allowing you to test the market and gather valuable feedback for future iterations."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 5,
-    title: "Startup Idea Validation",
-    heading: "05",
-    content: {
-      title: "Startup Idea Validation & Consulting",
-      subtitle: "Expert Consulting to Validate and Refine Your Ideas",
-      description: "Before you invest significant time and resources, we offer comprehensive idea validation and consulting services. Our experts work with you to assess market potential, identify challenges, and refine your business concept, setting you up for success from the start."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 6,
-    title: "Progressive Web Apps",
-    heading: "06",
-    content: {
-      title: "Progressive Web Apps",
-      subtitle: "Building High-Performance PWAs for Seamless Experience",
-      description: "We design and develop Progressive Web Apps (PWAs) that offer the performance and user experience of native apps, combined with the reach of the web. PWAs are fast, reliable, and engage users across multiple devices, providing a seamless experience."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 7,
-    title: "UI/UX Design Services",
-    heading: "07",
-    content: {
-      title: "UI/UX Design Services",
-      subtitle: "Creating Intuitive and Engaging User Experiences",
-      description: "Our UI/UX design services focus on creating visually appealing and highly functional interfaces that resonate with users. We prioritize user experience at every step, ensuring your digital products are not only beautiful but also easy to use."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 8,
-    title: "Digital Transformation",
-    heading: "08",
-    content: {
-      title: "Digital Transformation",
-      subtitle: "Modernizing Your Business for the Digital Age",
-      description: "We guide organizations through comprehensive digital transformation journeys. Our expertise helps you leverage cutting-edge technologies to improve efficiency, enhance customer experience, and stay competitive in the digital landscape."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 9,
-    title: "Cloud Solutions",
-    heading: "09",
-    content: {
-      title: "Cloud Solutions",
-      subtitle: "Scalable and Secure Cloud Infrastructure",
-      description: "Our cloud solutions help businesses leverage the power of cloud computing for improved scalability, security, and performance. We design and implement cloud architectures that align with your business needs and growth objectives."
-    },
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-        <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-        <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-      </svg>
-    )
-  },
-  {
-    id: 10,
-    title: "AI & Machine Learning",
-    heading: "10",
-    content: {
-      title: "AI & Machine Learning",
-      subtitle: "Intelligent Solutions for Complex Challenges",
-      description: "We develop sophisticated AI and machine learning solutions that help businesses automate processes, gain insights from data, and make better decisions. Our expertise spans across various AI technologies and applications."
-    },
-     icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none">
-          <path fill="currentColor" d="M24.167 3.625H4.833a1.208 1.208 0 0 0-1.208 1.208v19.334c0 .667.542 1.208 1.208 1.208h19.334c.667 0 1.208-.541 1.208-1.208V4.833c0-.666-.541-1.208-1.208-1.208Zm-19.334 1.208h19.334v4.834H4.833V4.833Zm0 19.334V10.875h19.334v13.292H4.833Z"/>
-          <path fill="currentColor" d="M7.25 7.25h1.208v1.208H7.25V7.25ZM9.667 7.25h1.208v1.208H9.667V7.25ZM12.083 7.25h1.209v1.208h-1.209V7.25ZM7.25 14.5h14.5v1.208H7.25V14.5ZM7.25 17.792h14.5V19H7.25v-1.208ZM7.25 21.083h14.5v1.209H7.25v-1.209Z"/>
-        </svg>
-      )
-  }
-];
 
 // Add custom scrollbar styles to your global CSS
 const styles = `
@@ -475,22 +313,21 @@ const styles = `
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    // const handleScroll = () => {
+    //   setScrolled(window.scrollY > 50);
+    // };
 
-    window.addEventListener('scroll', handleScroll);
+    // window.addEventListener('scroll', handleScroll);
 
     return () => {
       clearInterval(timer);
-      window.removeEventListener('scroll', handleScroll);
+      // window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -606,7 +443,7 @@ export default function HomePage() {
                 <div className="prose prose-lg max-w-none text-gray-600">
                   <div className="text-justify space-y-4">
                     <p>
-                      The College of Fine Arts has a rich history dating back to 1964 when it was initially established as 'Chitrakala Vidyalaya' under the guidance of Karnataka Chitrakala Parishath. It owes its establishment to Sri M Aryamurthy the Founder President, and led by the visionary leadership of Prof. M.S. Nanjunda Rao, appointed as the Founder Secretary and first Principal. Sri S. S Kukke briefly assumed the role of Principal during the early stages.
+                      The College of Fine Arts has a rich history dating back to 1964 when it was initially established as Chitrakala Vidyalaya under the guidance of Karnataka Chitrakala Parishath. It owes its establishment to Sri M Aryamurthy the Founder President, and led by the visionary leadership of Prof. M.S. Nanjunda Rao, appointed as the Founder Secretary and first Principal. Sri S. S Kukke briefly assumed the role of Principal during the early stages.
                     </p>
                     <p>
                       In 1983, CFA was elevated to the status of a degree college, offering undergraduate programs. It further expanded its offerings in 1990 to include postgraduate and post-diploma courses. Today, College of Fine Arts stands as a testament to the enduring legacy of its founders and its vibrant community of faculty, staff, students, and alumni in shaping the institution into a renowned center of Artistic excellence.

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './hero.module.css';
+import Image from 'next/image';
 
 interface HeroCarouselItemProps {
   item: { image: string; alt: string };
@@ -18,7 +19,7 @@ const HeroCarouselItem: React.FC<HeroCarouselItemProps> = ({
     <div
       className={`${styles.carouselItem} ${isActive ? styles.active : ''}`}
     >
-      <img src={item.image} alt={item.alt} />
+      <Image width={1000} height={1000} src={item.image} alt={item.alt} />
     </div>
   );
 };

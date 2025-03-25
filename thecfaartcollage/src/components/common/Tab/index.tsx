@@ -15,7 +15,9 @@ interface classNameProps {
 }
 
 interface TabProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tabs: string[] | any[]; // Array of tab names
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   content: any; //Any for now
   className?: classNameProps;
 }
@@ -23,12 +25,14 @@ interface TabProps {
 export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.key);
   const [activeTabContent, setActiveTabContent] = useState(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     content?.find((data: any) => data?.key === tabs[0]?.key)
   );
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setActiveTabContent(content?.find((data: any) => data?.key === tabKey));
   };
 
@@ -40,6 +44,7 @@ export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
           if (rect.top >= 0 && rect.bottom <= window.innerHeight - 250) {
             setActiveTab(tabs[index]?.key);
             setActiveTabContent(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               content?.find((data: any) => data?.key === tabs[index]?.key)
             );
           }
