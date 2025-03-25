@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.title {
+  text-align: left;
+}
+.heading {
+  position: absolute;
+  right: 48px;
+  top: 40px;
+  font-size: 86px;
+  line-height: 80px;
+  font-weight: 700;
+  opacity: 0.6;
+  background: -webkit-linear-gradient(
+    rgba(0, 0, 0, 0.2),
+    rgba(102, 102, 102, 0.02)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.arrowIcon {
+  position: absolute;
+  top: 15px;
+  right: 14px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    gap: 16px;
+  }
+}

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { awards, departments, features, newsItems, notifications, testimonials } from '../constants/homeData';
+import { Solutions } from '../components/common/Solutions';
 
 const slides = [
   {
@@ -447,214 +448,6 @@ const departmentData: Department[] = [
   }
 ];
 
-const InteractiveContentSection: React.FC = () => {
-  const [activeBox, setActiveBox] = useState(1);
-  const [isRightSideSticky, setIsRightSideSticky] = useState(false);
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const rightSideRef = useRef<HTMLDivElement>(null);
-
-  const setRef = (index: number) => (el: HTMLDivElement | null) => {
-    sectionRefs.current[index] = el;
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current || !containerRef.current || !rightSideRef.current) return;
-      
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const sectionInView = sectionRect.top <= windowHeight && sectionRect.bottom >= 0;
-      
-      const shouldBeSticky = sectionInView && 
-                         containerRect.top <= windowHeight/2 && 
-                         containerRect.bottom >= windowHeight/2;
-
-      setIsRightSideSticky(shouldBeSticky);
-
-      if (sectionInView) {
-        const sections = sectionRefs.current;
-        let newActiveSection = activeBox;
-
-        sections.forEach((section, index) => {
-          if (!section) return;
-          
-          const rect = section.getBoundingClientRect();
-          const triggerPoint = windowHeight * 0.6;
-          if (rect.top <= triggerPoint && rect.bottom >= windowHeight/2) {
-            newActiveSection = index + 1;
-          }
-        });
-
-        if (newActiveSection !== activeBox) {
-          setActiveBox(newActiveSection);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [activeBox]);
-
-  const activeContent = departmentData.find((dept) => dept.id === activeBox)?.content;
-
-  return (
-    <section ref={sectionRef} className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="mb-16">
-          <p className="text-blue-600 font-medium flex items-center gap-2 mb-2">
-            Solutions
-            <span className="w-12 h-[1px] bg-blue-600 ml-2"></span>
-          </p>
-          <div className="mb-4">
-            <h2 className="text-4xl font-medium text-gray-900">
-              <div className="font-semibold">Transforming Ideas into Reality</div>
-            </h2>
-          </div>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Comprehensive Solutions to Drive Your Digital Success
-          </p>
-        </div>
-
-        <div ref={containerRef} className="flex flex-col lg:flex-row gap-0 min-h-[800px] relative">
-          {/* Left side - Department list */}
-          <div className="lg:w-[45%] relative z-30">
-            <div className="space-y-3">
-              {departmentData.map((dept, index) => (
-                <div
-                  key={dept.id}
-                  ref={setRef(index)}
-                  data-id={dept.id}
-                  className={`w-full max-w-[520px] transition-all duration-300 relative z-10 hover:z-20`}
-                >
-                  <div
-                    onClick={() => {
-                      setActiveBox(dept.id);
-                      const element = sectionRefs.current[index];
-                      element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }}
-                    className={`group cursor-pointer p-5 flex items-center transition-all duration-300 ${
-                      activeBox === dept.id 
-                        ? 'bg-gradient-to-r from-[#fafbff] to-[#f5f7ff] shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)]' 
-                        : 'bg-white hover:bg-gray-50/60'
-                    }`}
-                  >
-                    <div className="flex items-center gap-5 flex-1">
-                      <div className={`relative flex items-center justify-center ${
-                        activeBox === dept.id ? 'text-black' : 'text-gray-400'
-                      }`}>
-                        {/* Icon container */}
-                        <div className={`w-[48px] h-[48px] flex items-center justify-center rounded-xl transition-all duration-300 ${
-                          activeBox === dept.id 
-                            ? 'bg-[#f5f7ff] shadow-sm' 
-                            : 'bg-[#fafafa]'
-                        }`}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="none" className="transition-all duration-300">
-                            <path fill="currentColor" d="M14.495 29a2.637 2.637 0 0 0 .88-5.12V12.3a.879.879 0 1 0-1.758 0v11.58a2.637 2.637 0 0 0 .878 5.12Zm0-3.516a.88.88 0 1 1 0 1.758.88.88 0 0 1 0-1.758ZM11.863 19.486v-4.545a.879.879 0 1 0-1.758 0v4.545a.886.886 0 0 1-.257.622l-1.246 1.245a2.647 2.647 0 1 0 1.243 1.243l1.245-1.246a2.617 2.617 0 0 0 .773-1.864ZM7.469 24.61a.879.879 0 1 1 0-1.757.879.879 0 0 1 0 1.757ZM21.543 26.366a2.637 2.637 0 1 0-1.134-5.013l-1.245-1.245a.886.886 0 0 1-.258-.622v-4.545a.879.879 0 1 0-1.758 0v4.545a2.62 2.62 0 0 0 .773 1.864l1.245 1.246a2.63 2.63 0 0 0 2.377 3.77Zm.879-2.636a.878.878 0 1 1-1.757 0 .878.878 0 0 1 1.757 0Z"/>
-                            <path fill="currentColor" d="M2.637 20.214H7.47a.879.879 0 0 0 0-1.758H2.637a.879.879 0 0 1-.88-.879V6.152h25.488v11.425a.878.878 0 0 1-.88.88h-4.833a.879.879 0 1 0 0 1.757h4.834a2.64 2.64 0 0 0 2.636-2.637V2.637A2.64 2.64 0 0 0 26.366 0H2.636A2.64 2.64 0 0 0 0 2.637v14.94a2.64 2.64 0 0 0 2.637 2.637Zm0-18.456h23.729a.879.879 0 0 1 .879.879v1.757H1.758V2.637a.879.879 0 0 1 .879-.88Z"/>
-                            <path fill="currentColor" d="M3.082 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758ZM5.27 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758ZM7.473 3.96a.879.879 0 1 0 0-1.757.879.879 0 0 0 0 1.758Z"/>
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <h6 className={`text-[15px] font-medium leading-snug transition-colors duration-300 ${
-                          activeBox === dept.id ? 'text-black' : 'text-gray-600'
-                        }`}>
-                          {dept.title}
-                        </h6>
-                        <div className={`text-[28px] font-semibold leading-none mt-1 transition-colors duration-300 ${
-                          activeBox === dept.id ? 'text-black' : 'text-gray-300'
-                        }`}>
-                          {dept.heading}
-                        </div>
-                      </div>
-                      <div className={`transform transition-all duration-300 ml-auto ${
-                        activeBox === dept.id 
-                          ? 'opacity-100 translate-x-0' 
-                          : 'opacity-0 -translate-x-2'
-                      }`}>
-                        <div className="w-[30px] h-[30px] rounded-full flex items-center justify-center bg-black">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" className="text-white scale-[0.6]">
-                            <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-                              <path d="M15 26.25c6.213 0 11.25-5.037 11.25-11.25S21.213 3.75 15 3.75 3.75 8.787 3.75 15 8.787 26.25 15 26.25ZM18.75 18.75l-7.5-7.5"/>
-                              <path d="M18.75 13.125v5.625h-5.625"/>
-                            </g>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right side - Department Content */}
-          <div ref={rightSideRef} className="lg:w-[65%] relative -ml-[10%] z-20">
-            <div className={`${
-              isRightSideSticky 
-                ? 'fixed top-1/2 -translate-y-1/2 w-[calc(65%-2rem)] max-w-[1000px]' 
-                : 'relative w-full'
-            } transition-all duration-300`}>
-              <div className="bg-gradient-to-br from-[#002B5B] to-[#1B4B79] rounded-[2.5rem] p-16 shadow-2xl min-h-[600px] flex flex-col relative overflow-hidden">
-                {/* Background Image with Overlay */}
-                <div className="absolute inset-0">
-                  <Image
-                    src={`https://ik.imagekit.io/demo/img/default-image.jpg?tr=w-1200,h-800`}
-                    alt="Background"
-                    fill
-                    sizes="100vw"
-                    priority={true}
-                    className="object-cover opacity-5"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#002B5B]/90 to-[#1B4B79]/90"></div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-grow relative z-10">
-                  <h3 className="text-[2.75rem] font-bold text-white mb-8 leading-[1.2]">
-                    {activeContent?.title}
-                  </h3>
-                  <h5 className="text-2xl text-blue-100 mb-10 leading-normal">
-                    {activeContent?.subtitle}
-                  </h5>
-                  <p className="text-blue-50/90 mb-16 text-xl leading-relaxed">
-                    {activeContent?.description}
-                  </p>
-                </div>
-                <div className="relative z-10">
-                  <button className="text-white text-xl font-medium hover:text-blue-200 transition-colors flex items-center gap-4 group">
-                    <span>Explore</span>
-                    <svg 
-                      className="transform transition-transform group-hover:translate-x-1 w-7 h-7" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-0 left-0 w-[700px] h-[700px] bg-blue-600/10 rounded-full blur-[140px]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // Add custom scrollbar styles to your global CSS
 const styles = `
   .custom-scrollbar {
@@ -997,8 +790,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Interactive Content Section */}
-        <InteractiveContentSection />
+        <Solutions/>
 
         {/* Features Section */}
         <section className="py-20 bg-gray-50">
