@@ -26,7 +26,7 @@ export default function DepartmentPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Department Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center">
+      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
         <div className="absolute inset-0">
           <Image
             src={department.image}

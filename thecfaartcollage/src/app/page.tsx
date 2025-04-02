@@ -15,9 +15,9 @@ const slides = [
     heroDescription: 'Develop your drawing skills with expert guidance and practice',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full relative">
               <Image
                 src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-1.png"
@@ -39,9 +39,9 @@ const slides = [
     heroDescription: 'Create three-dimensional masterpieces with our sculpture program',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full relative">
               <Image
                 src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/Psittaciformes.png"
@@ -64,9 +64,9 @@ const slides = [
     heroDescription: 'Learn modern digital art techniques and animation',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="absolute right-8 w-[300px] lg:w-[500px] h-[463px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden">
+          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full relative">
               <Image
                 src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-2.png"
@@ -359,22 +359,22 @@ export default function HomePage() {
                   <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center justify-around">
                       {/* Left Content */}
-                      <div className="max-w-xl">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900">
+                      <div className="max-w-xl text-center lg:text-left">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900">
                           {slide.heroTitle}
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-800 font-medium">
+                        <p className="text-lg sm:text-xl md:text-2xl text-gray-800 font-medium mb-6">
                           {slide.heroDescription}
                         </p>
                         <div className="mt-8">
-                          <button className="bg-[#963B25] text-white px-8 py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300">
+                          <button className="bg-[#963B25] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300 text-sm sm:text-base">
                             Learn More
                           </button>
                         </div>
                       </div>
                       
                       {/* Right Content - Circle Image */}
-                      <div className="relative flex items-center justify-center lg:justify-end">
+                      <div className="relative flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
                         {slide.circleContent}
                       </div>
                     </div>
@@ -386,36 +386,36 @@ export default function HomePage() {
         </section>
 
         {/* Admissions Banner Section */}
-        <section className="bg-gradient-to-r from-blue-800 to-blue-600 py-8">
+        <section className="bg-gradient-to-r from-blue-800 to-blue-600 py-4 sm:py-6 md:py-8">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 md:gap-6">
               <div className="text-center md:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
                   Admissions Open 2024-2025
                 </h2>
-                <p className="text-white/90 text-lg">
+                <p className="text-white/90 text-sm sm:text-base md:text-lg">
                   Join our prestigious art programs
                 </p>
               </div>
-              <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
                 <Link
                   href="/admission"
-                  className="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 font-semibold rounded-full hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap text-center"
+                  className="px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 font-semibold rounded-full hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl text-center text-xs sm:text-sm md:text-base w-full sm:w-auto"
                 >
-                  Click Here to download BVA Prospectus and Application Form
+                  Download BVA Prospectus & Application Form
                 </Link>
-                <div className="hidden md:flex flex-col items-center bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="grid grid-cols-8 grid-rows-8 gap-0.5 w-16 h-16">
+                <div className="hidden md:flex flex-col items-center bg-white/95 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="grid grid-cols-8 grid-rows-8 gap-0.5 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
                     {Array(64).fill(null).map((_, index) => (
                       <div
                         key={index}
-                        className={`w-2 h-2 ${
+                        className={`w-1 h-1 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 ${
                           Math.random() > 0.5 ? 'bg-blue-900' : 'bg-transparent'
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-xs mt-2 text-blue-900 font-medium">Scan QR Code</span>
+                  <span className="text-[10px] sm:text-xs mt-1 sm:mt-2 text-blue-900 font-medium">Scan QR Code</span>
                 </div>
               </div>
             </div>

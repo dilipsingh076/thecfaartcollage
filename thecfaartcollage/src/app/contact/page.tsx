@@ -7,25 +7,57 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] overflow-hidden">
+      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] overflow-hidden">
         {/* Background Image with Overlay */}
-         <div 
+        <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070&auto=format&fit=crop')", // Creative office/contact image
+            backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070&auto=format&fit=crop')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: '0.4'
           }}
         />
         
+        {/* Animated Overlay Pattern */}
+        <div className="absolute inset-0 z-0 bg-[url('/pattern.png')] opacity-10" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-[#FFD700]/10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#FFD700]/10 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2" />
+        
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">
-            Contact Us
-          </h1>
-          <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto">
-            Get in touch with us for any inquiries about our programs or campus
-          </p>
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="text-[#FFD700] font-semibold text-sm uppercase tracking-wider mb-4 block">
+              Contact Us
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Let&apos;s Start Your Artistic Journey
+            </h1>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Connect with us to explore your artistic journey. We&apos;re here to answer your questions and help you take the next step.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="#contact-form" 
+                className="group px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-full hover:bg-[#FFC000] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                <span>Send Message</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a 
+                href="#contact-info" 
+                className="group px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <span>View Contact Info</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

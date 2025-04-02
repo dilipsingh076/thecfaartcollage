@@ -9,7 +9,7 @@ export default function CoursesPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
@@ -33,34 +33,35 @@ export default function CoursesPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="inline-block mb-8"
+              className="inline-block mb-4 sm:mb-6 lg:mb-8"
             >
-              <span className="px-6 py-2 bg-[#FFD700]/20 text-[#FFD700] rounded-full text-lg font-semibold backdrop-blur-sm">
+              <span className="px-4 sm:px-6 py-2 bg-[#FFD700]/20 text-[#FFD700] rounded-full text-sm sm:text-base lg:text-lg font-semibold backdrop-blur-sm">
                 Discover Your Creative Path
               </span>
             </motion.div>
-            <h1 className="text-7xl md:text-8xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               Transform Your Creative Journey
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 sm:mb-10 lg:mb-12 leading-relaxed max-w-3xl mx-auto px-4">
               Discover our comprehensive range of art programs designed to nurture your artistic talent and develop professional skills
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
               <motion.a 
                 href="#courses" 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block bg-[#FFD700] text-black px-10 py-5 rounded-full font-semibold hover:bg-[#FFE55C] transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
+                className="inline-block bg-[#FFD700] text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full font-semibold hover:bg-[#FFE55C] transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base lg:text-lg w-full sm:w-auto text-center"
               >
                 Explore Programs
               </motion.a>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="w-full sm:w-auto"
               >
                 <Link 
                   href="/admission" 
-                  className="inline-block bg-transparent border-2 border-white text-white px-10 py-5 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 text-lg"
+                  className="inline-block bg-transparent border-2 border-white text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 text-sm sm:text-base lg:text-lg w-full sm:w-auto text-center"
                 >
                   Apply Now
                 </Link>

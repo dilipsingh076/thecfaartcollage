@@ -3,28 +3,29 @@ export const navLinks = [
       name: 'Home', 
       href: '/',
       color: 'text-orange-500',
-      dropdownItems: [
+      dropdownItems: []
+      // dropdownItems: [
         
-        { name: 'History', href: '/history' },
-        { name: 'Vision & Mission', href: '/vision-mission' },
-        { name: 'Campus', href: '/campus' },
-        { name: 'Gallery', href: '/gallery' }
-      ]
+      //   { name: 'History', href: '/history' },
+      //   { name: 'Vision & Mission', href: '/vision-mission' },
+      //   { name: 'Campus', href: '/campus' },
+      //   { name: 'Gallery', href: '/gallery' }
+      // ]
     },
     { name: 'About Us', href: '/about',  color: 'text-orange-500',dropdownItems: [] },
     { name: 'Courses', href: '/courses',  color: 'text-orange-500',dropdownItems: [] },
-    { 
-      name: 'Admission', 
-      href: '/admission',
-      color: 'text-red-500',
-      dropdownItems: [
-        { name: 'Admission Process', href: '/admission/process' },
-        { name: 'Application Form', href: '/admission/form' },
-        { name: 'Eligibility Criteria', href: '/admission/eligibility' },
-        { name: 'Fee Structure', href: '/admission/fees' },
-        { name: 'Scholarships', href: '/admission/scholarships' }
-      ]
-    },
+    // { 
+    //   name: 'Admission', 
+    //   href: '/admission',
+    //   color: 'text-red-500',
+    //   dropdownItems: [
+    //     { name: 'Admission Process', href: '/admission/process' },
+    //     { name: 'Application Form', href: '/admission/form' },
+    //     { name: 'Eligibility Criteria', href: '/admission/eligibility' },
+    //     { name: 'Fee Structure', href: '/admission/fees' },
+    //     { name: 'Scholarships', href: '/admission/scholarships' }
+    //   ]
+    // },
     { 
       name: 'Departments', 
       href: '/departments',

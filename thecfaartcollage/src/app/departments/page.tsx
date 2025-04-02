@@ -9,7 +9,7 @@ export default function DepartmentsPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
         <div className="absolute inset-0">
           <Image
             src="https://thecfa.art/wp-content/uploads/2022/06/image-004-1080x675.jpg"

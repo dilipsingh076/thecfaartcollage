@@ -9,10 +9,9 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative h-[70vh]">
+      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
         <Image
           src={aboutPageContent.hero.image}
-          // Alternative options if you prefer:
           alt="CFA Banner"
           fill
           className="object-cover"
@@ -20,10 +19,10 @@ export default function AboutPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         <div className="absolute inset-0 flex flex-col justify-center items-center container mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-center">
             {aboutPageContent.hero.title}
           </h1>
-          <p className="text-xl text-gray-200 text-center max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-200 text-center max-w-2xl sm:max-w-3xl mx-auto px-4">
             {aboutPageContent.hero.subtitle}
           </p>
         </div>
