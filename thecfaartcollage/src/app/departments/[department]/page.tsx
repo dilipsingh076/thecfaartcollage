@@ -1,190 +1,158 @@
 'use client';
 
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
-
-const departmentDetails = {
-  'bva-foundation': {
-    title: 'BVA Foundation',
-    description: 'Foundation studies in visual arts for first-year students',
-    content: 'The BVA Foundation program provides a comprehensive introduction to visual arts, covering fundamental concepts, techniques, and practices. Students develop essential skills in drawing, color theory, and art history.',
-    faculty: 'Led by experienced artists and educators',
-    duration: '1 year',
-    courses: [
-      'Drawing Fundamentals',
-      'Color Theory',
-      'Art History',
-      'Basic Design',
-      'Visual Communication'
-    ]
-  },
-  'painting': {
-    title: 'Painting',
-    description: 'Explore various painting techniques and styles',
-    content: 'The Painting department offers intensive training in various painting techniques, from traditional to contemporary approaches. Students develop their unique artistic voice while mastering different mediums.',
-    faculty: 'Experienced painters and art educators',
-    duration: '3 years',
-    courses: [
-      'Oil Painting',
-      'Watercolor',
-      'Acrylic Painting',
-      'Mixed Media',
-      'Contemporary Painting'
-    ]
-  },
-  'sculpture': {
-    title: 'Sculpture',
-    description: 'Learn three-dimensional art forms and techniques',
-    content: 'The Sculpture department focuses on three-dimensional art forms, teaching students to work with various materials and techniques. Students learn to create both traditional and contemporary sculptures.',
-    faculty: 'Professional sculptors and artists',
-    duration: '3 years',
-    courses: [
-      'Clay Modeling',
-      'Metal Sculpture',
-      'Wood Carving',
-      'Installation Art',
-      'Contemporary Sculpture'
-    ]
-  },
-  'graphic-art': {
-    title: 'Graphic Art',
-    description: 'Digital and traditional graphic design',
-    content: 'The Graphic Art department combines traditional art principles with digital technology. Students learn to create compelling visual communications for various media platforms.',
-    faculty: 'Graphic designers and digital artists',
-    duration: '3 years',
-    courses: [
-      'Digital Design',
-      'Typography',
-      'Branding',
-      'UI/UX Design',
-      'Motion Graphics'
-    ]
-  },
-  'applied-art': {
-    title: 'Applied Art',
-    description: 'Commercial and applied art practices',
-    content: 'The Applied Art department focuses on commercial art applications, preparing students for careers in advertising, illustration, and design industries.',
-    faculty: 'Industry professionals and artists',
-    duration: '3 years',
-    courses: [
-      'Commercial Illustration',
-      'Advertising Design',
-      'Package Design',
-      'Print Media',
-      'Digital Marketing'
-    ]
-  },
-  'art-history': {
-    title: 'Art History',
-    description: 'Study of art history and theory',
-    content: 'The Art History department provides comprehensive knowledge of art history, theory, and criticism. Students develop critical thinking and research skills.',
-    faculty: 'Art historians and researchers',
-    duration: '3 years',
-    courses: [
-      'Ancient Art',
-      'Modern Art',
-      'Contemporary Art',
-      'Art Criticism',
-      'Research Methodology'
-    ]
-  },
-  'animation': {
-    title: 'Animation',
-    description: 'Digital animation and motion graphics',
-    content: 'The Animation department teaches students to create engaging animated content using both traditional and digital techniques.',
-    faculty: 'Animation professionals and artists',
-    duration: '3 years',
-    courses: [
-      '2D Animation',
-      '3D Animation',
-      'Character Design',
-      'Storyboarding',
-      'Motion Graphics'
-    ]
-  },
-  'ceramics': {
-    title: 'Ceramics',
-    description: 'Ceramic art and pottery',
-    content: 'The Ceramics department focuses on creating functional and artistic ceramic works, teaching various techniques and firing methods.',
-    faculty: 'Ceramic artists and potters',
-    duration: '3 years',
-    courses: [
-      'Hand Building',
-      'Wheel Throwing',
-      'Glazing Techniques',
-      'Kiln Firing',
-      'Ceramic Sculpture'
-    ]
-  }
-};
+import { departments } from '../data';
 
 export default function DepartmentPage() {
   const params = useParams();
-  const department = params.department as string;
-  const details = departmentDetails[department as keyof typeof departmentDetails];
+  const department = departments.find(d => d.slug === params.department);
 
-  if (!details) {
+  if (!department) {
     return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Department Not Found</h1>
-          <p className="text-gray-600">The requested department does not exist.</p>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Department Not Found</h1>
+          <Link href="/departments" className="text-[#FFD700] hover:text-[#FFE55C] transition-colors">
+            Return to Departments
+          </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a]">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">
-            {details.title}
-          </h1>
-          <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto">
-            {details.description}
-          </p>
+      {/* Department Hero */}
+      <section className="relative h-[60vh] flex items-center justify-center">
+        <div className="absolute inset-0">
+          <Image
+            src={department.image}
+            alt={department.title}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
+        </div>
+        <div className="relative container mx-auto px-4 text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-6xl md:text-7xl font-bold text-white mb-6"
+          >
+            {department.title}
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl text-gray-200 max-w-3xl mx-auto"
+          >
+            {department.description}
+          </motion.p>
         </div>
       </section>
 
       {/* Department Details */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">About the Department</h2>
-                  <p className="text-gray-600">{details.content}</p>
-                </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Program Details</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Faculty</h3>
-                      <p className="text-gray-600">{details.faculty}</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Duration</h3>
-                      <p className="text-gray-600">{details.duration}</p>
-                    </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Course Information */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-3xl p-8 relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 via-transparent to-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative">
+                <h2 className="text-3xl font-bold mb-8 text-[#1a1a1a]">Course Information</h2>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-[#FFD700] mb-2">Duration</h3>
+                    <p className="text-gray-600">{department.details.duration}</p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-[#FFD700] mb-2">Level</h3>
+                    <p className="text-gray-600">{department.details.level}</p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-[#FFD700] mb-4">Courses Offered</h3>
+                    <ul className="space-y-2">
+                      {department.details.courses.map((course, index) => (
+                        <li key={index} className="flex items-center gap-2 text-gray-600">
+                          <span className="w-2 h-2 bg-[#FFD700] rounded-full"></span>
+                          {course}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
+              </div>
+            </motion.div>
 
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Courses Offered</h2>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600">
-                    {details.courses.map((course, index) => (
-                      <li key={index}>{course}</li>
-                    ))}
-                  </ul>
+            {/* Facilities */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-3xl p-8 relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 via-transparent to-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative">
+                <h2 className="text-3xl font-bold mb-8 text-[#1a1a1a]">Facilities</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {department.details.facilities.map((facility, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#FFD700]/10 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-[#FFD700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-gray-600">{facility}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 via-transparent to-[#FFD700]/5"></div>
+        <div className="container mx-auto px-4 relative">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-4xl font-bold text-[#1a1a1a] mb-8">Interested in {department.title}?</h2>
+            <p className="text-xl text-gray-600 mb-12">
+              Contact us to learn more about our programs and admission process
+            </p>
+            <div className="space-y-6">
+              <div className="flex items-center justify-center gap-4 text-lg">
+                <span className="text-[#FFD700] font-semibold">Phone:</span>
+                <span className="text-gray-700">+91 63649 17676</span>
+              </div>
+              <div className="flex items-center justify-center gap-4 text-lg">
+                <span className="text-[#FFD700] font-semibold">Email:</span>
+                <span className="text-gray-700">thecfaadmission@gmail.com</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
   );
-} 
+}

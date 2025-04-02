@@ -4,13 +4,15 @@ export const navLinks = [
       href: '/',
       color: 'text-orange-500',
       dropdownItems: [
-        { name: 'About Us', href: '/about' },
+        
         { name: 'History', href: '/history' },
         { name: 'Vision & Mission', href: '/vision-mission' },
         { name: 'Campus', href: '/campus' },
         { name: 'Gallery', href: '/gallery' }
       ]
     },
+    { name: 'About Us', href: '/about',  color: 'text-orange-500',dropdownItems: [] },
+    { name: 'Courses', href: '/courses',  color: 'text-orange-500',dropdownItems: [] },
     { 
       name: 'Admission', 
       href: '/admission',

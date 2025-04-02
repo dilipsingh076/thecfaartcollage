@@ -248,3 +248,44 @@ export const departmentData = [
     }
   }
 ]; 
+
+
+
+export const galleryImages = [
+  {
+    id: 1,
+    title: "Student Art Exhibition",
+    category: "Exhibition",
+    imageUrl: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=800",
+  },
+  {
+    id: 2,
+    title: "Sculpture Workshop",
+    category: "Workshop",
+    imageUrl: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=800",
+  },
+  {
+    id: 3,
+    title: "Painting Studio",
+    category: "Campus",
+    imageUrl: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=800",
+  },
+  {
+    id: 4,
+    title: "Digital Art Lab",
+    category: "Facilities",
+    imageUrl: "https://images.unsplash.com/photo-1452802447250-470a88ac82bc?q=80&w=800",
+  },
+  {
+    id: 5,
+    title: "Annual Art Festival",
+    category: "Events",
+    imageUrl: "https://images.unsplash.com/photo-1594794312433-05a69a98b7a0?q=80&w=800",
+  },
+  {
+    id: 6,
+    title: "Student Projects",
+    category: "Student Work",
+    imageUrl: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=800",
+  },
+];
