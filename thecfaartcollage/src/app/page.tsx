@@ -15,17 +15,16 @@ const slides = [
     heroDescription: 'Develop your drawing skills with expert guidance and practice',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[200px] sm:w-[250px] md:w-[320px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[320px] lg:h-[450px] 2xl:h-[550px] 2xl:w-[550px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full relative">
-              <Image
-                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-1.png"
-                alt="Art"
-                fill
-                className="object-cover p-4 lg:p-6"
-              />
-            </div>
+          <div className="absolute inset-0 rounded-full overflow-hidden">
+            <Image
+              src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-1.png"
+              alt="Art"
+              fill
+              className="object-cover p-4 lg:p-6"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -39,18 +38,16 @@ const slides = [
     heroDescription: 'Create three-dimensional masterpieces with our sculpture program',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[200px] sm:w-[250px] md:w-[320px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[320px] lg:h-[450px] 2xl:h-[550px] 2xl:w-[550px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full relative">
-              <Image
-                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/Psittaciformes.png"
-                alt="Sculpture"
-                fill
-                className="object-cover p-4 lg:p-6"
-                priority
-              />
-            </div>
+          <div className="absolute inset-0 rounded-full overflow-hidden">
+            <Image
+              src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/Psittaciformes.png"
+              alt="Sculpture"
+              fill
+              className="object-cover p-4 lg:p-6"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -64,17 +61,16 @@ const slides = [
     heroDescription: 'Learn modern digital art techniques and animation',
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     circleContent: (
-      <div className="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[700px] 2xl:w-[700px]">
+      <div className="w-[200px] sm:w-[250px] md:w-[320px] lg:w-[450px] h-[200px] sm:h-[250px] md:h-[320px] lg:h-[450px] 2xl:h-[550px] 2xl:w-[550px]">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 rounded-full bg-[#FDF6E9] shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full relative">
-              <Image
-                src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-2.png"
-                alt="Digital Art"
-                fill
-                className="object-cover p-4 lg:p-6"
-              />
-            </div>
+          <div className="absolute inset-0 rounded-full overflow-hidden">
+            <Image
+              src="https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/05/Psittaciformes-2.png"
+              alt="Digital Art"
+              fill
+              className="object-cover p-4 lg:p-6"
+              priority
+            />
           </div>
         </div>
       </div>
@@ -374,7 +370,7 @@ export default function HomePage() {
                       </div>
                       
                       {/* Right Content - Circle Image */}
-                      <div className="relative flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
+                      <div className="relative flex items-center justify-center lg:justify-end mt-[25px] lg:mt-0">
                         {slide.circleContent}
                       </div>
                     </div>
