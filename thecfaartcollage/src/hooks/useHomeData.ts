@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getHomeData } from '../services/api';
 import { HomeData } from '../types/api';
-import { ApiRequestError } from '../utils/api.utils';
 
 interface UseHomeDataResult {
   data: HomeData | null;

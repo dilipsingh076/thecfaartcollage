@@ -5,7 +5,7 @@ import { HomeData } from '../../types/api';
 /**
  * Cache for storing API responses
  */
-const cache = new Map<string, { data: any; timestamp: number }>();
+const cache = new Map<string, { data: unknown; timestamp: number }>();
 
 /**
  * Get data from cache if it exists and is not expired

@@ -79,6 +79,7 @@ export const parseApiError = async (response: Response): Promise<ApiError> => {
     const errorData = await response.json();
     return errorData as ApiError;
   } catch (error) {
+    console.error('Error parsing API error response:', error);
     // If we can't parse the error response, create a generic error
     return {
       success: false,
