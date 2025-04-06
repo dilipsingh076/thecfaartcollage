@@ -14,59 +14,7 @@ import {
   ArrowBigDown
 } from 'lucide-react';
 import SectionTitle from "../SectionTitle/SectionTitle";
-
-
-
-// export const SolutionsTabs = [
-//   {
-//     key: 1,
-//     icon: <Clock />,
-//     title: "Proof Of Concept & Prototype",
-//     heading: "01",
-//   },
-//   {
-//     key: 2,
-//     icon: <Clock />,
-//     title: "LLM Development & Integration",
-//     heading: "02",
-//   },
-//   {
-//     key: 3,
-//     icon: <Clock />,
-//     title: "Web & Mobile App Development",
-//     heading: "03",
-//   },
-//   {
-//     key: 4,
-//     icon: <Clock />,
-//     title: "Minimum Viable Product Development",
-//     heading: "04",
-//   },
-//   {
-//     key: 5,
-//     icon: <Clock />,
-//     title: "Startup Idea Validation & Consulting",
-//     heading: "05",
-//   },
-//   {
-//     key: 6,
-//     icon: <Clock />,
-//     title: "Progressive Web Apps",
-//     heading: "06",
-//   },
-//   {
-//     key: 7,
-//     icon: <Clock />,
-//     title: "UI & UX Designing",
-//     heading: "07",
-//   },
-//   {
-//     key: 8,
-//     icon: <Clock />,
-//     title: "Tech Infrastructure & IT Consulting",
-//     heading: "08",
-//   },
-// ];
+import MobileAccordion from "./MobileAccordion/MobileAccordion";
 
 
 export const SolutionsTabs = [
@@ -247,10 +195,12 @@ export const Solutions = () => {
   return (
     <div className="p-20 bg-gradient-to-br from-[#F6F8FD] via-[#F1F5FF] to-[#FAFAFF] dark:from-[#1A1F35] dark:via-[#1E2338] dark:to-[#1A1F35]" >
       <SectionTitle
-        boldCaption={"Solutions"}
-        boldTitle={"Transforming Ideas into Reality"}
+        boldCaption={"Departments"}
+        boldTitle={"Build your Future with us!"}
         description={"Comprehensive Solutions to Drive Your Digital Success"}
       />
+
+      <MobileAccordion />
 
       <Tabs
         className={{

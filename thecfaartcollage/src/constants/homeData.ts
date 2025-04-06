@@ -1,4 +1,3 @@
-
 export const features = [
   {
     title: 'Expert Faculty',
@@ -50,19 +49,37 @@ export const newsItems = [
     title: 'Admissions Open for 2024-25',
     date: 'March 15, 2024',
     description: 'Apply now for our BVA and MVA programs. Limited seats available.',
-    link: '/admission'
+    link: '/admission',
+    category: 'Admissions',
+    time: '9:00 AM - 5:00 PM',
+    venue: 'Admission Office',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
   },
   {
     title: 'Annual Art Exhibition',
     date: 'April 5, 2024',
     description: 'Join us for our annual student art exhibition showcasing creative excellence.',
-    link: '/events'
+    link: '/events',
+    category: 'Exhibition',
+    time: '10:00 AM - 6:00 PM',
+    venue: 'Main Exhibition Hall',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
   },
   {
     title: 'New Digital Art Lab',
     date: 'March 1, 2024',
     description: 'State-of-the-art digital art lab now open for students.',
-    link: '/departments/graphic-art'
+    link: '/departments/graphic-art',
+    category: 'Facility',
+    time: '8:00 AM - 8:00 PM',
+    venue: 'Digital Art Lab',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
   }
 ];
 
@@ -70,32 +87,38 @@ export const notifications = [
   {
     title: "Upcoming Exhibition",
     date: "April 2024",
-    content: "Student Art Exhibition showcasing the best works of 2024 batch"
+    content: "Student Art Exhibition showcasing the best works of 2024 batch",
+    link: "/notifications"
   },
   {
     title: "Workshop Series",
     date: "May 2024",
-    content: "Special workshops on contemporary art techniques by industry experts"
+    content: "Special workshops on contemporary art techniques by industry experts",
+    link: "/notifications"
   },
   {
     title: "Alumni Meet",
     date: "June 2024",
-    content: "Annual alumni gathering celebrating 60 years of artistic excellence"
+    content: "Annual alumni gathering celebrating 60 years of artistic excellence",
+    link: "/notifications"
   },
   {
     title: "International Art Fair",
     date: "July 2024",
-    content: "CFA students to participate in International Art Fair 2024"
+    content: "CFA students to participate in International Art Fair 2024",
+    link: "/notifications"
   },
   {
     title: "Guest Lecture Series",
     date: "August 2024",
-    content: "Distinguished artists and educators sharing their expertise"
+    content: "Distinguished artists and educators sharing their expertise",
+    link: "/notifications"
   },
   {
     title: "Cultural Festival",
     date: "September 2024",
-    content: "Annual cultural celebration featuring performances and exhibitions"
+    content: "Annual cultural celebration featuring performances and exhibitions",
+    link: "/notifications"
   }
 ];
 
@@ -248,8 +271,6 @@ export const departmentData = [
     }
   }
 ]; 
-
-
 
 export const galleryImages = [
   {

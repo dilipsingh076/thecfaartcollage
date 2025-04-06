@@ -5,8 +5,18 @@ const nextConfig = {
     turbo: false
   },
   images: {
-    domains: ['https://thecfa.art/wp-content/uploads','https://thecfa.art','thecfa.art', 'images.unsplash.com', 'ik.imagekit.io', 'https://images.unsplash.com','images.remotePatterns','tabula.bold-themes.com',"https://thecfa.art/wp-content/uploads/2024/04/logo-2.png"], // Add the domain here
+    domains: ['thecfa.art', 'images.unsplash.com', 'ik.imagekit.io', 'tabula.bold-themes.com', 'karnatakaindustries.in'], // Corrected domains
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'karnatakaindustries.in',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'karnatakaindustries.in',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'thecfa.art',

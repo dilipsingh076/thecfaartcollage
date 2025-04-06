@@ -1,16 +1,61 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/layouts/Navbar';
 import Footer from '../components/common/Footer';
+import { API_ENDPOINTS } from '../config/api.config';
+import { SeoData } from '../types/api';
 
+const poppins = Poppins({ 
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
-const inter = Inter({ subsets: ['latin'] });
+// Function to fetch SEO data from API
+async function getSeoData(): Promise<SeoData> {
+  try {
+    const response = await fetch(API_ENDPOINTS.HOME, { next: { revalidate: 3600 } });
+    const data = await response.json();
+    return data.data.seo;
+  } catch (error) {
+    console.error('Error fetching SEO data:', error);
+    // Return default SEO data if API fails
+    return {
+      title: 'College of Fine Arts',
+      keywords: 'Fine Arts, College, Bangalore, Art Education',
+      description: 'Premier institution for visual arts education in Bangalore',
+      og_title: 'College of Fine Arts',
+      og_description: 'Premier institution for visual arts education in Bangalore',
+      og_url: 'https://thecfa.art',
+      og_image: 'https://thecfa.art/wp-content/uploads/2024/04/logo-2.png'
+    };
+  }
+}
 
-export const metadata: Metadata = {
-  title: 'College of Fine Arts',
-  description: 'Premier institution for visual arts education in Bangalore',
-};
+// Generate metadata using the SEO data
+export async function generateMetadata(): Promise<Metadata> {
+  const seoData = await getSeoData();
+  
+  return {
+    title: seoData.title,
+    description: seoData.description,
+    keywords: seoData.keywords,
+    openGraph: {
+      title: seoData.og_title,
+      description: seoData.og_description,
+      url: seoData.og_url,
+      images: [
+        {
+          url: seoData.og_image,
+          width: 1200,
+          height: 630,
+          alt: seoData.og_title,
+        },
+      ],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -19,7 +64,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Navbar />
         {children}
         <Footer />

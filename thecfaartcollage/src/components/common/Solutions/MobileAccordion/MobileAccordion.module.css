@@ -1,0 +1,103 @@
+.accordion {
+  width: 100%;
+  margin: 40px 0;
+  display: none;
+}
+
+.accordionItem {
+  border-top: 1px solid rgba(204, 204, 204, 1);
+  border-bottom: 1px solid rgba(204, 204, 204, 1);
+  transition: background-color 0.3s ease-in-out;
+}
+.title {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.accordionTitle {
+  padding: 16px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+.iconContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.accordionContent {
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  padding: 0 15px;
+}
+
+.content {
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.active:first-child {
+  background: linear-gradient(82.45deg, #c6bae8 3.85%, #e9b3d5 98.75%);
+}
+
+.active:nth-child(2) {
+  background: linear-gradient(82.45deg, #bae8d5 3.85%, #d8e9b3 98.75%);
+}
+
+.active:nth-child(3) {
+  background: linear-gradient(82.45deg, #e8d6ba 3.85%, #e9b8c9 98.75%);
+}
+.active:nth-child(4) {
+  background: linear-gradient(82.45deg, #e8bae1 3.85%, #b3cfe9 98.75%);
+}
+.active:nth-child(5) {
+  background: linear-gradient(82.45deg, #bae8e8 3.85%, #c2e9b8 98.75%);
+}
+.active:nth-child(6) {
+  background: linear-gradient(82.45deg, #b3caff 3.85%, #e8e9b8 98.75%);
+}
+.active:nth-child(7) {
+  background: linear-gradient(82.45deg, #ffe5b3 3.85%, #b8e9cb 98.75%);
+}
+.active:nth-child(8) {
+  background: linear-gradient(82.45deg, #c5fbff 3.85%, #cfa7f7 98.75%);
+}
+.active::after {
+  display: none;
+}
+
+.active .accordionContent {
+  padding: 16px;
+  background: rgba(0, 61, 100, 1);
+  transition: all 1.2s ease-in-out;
+}
+.close .accordionContent {
+  transition: all 1.2s ease-out;
+}
+.arrow {
+  font-size: 18px;
+}
+.explore {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.exploreContent {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 768px) {
+  .accordion {
+    display: block !important;
+  }
+  .iconContainer {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+  }
+}

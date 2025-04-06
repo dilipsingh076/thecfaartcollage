@@ -97,11 +97,11 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <nav className={`w-full transition-all duration-300 ${
-        scrolled ? 'py-1 bg-white/95 backdrop-blur-sm shadow-sm -translate-y-8' : 'py-2 translate-y-0'
+      <nav className={`fixed w-full transition-all duration-300 ${
+        scrolled ? 'py-3 bg-white/95 backdrop-blur-sm shadow-sm -translate-y-8' : 'py-2 translate-y-0'
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-12">
+          <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Logo  />

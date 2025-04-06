@@ -3,10 +3,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { awards, galleryImages,  newsItems, notifications, testimonials } from '../constants/homeData';
+import { awards, galleryImages, newsItems, notifications, testimonials } from '../constants/homeData';
 import { Solutions } from '../components/common/Solutions';
+import { SixtyYearsLogo, AwardLeafIcon, QuoteIcon } from '../Images/Icons';
+import { useHomeData } from '../hooks';
+import { LoadingSpinner, ErrorMessage } from '../components/common';
+import { SliderItem, Notice, Event, GalleryItem } from '../types/api';
+import GallerySection from '../components/common/GallerySection';
+import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config/api.config';
 
-const slides = [
+// Fallback slides in case API fails
+const fallbackSlides = [
   {
     title: 'Master the Art of Drawing',
     description: 'Develop your drawing skills with expert guidance and practice',
@@ -78,100 +86,68 @@ const slides = [
   }
 ];
 
+// Convert API slider items to our slide format
+const convertSliderToSlides = (sliderItems: SliderItem[]) => {
+  return sliderItems.map((item, index) => ({
+    title: item.title,
+    description: item.description,
+    variant: index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary',
+    heroTitle: item.title,
+    heroDescription: item.description,
+    imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg', // Fallback image
+    circleContent: (
+      <div className="w-[235px] sm:w-[250px] md:w-[375px] lg:w-[530px] h-[200px] sm:h-[250px] md:h-[320px] lg:h-[450px] 2xl:h-[550px] 2xl:w-[660px]">
+        <div className="relative w-full h-full">
+          <div className="absolute inset-0 rounded-full overflow-hidden">
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-cover p-4 lg:p-6"
+              priority
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }));
+};
 
+// Convert API notices to our notification format
+const convertNoticesToNotifications = (notices: Notice[]) => {
+  return notices.map(notice => ({
+    title: notice.title,
+    content: notice.short_description,
+    date: notice.date,
+    link: notice.link
+  }));
+};
 
+// Convert API events to our news items format
+const convertEventsToNewsItems = (events: Event[]) => {
+  return events.map(event => ({
+    title: event.title,
+    description: event.snippet,
+    date: event.date,
+    link: `/events`,
+    category: event.category,
+    time: event.time,
+    venue: event.venue,
+    thumbImg: event.thumbImg,
+    featuredImg: event.featuredImg,
+  }));
+};
 
-
-
-const SixtyYearsLogo = () => (
-  <svg viewBox="0 0 80 60" className="w-32 mb-8">
-    <g>
-      {/* Outer Arc - Yellow */}
-      <path
-        d="M 12 48 A 32 32 0 0 1 64 28"
-        fill="none"
-        stroke="#F7D675"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      {/* Middle Arc - Orange */}
-      <path
-        d="M 18 50 A 28 28 0 0 1 58 34"
-        fill="none"
-        stroke="#F4A261"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      {/* Inner Arc - Light Blue */}
-      <path
-        d="M 24 52 A 24 24 0 0 1 52 38"
-        fill="none"
-        stroke="#90CDF4"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      
-      {/* Number 60 */}
-      <text
-        x="38"
-        y="44"
-        fontSize="18"
-        fontWeight="bold"
-        fill="#4A5568"
-        textAnchor="middle"
-        dominantBaseline="middle"
-      >
-        60
-      </text>
-      
-      {/* Small "YEARS" text */}
-      <text
-        x="52"
-        y="44"
-        fontSize="5"
-        fill="#4A5568"
-      >
-        YEARS
-      </text>
-    </g>
-  </svg>
-);
-
-const AwardLeafIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    className="w-8 h-8 opacity-70 group-hover:opacity-100 transition-opacity"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-  >
-    <path
-      d="M12 2L9 7L12 9L15 7L12 2Z"
-      fill="#F4A261"
-      stroke="#F4A261"
-    />
-    <path
-      d="M12 9V20M12 9L6 11M12 9L18 11"
-      stroke="#F7D675"
-      strokeLinecap="round"
-    />
-    <path
-      d="M6 11C4 14 3 17 3 20H9M18 11C20 14 21 17 21 20H15"
-      stroke="#90CDF4"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-const QuoteIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    className="w-12 h-12 opacity-20"
-    fill="currentColor"
-  >
-    <path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.77-.692-1.327-.817-.56-.124-1.074-.13-1.54-.022-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003z"/>
-  </svg>
-);
+// Convert API gallery items to our gallery images format
+const convertGalleryToGalleryImages = (galleryItems: GalleryItem[]) => {
+  return galleryItems.map((item, index) => ({
+    id: index + 1,
+    title: item.title,
+    category: item.category,
+    imageUrl: item.largeImg,
+    thumbnailUrl: item.thumbImg
+  }));
+};
 
 const TestimonialCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -309,23 +285,43 @@ const styles = `
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { data: homeData, isLoading, error, refetch } = useHomeData();
+  
+  // Use API data or fallback to static data
+  const slides = homeData ? convertSliderToSlides(homeData.slider) : fallbackSlides;
+  const apiNotifications = homeData ? convertNoticesToNotifications(homeData.notices) : notifications;
+  const apiNewsItems = homeData ? convertEventsToNewsItems(homeData.events) : newsItems;
+  const apiGalleryImages = homeData ? convertGalleryToGalleryImages(homeData.gallery) : galleryImages;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
-    // const handleScroll = () => {
-    //   setScrolled(window.scrollY > 50);
-    // };
-
-    // window.addEventListener('scroll', handleScroll);
-
     return () => {
       clearInterval(timer);
-      // window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [slides.length]);
+
+  // If loading, show a loading spinner
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" color="#963B25" />
+      </div>
+    );
+  }
+
+  // If there's an error, show an error message with a retry button
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="max-w-md w-full">
+          <ErrorMessage error={error} retry={refetch} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[#FDF6E9]">
@@ -354,24 +350,24 @@ export default function HomePage() {
                 <div className="relative z-10 h-full w-full flex items-center">
                   <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center justify-around">
-                      {/* Left Content */}
-                      <div className="max-w-xl text-center lg:text-left">
+                      {/* Right Content - Circle Image - Now appears first on mobile/tablet */}
+                      <div className="relative flex items-center justify-center lg:justify-end mt-[25px] lg:mt-0 order-1 lg:order-2">
+                        {slide.circleContent}
+                      </div>
+                      
+                      {/* Left Content - Now appears second on mobile/tablet */}
+                      <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left order-2 lg:order-1 px-4 sm:px-6 md:px-8">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900">
                           {slide.heroTitle}
                         </h1>
                         <p className="text-lg sm:text-xl md:text-2xl text-gray-800 font-medium mb-6">
                           {slide.heroDescription}
                         </p>
-                        <div className="mt-8">
+                        <div className="mt-8 flex justify-center lg:justify-start">
                           <button className="bg-[#963B25] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300 text-sm sm:text-base">
                             Learn More
                           </button>
                         </div>
-                      </div>
-                      
-                      {/* Right Content - Circle Image */}
-                      <div className="relative flex items-center justify-center lg:justify-end mt-[25px] lg:mt-0">
-                        {slide.circleContent}
                       </div>
                     </div>
                   </div>
@@ -387,7 +383,7 @@ export default function HomePage() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 md:gap-6">
               <div className="text-center md:text-left">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2">
-                  Admissions Open 2024-2025
+                  Admissions Open 2025-2026
                 </h2>
                 <p className="text-white/90 text-sm sm:text-base md:text-lg">
                   Join our prestigious art programs
@@ -398,7 +394,7 @@ export default function HomePage() {
                   href="/admission"
                   className="px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 font-semibold rounded-full hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl text-center text-xs sm:text-sm md:text-base w-full sm:w-auto"
                 >
-                  Download BVA Prospectus & Application Form
+                 Click Here to Download BVA Prospectus & Application Form
                 </Link>
                 <div className="hidden md:flex flex-col items-center bg-white/95 backdrop-blur-sm p-2 sm:p-3 md:p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="grid grid-cols-8 grid-rows-8 gap-0.5 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
@@ -445,7 +441,10 @@ export default function HomePage() {
                       In 1983, CFA was elevated to the status of a degree college, offering undergraduate programs. It further expanded its offerings in 1990 to include postgraduate and post-diploma courses. Today, College of Fine Arts stands as a testament to the enduring legacy of its founders and its vibrant community of faculty, staff, students, and alumni in shaping the institution into a renowned center of Artistic excellence.
                     </p>
                     <p>
-                      The College of Fine Arts, Karnataka Chitrakala Parishath, is affiliated with Bangalore University and offers undergraduate and postgraduate programs in Visual Arts. The Bachelor of Visual Arts (BVA) is a comprehensive 4-year program spanning 8 semesters, including 2 semesters of foundational studies and 6 semesters of specialization. The Master of Visual Arts (MVA) is a 2-year program divided into 4 semesters, designed for advanced study and research in Visual arts.
+                      The College of Fine Arts, Karnataka Chitrakala Parishath, is affiliated with Bangalore University and offers undergraduate and postgraduate programs in Visual Arts. The Bachelor of Visual Arts (BVA) is a comprehensive 4-year program spanning 8 semesters, including 2 semesters of foundational studies and 6 semesters of specialization. The Master of Visual Arts (MVA) is a 2-year program divided into 4 semesters, designed for advanced study and research in Visual arts. 
+                    </p>
+                    <p>
+                    College of Fine Arts, Karnataka Chitrakala Parishath continues to uphold its commitment to nurturing creative talent and advancing the frontiers of art education on both national and international platforms.
                     </p>
                   </div>
                 </div>
@@ -453,8 +452,14 @@ export default function HomePage() {
 
               {/* Right Side - Notifications Slider */}
               <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden h-[600px]">
-                <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-800 to-blue-600 text-white py-4 px-6 z-10">
-                  <h3 className="text-2xl font-bold">Latest Updates</h3>
+                <div className="absolute flex justify-between items-center top-0 left-0 right-0 bg-gradient-to-r from-blue-800 to-blue-600 text-white py-4 px-6 z-10">
+                  <h3 className="text-2xl font-bold">Notifications</h3>
+                  <Link 
+                    href="/notifications" 
+                    className="bg-white cursor-pointer text-blue-800 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
+                  >
+                    All Notifications
+                  </Link>
                 </div>
                 
                 <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white z-[5]"></div>
@@ -462,8 +467,9 @@ export default function HomePage() {
                 
                 <div className="pt-20 pb-6 px-6 h-full overflow-hidden">
                   <div className="space-y-4 animate-scroll">
-                    {[...notifications, ...notifications].map((notification, index) => (
-                      <div
+                    {[...apiNotifications, ...apiNotifications].map((notification, index) => (
+                     <Link target="_blank" key={index} href={`${API_BASE_URL}/${notification.link}`}>
+                     <div
                         key={index}
                         className="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-500 hover:shadow-md transition-shadow"
                       >
@@ -477,6 +483,7 @@ export default function HomePage() {
                         </div>
                         <p className="text-gray-600">{notification.content}</p>
                       </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -495,13 +502,21 @@ export default function HomePage() {
                     </ul>
                   </li>
                   <li>M.V.A - 2 years (4 semesters)</li>
-                  <li>Certificate Courses - 6 months
+                  <li>Short Term Courses - Basic & Advance
                     <ul className="pl-6 mt-1 space-y-1 text-gray-500">
-                      <li>• Drawing</li>
-                      <li>• Painting</li>
-                      <li>• Sculpture</li>
-                      <li>• Printmaking</li>
+                      <li>•  FUNDAMENTALS OF VISUAL ART</li>
+                      <li>• NATURE STUDY</li>
+                      <li>• OBJECT STUDY/STILL LIFE STUDY</li>
+                      <li>• PRINT MAKING</li>
+                      <li>• SCULPTURE</li>
+
                     </ul>
+                  </li>
+                  <li>
+                    Post Diploma
+                  </li>
+                  <li>
+                    Diploma in Animation
                   </li>
                 </ul>
               </div>
@@ -550,12 +565,12 @@ export default function HomePage() {
                 <div className="flex items-center gap-3 mb-4 justify-center">
                   <div className="h-[1px] w-12 bg-blue-600"></div>
                   <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                    Digital Experience
+                    Dates to Remember
                   </span>
                   <div className="h-[1px] w-12 bg-blue-600"></div>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                  Awards & Achievements
+                  Notice Board
                 </h2>
                 <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
               </div>
@@ -592,153 +607,97 @@ export default function HomePage() {
           </div>
         </section>
 
-
-
         <Solutions/>
-
-        {/* Features Section */}
-        {/* <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-12">Why Choose CFA?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {features.map((feature) => (
-                <div key={feature.title} className="bg-white p-8 rounded-xl shadow-lg text-center">
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section> */}
-
-        {/* Departments Section */}
-        {/* <section className="py-20">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-12">Our Departments</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {departments.map((department) => (
-                <Link
-                  key={department.title}
-                  href={department.link}
-                  className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <h3 className="text-2xl font-bold mb-4 text-[#1a1a1a] group-hover:text-[#FFD700] transition-colors">
-                    {department.title}
-                  </h3>
-                  <p className="text-gray-600">{department.description}</p>
-                </Link>
-              ))}
-            </div>
-            <div className="text-center mt-12">
-              <Link
-                href="/departments"
-                className="inline-block px-8 py-3 bg-[#FFD700] text-black font-semibold rounded-full hover:bg-[#FFC000] transition-colors"
-              >
-                View All Departments
-              </Link>
-            </div>
-          </div>
-        </section> */}
 
         {/* News & Updates Section */}
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-12">News & Updates</h2>
+            {/* Section Header */}
+            <div className="mb-16 text-center">
+              <div className="inline-block">
+                <div className="flex items-center gap-3 mb-4 justify-center">
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                  <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                    Latest Updates
+                  </span>
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  Events and Exhibitions
+                </h2>
+                <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {newsItems.map((news) => (
-                <div key={news.title} className="bg-white rounded-xl p-8 shadow-lg">
-                  <div className="text-sm text-gray-500 mb-2">{news.date}</div>
-                  <h3 className="text-xl font-bold mb-4">{news.title}</h3>
-                  <p className="text-gray-600 mb-6">{news.description}</p>
+              {apiNewsItems.map((news, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <Link
                     href={news.link}
-                    className="text-[#FFD700] font-semibold hover:text-[#FFC000] transition-colors"
+                    className="group block bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
                   >
-                    Read More →
+                    <div className="flex flex-col sm:flex-row h-[330px]">
+                      <div className="relative w-full sm:w-2/5 h-48 sm:h-auto">
+                        <Image
+                          src={news.featuredImg || "https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg"}
+                          alt={news.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent sm:bg-gradient-to-r" />
+                      </div>
+                      <div className="relative flex-1 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                          <div className="inline-block px-4 py-1 bg-[#FFD700] text-black font-semibold rounded-full text-sm mb-4">
+                            {news.category || "Event"}
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-bold mb-3 text-gray-900 group-hover:text-[#FFD700] transition-colors">
+                            {news.title}
+                          </h3>
+                          <p className="text-gray-600 mb-4 line-clamp-2">{news.description}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-gray-600">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span className="text-sm">{news.date}</span>
+                          </div>
+                          {news.time && (
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              <span className="text-sm">{news.time}</span>
+                            </div>
+                          )}
+                          {news.venue && (
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              <span className="text-sm">{news.venue}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </Link>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-{/* Gallery Section */}
-<section className="py-20 bg-gradient-to-b from-white to-gray-50">
-  <div className="container mx-auto px-4">
-    {/* Section Header */}
-    <div className="mb-16 text-center">
-      <div className="inline-block">
-        <div className="flex items-center gap-3 mb-4 justify-center">
-          <div className="h-[1px] w-12 bg-blue-600"></div>
-          <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-            Our Gallery
-          </span>
-          <div className="h-[1px] w-12 bg-blue-600"></div>
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Campus Life & Activities
-        </h2>
-        <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
-      </div>
-    </div>
-
-    {/* Gallery Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {galleryImages.map((image) => (
-        <div 
-          key={image.id}
-          className="group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer bg-white shadow-lg hover:shadow-xl transition-shadow"
-        >
-          <div className="relative w-full h-full">
-            <Image
-              src={image.imageUrl}
-              alt={image.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
-              priority={image.id <= 3} // Prioritize loading first 3 images
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <span className="inline-block px-3 py-1 bg-amber-400/90 text-black text-sm font-medium rounded-full mb-3">
-                {image.category}
-              </span>
-              <h3 className="text-white text-xl font-bold transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                {image.title}
-              </h3>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* View More Button */}
-    <div className="text-center mt-12">
-      <Link
-        href="/gallery"
-        className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
-      >
-        View Full Gallery
-        <svg 
-          className="w-5 h-5" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M17 8l4 4m0 0l-4 4m4-4H3" 
-          />
-        </svg>
-      </Link>
-    </div>
-  </div>
-</section>
-
+        {/* Gallery Section */}
+        <GallerySection images={apiGalleryImages} />
 
         {/* Contact Section */}
         <section className="py-20">
@@ -781,6 +740,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        
         {/* Chitrasanthe Welcome Banner */}
         <section className="py-12 bg-[#963B25] relative">
           <div className="container mx-auto px-4">
