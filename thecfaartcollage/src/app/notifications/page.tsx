@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useHomeData } from '../../hooks';
-import { LoadingSpinner, ErrorMessage } from '../../components/common';
+import { LoadingSpinner, ErrorMessage, ChitrasantheBanner } from '../../components/common';
 import { convertNoticesToNotifications } from '../../utils/notification.utils';
 import { Notification } from '../../utils/notification.utils';
 import { API_BASE_URL } from '@/src/config/api.config';
@@ -278,7 +278,9 @@ export default function NotificationsPage() {
             Back to Home
           </Link>
         </div>
+      
       </div>
+      <ChitrasantheBanner />
     </main>
   );
 } 

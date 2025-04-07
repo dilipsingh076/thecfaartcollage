@@ -1,5 +1,6 @@
 'use client';
 
+import { ChitrasantheBanner } from "@/src/components/common";
 import { contactInfo } from "@/src/constants/content";
 
 
@@ -226,6 +227,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <ChitrasantheBanner />
     </main>
   );
 } 
