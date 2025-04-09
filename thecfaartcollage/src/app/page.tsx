@@ -15,7 +15,7 @@ import {
   AboutSection,
   AwardsSection,
   NewsSection,
-  ContactSection,
+  // ContactSection,
   ChitrasantheBanner
 } from '../components/common';
 
@@ -344,7 +344,7 @@ export default function HomePage() {
         <GallerySection images={apiGalleryImages} />
 
         {/* Contact Section */}
-        <ContactSection />
+        {/* <ContactSection /> */}
         
         {/* Chitrasanthe Welcome Banner */}
         <ChitrasantheBanner />

@@ -58,14 +58,14 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
                   
                   {/* Left Content - Now appears second on mobile/tablet */}
                   <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left order-2 lg:order-1 px-4 sm:px-6 md:px-8">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900 leading-tight sm:leading-tight md:leading-tight lg:leading-tight">
                       {slide.heroTitle}
                     </h1>
                     <p className="text-lg sm:text-xl md:text-2xl text-gray-800 font-medium mb-6">
                       {slide.heroDescription}
                     </p>
                     <div className="mt-8 flex justify-center lg:justify-start">
-                      <button className="bg-[#963B25] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#7b2e1d] transition-colors duration-300 text-sm sm:text-base">
+                      <button className="bg-[#95131D] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#8b2e1d] transition-colors duration-300 text-sm sm:text-base">
                         Learn More
                       </button>
                     </div>

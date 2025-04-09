@@ -80,6 +80,42 @@ export const newsItems = [
     thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
     featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
 
+  },
+  {
+    title: 'Admissions Open for 2024-25',
+    date: 'March 15, 2024',
+    description: 'Apply now for our BVA and MVA programs. Limited seats available.',
+    link: '/admission',
+    category: 'Admissions',
+    time: '9:00 AM - 5:00 PM',
+    venue: 'Admission Office',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
+  },
+  {
+    title: 'Annual Art Exhibition',
+    date: 'April 5, 2024',
+    description: 'Join us for our annual student art exhibition showcasing creative excellence.',
+    link: '/events',
+    category: 'Exhibition',
+    time: '10:00 AM - 6:00 PM',
+    venue: 'Main Exhibition Hall',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
+  },
+  {
+    title: 'New Digital Art Lab',
+    date: 'March 1, 2024',
+    description: 'State-of-the-art digital art lab now open for students.',
+    link: '/departments/graphic-art',
+    category: 'Facility',
+    time: '8:00 AM - 8:00 PM',
+    venue: 'Digital Art Lab',
+    thumbImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg',
+    featuredImg: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg'
+
   }
 ];
 

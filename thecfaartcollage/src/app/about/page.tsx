@@ -31,11 +31,11 @@ export default function AboutPage() {
       {/* Content Sections */}
       <section className="pt-20 md:pt-40">
         <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
+          <div className="max-w-8xl space-y-12 md:space-y-16">
             {/* History Section - Improved */}
 
             <div className="grid md:grid-cols-2 gap-8 items-start">
-            <div className="space-y-8">
+              <div className="space-y-8">
                 <div className="inline-block">
                   <h2 className="text-2xl md:text-3xl font-bold mb-2">{aboutPageContent.history.title}</h2>
                   <div className="h-1 w-20 bg-red-500"></div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               </div>
-              
+
             </div>
 
             {/* Leadership Section - Redesigned */}
@@ -191,7 +191,24 @@ export default function AboutPage() {
 
             {/* Infrastructure Gallery Section */}
             <div className="space-y-6">
-              <h2 className="text-2xl md:text-3xl font-bold">{aboutPageContent.infrastructure.title}</h2>
+              <div className="mb-16 text-center">
+                <div className="inline-block">
+                  <div className="flex items-center gap-3 mb-4 justify-center">
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                      Infrastructure
+                    </span>
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    {aboutPageContent.infrastructure.title}
+                  </h2>
+                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+                </div>
+              </div>
+
+
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {aboutPageContent.infrastructure.images.map((image, index) => (
                   <div key={index} className="group relative h-80 rounded-xl overflow-hidden">
@@ -212,7 +229,21 @@ export default function AboutPage() {
             {/* Programs Section - New */}
             <div className="bg-white rounded-xl overflow-hidden shadow-lg">
               <div className="p-6 md:p-8">
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Programs</h2>
+                <div className="mb-16 text-center">
+                  <div className="inline-block">
+                    <div className="flex items-center gap-3 mb-4 justify-center">
+                      <div className="h-[1px] w-12 bg-blue-600"></div>
+                      <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                        Programs
+                      </span>
+                      <div className="h-[1px] w-12 bg-blue-600"></div>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                      Our Programs
+                    </h2>
+                    <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+                  </div>
+                </div>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <div className="relative h-[250px] rounded-xl overflow-hidden">
@@ -244,8 +275,21 @@ export default function AboutPage() {
 
             {/* Departments Section - New */}
             <div className="space-y-6">
-              <h2 className="text-2xl md:text-3xl font-bold">Academic Departments</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="mb-16 text-center">
+                <div className="inline-block">
+                  <div className="flex items-center gap-3 mb-4 justify-center">
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                      Departments
+                    </span>
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Academic Departments
+                  </h2>
+                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+                </div>
+              </div>              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {aboutPageContent.departments.list.map((dept) => {
                   // Create the image key properly
                   const imageKey = dept.toLowerCase().replace(/\s+/g, '') as keyof typeof aboutPageContent.departments.images;
@@ -314,7 +358,7 @@ export default function AboutPage() {
 
 
         {/* Chitrasanthe Welcome Banner */}
-        <ChitrasantheBanner  />
+        <ChitrasantheBanner />
       </section>
 
 
