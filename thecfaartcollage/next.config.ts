@@ -5,7 +5,7 @@ const nextConfig = {
     turbo: false
   },
   images: {
-    domains: ['thecfa.art', 'images.unsplash.com', 'ik.imagekit.io', 'tabula.bold-themes.com', 'karnatakaindustries.in'], // Corrected domains
+    domains: ['thecfa.art', 'images.unsplash.com', 'ik.imagekit.io', 'tabula.bold-themes.com', 'karnatakaindustries.in', 'ui-avatars.com'], // Added ui-avatars.com
     remotePatterns: [
       {
         protocol: 'https',
@@ -30,6 +30,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
         pathname: '/**',
       },
     ],

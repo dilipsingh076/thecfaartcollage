@@ -5,4 +5,5 @@
  */
 
 export * from './home.service';
+export * from './about.service';
 // Export other services as they are added 

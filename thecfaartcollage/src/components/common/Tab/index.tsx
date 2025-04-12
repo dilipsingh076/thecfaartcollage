@@ -20,6 +20,7 @@ interface TabProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   content: any; //Any for now
   className?: classNameProps;
+  bgColor?: string;
 }
 
 export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
@@ -36,6 +37,7 @@ export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
     setActiveTabContent(content?.find((data: any) => data?.key === tabKey));
   };
 
+ console.log("check solution tabs contnet",tabs, content)
   useEffect(() => {
     const handleScroll = () => {
       tabRefs.current.forEach((ref, index) => {
@@ -71,6 +73,7 @@ export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
               ref={(el) => {
                 tabRefs.current[ind] = el;
               }}
+              style={activeTab === tab?.key && tab?.bgColor ? { background: tab.bgColor } : undefined}
             >
               <span className={styles.tabText}>
                 <SolutionTab
@@ -86,14 +89,16 @@ export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
           ))}
         </div>
       </div>
-      <div className={clsx(styles["tab-content"], className?.contentClass)}>
+      <div className={clsx(styles["tab-content"], className?.contentClass)}
+        style={{ backgroundColor: activeTabContent?.bgColor }}
+      >
         {activeTabContent ? (
           <SolutionsCard
             title={activeTabContent?.title}
-            subtitle={activeTabContent?.subtitle}
             description={activeTabContent?.description}
             features={activeTabContent?.features}
             images={activeTabContent?.image}
+            bgColor={activeTabContent?.bgColor}
           />
         ) : (
           <div>No content available for this tab</div>

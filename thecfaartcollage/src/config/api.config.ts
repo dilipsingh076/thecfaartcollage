@@ -11,6 +11,7 @@ export const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}` || 'http:/
 // API Endpoints
 export const API_ENDPOINTS = {
   HOME: `${API_BASE_URL}/api/home`,
+  ABOUT_US: `${API_BASE_URL}/api/about_us`,
   // Add more endpoints as needed
 };
 
@@ -27,4 +28,5 @@ export const API_RETRY_CONFIG = {
 export const API_CACHE_CONFIG = {
   // Cache time in seconds
   homeData: 60 * 5, // 5 minutes
+  aboutUsData: 60 * 5, // 5 minutes
 }; 

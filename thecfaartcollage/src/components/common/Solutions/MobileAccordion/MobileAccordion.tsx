@@ -1,9 +1,22 @@
 import { useState } from "react";
 import styles from "./MobileAccordion.module.css";
-import { accordionItems } from "./constant";
-
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
-const MobileAccordion = () => {
+import { MDXProvider } from "@mdx-js/react";
+
+interface Department {
+  name: string;
+  slug: string;
+  snippet: string;
+  image: string;
+  icon: string;
+  bg_color?: string;
+}
+
+interface MobileAccordionProps {
+  departments?: Department[];
+}
+
+const MobileAccordion: React.FC<MobileAccordionProps> = ({ departments = [] }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
@@ -12,9 +25,9 @@ const MobileAccordion = () => {
 
   return (
     <div className={styles.accordion}>
-      {accordionItems.map((item, index) => (
+      {departments.map((dept, index) => (
         <div
-          key={item.id}
+          key={index}
           className={`${styles.accordionItem} ${
             activeIndex === index ? styles.active : styles.close
           }`}
@@ -24,12 +37,16 @@ const MobileAccordion = () => {
             onClick={() => handleClick(index)}
           >
             <div className={styles.iconContainer}>
-              <span>{item.icon}</span>
+              <div 
+                className="w-6 h-6" 
+                style={{ color: dept.bg_color || '#FF6B6B' }}
+                dangerouslySetInnerHTML={{ __html: dept.icon }}
+              />
               <h6 
                 className={styles.title}
               >
                 {" "}
-                {item.title}
+                {dept.name}
               </h6>
             </div>
             <div className={styles.arrow}>
@@ -40,10 +57,12 @@ const MobileAccordion = () => {
             className={styles.accordionContent}
             style={{ maxHeight: activeIndex === index ? "420px" : "0" }}
           >
-            <p className={styles.content}>
-              {" "}
-              {item.content}
-            </p>
+            <MDXProvider>
+              <div 
+                className={styles.content}
+                dangerouslySetInnerHTML={{ __html: dept.snippet }}
+              />
+            </MDXProvider>
             <div className={styles.explore}>
               <h6 className={styles.exploreContent}>
                 Explore

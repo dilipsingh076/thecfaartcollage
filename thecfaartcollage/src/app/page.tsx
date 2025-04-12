@@ -18,6 +18,7 @@ import {
   // ContactSection,
   ChitrasantheBanner
 } from '../components/common';
+import { API_BASE_URL } from '../config/api.config';
 
 // Fallback slides in case API fails
 const fallbackSlides = [
@@ -155,115 +156,6 @@ const convertGalleryToGalleryImages = (galleryItems: GalleryItem[]) => {
   }));
 };
 
-// const TestimonialCarousel = () => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-
-//   const nextTestimonial = useCallback(() => {
-//     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-//   }, []);
-
-//   const prevTestimonial = useCallback(() => {
-//     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-//   }, []);
-
-//   useEffect(() => {
-//     const timer = setInterval(() => {
-//       nextTestimonial();
-//     }, 5000);
-
-//     return () => clearInterval(timer);
-//   }, [nextTestimonial]);
-
-//   return (
-//     <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg relative h-[400px] border border-gray-100">
-//       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-bl-full opacity-50"></div>
-//       <div className="mb-6 text-gray-400">
-//         <QuoteIcon />
-//       </div>
-      
-//       <div className="h-[280px] flex flex-col justify-between relative">
-//         <div>
-//           <blockquote 
-//             className="text-lg text-gray-600 mb-6 transition-all duration-500"
-//             key={currentIndex}
-//           >
-//             {testimonials[currentIndex].quote}
-//           </blockquote>
-//         </div>
-        
-//         <div className="mt-auto relative">
-//           <div className="flex items-center gap-4">
-//             <div className="flex-shrink-0">
-//               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg">
-//                 <span className="text-white font-bold text-lg">
-//                   {testimonials[currentIndex].author[0]}
-//                 </span>
-//               </div>
-//             </div>
-//             <div>
-//               <div className="font-semibold text-gray-900">
-//                 {testimonials[currentIndex].author}
-//               </div>
-//               <div className="text-sm text-gray-500">
-//                 {testimonials[currentIndex].position}, {testimonials[currentIndex].organization}
-//               </div>
-//               <div className="flex items-center gap-1 mt-1">
-//                 {[...Array(5)].map((_, i) => (
-//                   <svg
-//                     key={i}
-//                     className="w-4 h-4 text-amber-400"
-//                     fill="currentColor"
-//                     viewBox="0 0 20 20"
-//                   >
-//                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-//                   </svg>
-//                 ))}
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Navigation Buttons */}
-//       <div className="absolute bottom-8 right-8 flex gap-2">
-//         <button 
-//           onClick={prevTestimonial}
-//           className="p-2 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors"
-//           aria-label="Previous testimonial"
-//         >
-//           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-//           </svg>
-//         </button>
-//         <button 
-//           onClick={nextTestimonial}
-//           className="p-2 rounded-full bg-gray-50 hover:bg-gray-100 transition-colors"
-//           aria-label="Next testimonial"
-//         >
-//           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-//           </svg>
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// interface DepartmentContent {
-//   title: string;
-//   subtitle: string;
-//   description: string;
-// }
-
-// interface Department {
-//   id: number;
-//   title: string;
-//   heading: string;
-//   content: DepartmentContent;
-//   icon: React.ReactNode;
-// }
-
-
 // Add custom scrollbar styles to your global CSS
 const styles = `
   .custom-scrollbar {
@@ -297,7 +189,24 @@ export default function HomePage() {
   const apiNotifications = homeData ? convertNoticesToNotifications(homeData.notices) : notifications;
   const apiNewsItems = homeData ? convertEventsToNewsItems(homeData.events) : newsItems;
   const apiGalleryImages = homeData ? convertGalleryToGalleryImages(homeData.gallery) : galleryImages;
-
+  const section_1 = homeData?.section_1 || undefined;
+  const academic_structure = homeData?.academic_structure || undefined;
+  const departments_activities = homeData?.departments_activities || undefined;
+  const section_2 = homeData?.section_2 || undefined;
+  const apiTestimonials = homeData?.testimonials || [];
+  
+  // Convert API testimonials to the format expected by AwardsSection
+  const convertedTestimonials = apiTestimonials.map(testimonial => ({
+    quote: testimonial.content,
+    author: testimonial.name,
+    position: testimonial.designation,
+    organization: "", // Empty string as requested
+    rating: 5 // Always 5 as requested
+  }));
+  
+  // Use API testimonials if available, otherwise use fallback testimonials
+  const finalTestimonials = apiTestimonials.length > 0 ? convertedTestimonials : testimonials;
+  
   // If loading, show a loading spinner
   if (isLoading) {
     return (
@@ -329,22 +238,83 @@ export default function HomePage() {
         <AdmissionsBanner />
 
         {/* About Section */}
-        <AboutSection notifications={apiNotifications} />
+        <AboutSection 
+          notifications={apiNotifications} 
+          section_1={section_1} 
+          academic_structure={academic_structure}
+          departments_activities={departments_activities}
+        />
 
         {/* Awards & Achievements Section */}
-        <AwardsSection awards={awards} testimonials={testimonials} />
+        <AwardsSection awards={awards} testimonials={finalTestimonials} />
 
+        {/* Section 2 Content */}
+        {section_2 && (
+          <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+            {/* Section Header with new design */}
+            <div className="mb-16 text-center">
+              <div className="inline-block">
+                <div className="flex items-center gap-3 mb-4 justify-center">
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                  <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                    Our Heritage
+                  </span>
+                  <div className="h-[1px] w-12 bg-blue-600"></div>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  A Legacy of Artistic Excellence
+                </h2>
+                <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+              </div>
+            </div>
+            
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                {/* Left Side - Image */}
+                <div className="flex justify-center">
+                  {section_2.image && (
+                    <div className="relative">
+                      <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-100 rounded-lg z-0"></div>
+                      <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-lg z-0"></div>
+                      <img 
+                        src={`${API_BASE_URL}/${section_2.image}`} 
+                        alt="College of Fine Arts Heritage" 
+                        className="max-w-full h-auto rounded-lg shadow-xl relative z-10 border-4 border-white"
+                      />
+                    </div>
+                  )}
+                </div>
+                
+                {/* Right Side - Content */}
+                <div className="prose prose-lg max-w-none">
+                  {section_2.content && (
+                    <div 
+                      className="text-gray-600 space-y-6"
+                      dangerouslySetInnerHTML={{ 
+                        __html: section_2.content.replace(/<\/p>/g, '</p><div class="h-4"></div>') 
+                      }} 
+                    />
+                  )}
+                  
+                  <div className="mt-8 flex items-center gap-4">
+                    <div className="h-12 w-1 bg-gradient-to-b from-blue-600 to-amber-500 rounded-full"></div>
+                    <p className="text-blue-800 font-medium italic">
+                      &ldquo;Art is not what you see, but what you make others see.&rdquo; - Edgar Degas
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         {/* Solutions Section */}
-        <Solutions />
+        <Solutions departments={homeData?.departments} />
 
         {/* News & Updates Section */}
         <NewsSection newsItems={apiNewsItems} />
 
         {/* Gallery Section */}
         <GallerySection images={apiGalleryImages} />
-
-        {/* Contact Section */}
-        {/* <ContactSection /> */}
         
         {/* Chitrasanthe Welcome Banner */}
         <ChitrasantheBanner />

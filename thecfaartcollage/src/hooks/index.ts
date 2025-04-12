@@ -5,4 +5,5 @@
  */
 
 export * from './useHomeData';
+export * from './useAboutData';
 // Export other hooks as they are added 

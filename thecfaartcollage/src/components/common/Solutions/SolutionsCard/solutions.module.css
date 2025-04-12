@@ -83,9 +83,11 @@
 
 /* components/DynamicComponent.module.css */
 .container {
-  padding-left: 140px;
-  display: flex;
+  padding-left: 128px;
+  display: grid;
+  grid-template-columns: 50% 50%;
   position: relative;
+  height: 100%;
 }
 
 .conrainerData {
@@ -168,22 +170,31 @@
   color: white;
 }
 
-@media (max-width: 1378px) {
+@media (max-width: 1024px) {
   .container {
-    padding-left: 20px;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding-left: 130px;
   }
   
   .conrainerData {
-    flex: 0 0 100%;
-    width: 100%;
+    grid-row: 1;
+    padding-right: 0;
+    padding-bottom: 20px;
   }
   
   .imageContainer {
-    display: block;
-    flex: 0 0 100%;
-    width: 100%;
-    margin-top: 20px;
+    grid-row: 2;
     height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 15px;
+  }
+  
+  .title {
+    margin-top: 30px;
   }
 }

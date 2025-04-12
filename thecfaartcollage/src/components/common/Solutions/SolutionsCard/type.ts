@@ -8,8 +8,9 @@ export interface Feature {
 
 export interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   description: string;
   features: Feature[];
   images: StaticImageData;
+  bgColor?: string;
 }

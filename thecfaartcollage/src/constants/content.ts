@@ -163,16 +163,6 @@ export const aboutPageContent = {
       animation: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2070&auto=format&fit=crop"
     }
   },
-  // leadership: {
-  //   title: "Leadership",
-  //   president: {
-  //     name: "Dr. B. L. Shankar",
-  //     role: "President",
-  //     message: "The CFA-CKP, is one of the renowned institutions in the field of fine arts education in India. It has a consistent history of encouraging the theory, practice and display of visual culture, over last five decades...",
-  //     // Professional portrait style image
-  //     image: "https://thecfa.art/wp-content/uploads/2020/07/president-1.jpg"
-  //   }
-  // },
   leadership: {
     title: "Leadership",
     president: {
@@ -210,7 +200,7 @@ export const aboutPageContent = {
     email: "thecfaadmission@gmail.com"
   },
   executiveMembers: {
-    title: "Executive Members",
+    title: "Management Committee",
     members: [
       {
         name: "Dr. Shankar B.L.",
