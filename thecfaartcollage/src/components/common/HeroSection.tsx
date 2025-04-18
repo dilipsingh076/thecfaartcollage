@@ -17,8 +17,11 @@ interface HeroSectionProps {
 
 const HeroSection = ({ slides }: HeroSectionProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -26,7 +29,7 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
     return () => {
       clearInterval(timer);
     };
-  }, [slides.length]);
+  }, [slides.length, isPaused]);
 
   return (
     <section className="relative min-h-screen lg:h-[90vh]">
@@ -65,7 +68,11 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
                       {slide.heroDescription}
                     </p>
                     <div className="mt-8 flex justify-center lg:justify-start">
-                      <button className="bg-[#95131D] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#8b2e1d] transition-colors duration-300 text-sm sm:text-base">
+                      <button 
+                        className="bg-[#95131D] cursor-pointer text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#8b2e1d] transition-colors duration-300 text-sm sm:text-base"
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                      >
                         Learn More
                       </button>
                     </div>
