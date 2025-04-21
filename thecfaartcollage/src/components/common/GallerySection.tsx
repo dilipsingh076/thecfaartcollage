@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ImageViewer from './ImageViewer';
 
 interface GalleryImage {
   id: number;
@@ -24,22 +25,11 @@ export default function GallerySection({ images }: GallerySectionProps) {
   // Handle image click to open full-screen viewer
   const handleImageClick = (image: GalleryImage) => {
     setSelectedImage(image);
-    // Prevent scrolling when modal is open
-    document.body.style.overflow = 'hidden';
   };
 
   // Close the full-screen viewer
   const closeImageViewer = () => {
     setSelectedImage(null);
-    // Restore scrolling
-    document.body.style.overflow = 'auto';
-  };
-
-  // Handle keyboard events (Escape key to close)
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeImageViewer();
-    }
   };
 
   return (
@@ -139,58 +129,15 @@ export default function GallerySection({ images }: GallerySectionProps) {
         </div>
       </div>
 
-      {/* Full-Screen Image Viewer Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 transition-opacity duration-300"
-          onClick={closeImageViewer}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-        >
-          <div 
-            className="relative max-w-7xl w-full h-full flex flex-col items-center justify-center p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeImageViewer}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
-              aria-label="Close"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            {/* Image container - fixed height and width */}
-            <div className="w-full h-[70vh] flex items-center justify-center">
-              <div className="relative w-full h-full">
-                <Image
-                  src={selectedImage.imageUrl}
-                  alt={selectedImage.title}
-                  fill
-                  className="object-contain"
-                  sizes="100vw"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Image info */}
-            <div className="mt-4 text-center text-white">
-              <span className="inline-block px-3 py-1 bg-amber-400/90 text-black text-sm font-medium rounded-full mb-2">
-                {selectedImage.category}
-              </span>
-              <h3 id="modal-title" className="text-2xl font-bold">
-                {selectedImage.title}
-              </h3>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Full-Screen Image Viewer */}
+      <ImageViewer
+        isOpen={!!selectedImage}
+        onClose={closeImageViewer}
+        imageUrl={selectedImage?.imageUrl || ''}
+        imageAlt={selectedImage?.title || ''}
+        imageTitle={selectedImage?.title || ''}
+        imageCategory={selectedImage?.category || ''}
+      />
     </section>
   );
 } 

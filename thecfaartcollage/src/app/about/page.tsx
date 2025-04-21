@@ -3,11 +3,13 @@
 import { ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { aboutPageContent } from '@/src/constants/content';
+import ImageViewer from '@/src/components/common/ImageViewer';
 
 import Link from 'next/link';
 import { MDXProvider } from '@mdx-js/react';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 import { useAboutData } from '@/src/hooks';
+import { useState } from 'react';
 
 // Define type for gallery conversion
 type GalleryItem = {
@@ -15,6 +17,12 @@ type GalleryItem = {
   category: string;
   thumbImg: string;
   largeImg: string;
+};
+
+// Define type for history image
+type HistoryImage = {
+  content: string;
+  image: string;
 };
 
 // Function to convert gallery items to the format expected by GallerySection
@@ -46,6 +54,22 @@ export default function AboutPage() {
   
   const historyContent = aboutData?.section_1?.content;
   const historyImage = `${API_BASE_URL}/${aboutData?.section_1?.image}`
+  
+  // Get the history images array from the API
+  const historyImages = (aboutData?.section_1_img || []) as HistoryImage[];
+  
+  // State for the image viewer modal
+  const [selectedHistoryImage, setSelectedHistoryImage] = useState<HistoryImage | null>(null);
+  
+  // Handle image click to open full-screen viewer
+  const handleHistoryImageClick = (image: HistoryImage) => {
+    setSelectedHistoryImage(image);
+  };
+
+  // Close the full-screen viewer
+  const closeHistoryImageViewer = () => {
+    setSelectedHistoryImage(null);
+  };
   
   const presidentName = aboutData?.president_message?.content ? "Dr. B. L. Shankar" : aboutPageContent.leadership.president.name;
   const presidentRole = "President";
@@ -153,16 +177,50 @@ export default function AboutPage() {
                     )}
                   </div>
                 </div>
-                <div className="relative h-[400px] md:h-[500px] rounded-xl overflow-hidden group">
-                  <img
-                    src={historyImage}
-                    alt="College History"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                  {historyImages.length > 0 ? (
+                    historyImages.map((img: HistoryImage, index: number) => (
+                      <div 
+                        key={index} 
+                        className="relative h-[200px] sm:h-[250px] md:h-full rounded-xl overflow-hidden group cursor-pointer"
+                        onClick={() => handleHistoryImageClick(img)}
+                      >
+                        <img
+                          src={`${API_BASE_URL}/${img.image}`}
+                          alt={img.content || "College History"}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                        {/* <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <p className="text-white text-sm font-medium">{img.content}</p>
+                        </div> */}
+                      </div>
+                    ))
+                  ) : (
+                    <div 
+                      className="relative h-[300px] sm:h-[400px] md:h-full rounded-xl overflow-hidden group col-span-1 sm:col-span-2 cursor-pointer"
+                      onClick={() => handleHistoryImageClick({ content: "College History", image: aboutData?.section_1?.image || "" })}
+                    >
+                      <img
+                        src={historyImage}
+                        alt="College History"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
+
+            {/* History Image Viewer */}
+            <ImageViewer
+              isOpen={!!selectedHistoryImage}
+              onClose={closeHistoryImageViewer}
+              imageUrl={selectedHistoryImage ? `${API_BASE_URL}/${selectedHistoryImage.image}` : ''}
+              imageAlt={selectedHistoryImage?.content || "College History"}
+              imageTitle={selectedHistoryImage?.content || "College History"}
+            />
 
             {/* Leadership Section - Redesigned */}
             <div className="space-y-6">

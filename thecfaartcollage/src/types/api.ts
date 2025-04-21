@@ -28,6 +28,10 @@ export interface AboutUsData {
     content: string;
     image: string;
   };
+  section_1_img?: {
+    content: string;
+    image: string;
+  }[];
   president_message: {
     content: string;
     image: string;

@@ -5,6 +5,7 @@ import Navbar from '../components/layouts/Navbar';
 import Footer from '../components/common/Footer';
 import { API_ENDPOINTS } from '../config/api.config';
 import { SeoData } from '../types/api';
+import Header from '../components/layouts/Header';
 
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
@@ -65,7 +66,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Navbar />
+        <Header/>
+        {/* <Navbar/> */}
         {children}
         <Footer />
       </body>
