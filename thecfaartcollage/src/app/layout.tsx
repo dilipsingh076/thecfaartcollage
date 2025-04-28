@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Navbar from '../components/layouts/Navbar';
 import Footer from '../components/common/Footer';
 import { API_ENDPOINTS } from '../config/api.config';
 import { SeoData } from '../types/api';

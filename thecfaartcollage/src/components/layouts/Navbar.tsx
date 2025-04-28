@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../ui/Logo';
-import { navLinks } from './constant';
-import { institutionalLinks } from './InstitutionalNavbar';
 import DropdownIcon from '../common/svg/DropdownIcon';
 import PhoneIcon from '../common/svg/PhoneIcon';
 import ClockIcon from '../common/svg/ClockIcon';
@@ -15,8 +13,29 @@ import YoutubeIcon from '../common/svg/YoutubeIcon';
 import InstagramIcon from '../common/svg/InstagramIcon';
 import TwitterIcon from '../common/svg/TwitterIcon';
 import { usePathname } from 'next/navigation';
+import SkeletonLoader from '../common/SkeletonLoader';
 
-export default function Navbar() {
+// Define types for the menu data
+interface DropdownItem {
+  name: string;
+  href: string;
+}
+
+interface MenuItem {
+  name: string;
+  href: string;
+  color: string | null;
+  dropdownItems: DropdownItem[];
+}
+
+interface NavbarProps {
+  menuItems: MenuItem[];
+  secondaryMenuItems: MenuItem[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
@@ -67,11 +86,11 @@ export default function Navbar() {
               </div>
               <div className="flex items-center">
                 <PhoneIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>+2342 5446 67</span>
+                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>+63649 17676</span>
               </div>
               <div className="flex items-center">
                 <LocationIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>Greenpoint, Brooklyn</span>
+                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>Bengaluru, Karnataka</span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -105,55 +124,61 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6">
-              {navLinks.map((link, index) => (
-                <div key={link.name} className="relative group">
-                  <Link 
-                    href={link.href}
-                    className={`text-base font-medium transition-colors duration-300 ${
-                      scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`
-                    } hover:text-red-500`}
-                    onMouseEnter={() => link.dropdownItems.length > 0 ? setActiveDropdown(index) : undefined}
-                    onMouseLeave={() => link.dropdownItems.length > 0 ? setActiveDropdown(null) : undefined}
-                  >
-                    <span className="flex items-center">
-                      {link.name}
-                      {link.dropdownItems.length > 0 && (
-                        <DropdownIcon className={`ml-1 w-4 h-4 text-gray-800`} />
-                      )}
-                    </span>
-                  </Link>
-                  
-                  {/* Dropdown menu */}
-                  {link.dropdownItems.length > 0 && (
-                    <AnimatePresence>
-                      {activeDropdown === index && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-lg overflow-hidden z-50"
-                          onMouseEnter={() => setActiveDropdown(index)}
-                          onMouseLeave={() => setActiveDropdown(null)}
-                        >
-                          <div className="py-2">
-                            {link.dropdownItems.map((item) => (
-                              <Link
-                                key={item.name}
-                                href={item.href}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-500 transition-colors duration-200"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
-                </div>
-              ))}
+              {isLoading ? (
+                <SkeletonLoader type="navbar" count={5} />
+              ) : error ? (
+                <div className="text-red-500">Error loading menu</div>
+              ) : (
+                menuItems.map((link, index) => (
+                  <div key={link.name} className="relative group">
+                    <Link 
+                      href={link.href}
+                      className={`text-base font-medium transition-colors duration-300 ${
+                        scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`
+                      } hover:text-red-500 ${link.color || ''}`}
+                      onMouseEnter={() => link.dropdownItems.length > 0 ? setActiveDropdown(index) : undefined}
+                      onMouseLeave={() => link.dropdownItems.length > 0 ? setActiveDropdown(null) : undefined}
+                    >
+                      <span className="flex items-center">
+                        {link.name}
+                        {link.dropdownItems.length > 0 && (
+                          <DropdownIcon className={`ml-1 w-4 h-4 text-gray-800`} />
+                        )}
+                      </span>
+                    </Link>
+                    
+                    {/* Dropdown menu */}
+                    {link.dropdownItems.length > 0 && (
+                      <AnimatePresence>
+                        {activeDropdown === index && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-lg overflow-hidden z-50"
+                            onMouseEnter={() => setActiveDropdown(index)}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                          >
+                            <div className="py-2">
+                              {link.dropdownItems.map((item) => (
+                                <Link
+                                  key={item.name}
+                                  href={item.href}
+                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-500 transition-colors duration-200"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                ))
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -211,31 +236,39 @@ export default function Navbar() {
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          {institutionalLinks.map((link) => (
-                            <div key={link.name} className="mt-1">
-                              <Link
-                                href={link.href}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500"
-                                onClick={() => setIsOpen(false)}
-                              >
-                                {link.name}
-                              </Link>
-                              {link.dropdownItems.length > 0 && (
-                                <div className="pl-6 ml-2 space-y-1 border-l border-gray-200">
-                                  {link.dropdownItems.map((item) => (
-                                    <Link
-                                      key={item.name}
-                                      href={item.href}
-                                      className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      {item.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
+                          {isLoading ? (
+                            <div className="px-4 py-2">
+                              <SkeletonLoader type="menu-item" count={3} />
                             </div>
-                          ))}
+                          ) : error ? (
+                            <div className="px-4 py-2 text-sm text-red-500">Error loading menu</div>
+                          ) : (
+                            secondaryMenuItems.map((link) => (
+                              <div key={link.name} className="mt-1">
+                                <Link
+                                  href={link.href}
+                                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500 ${link.color || ''}`}
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {link.name}
+                                </Link>
+                                {link.dropdownItems.length > 0 && (
+                                  <div className="pl-6 ml-2 space-y-1 border-l border-gray-200">
+                                    {link.dropdownItems.map((item) => (
+                                      <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
+                                        onClick={() => setIsOpen(false)}
+                                      >
+                                        {item.name}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -262,31 +295,39 @@ export default function Navbar() {
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          {navLinks.map((link) => (
-                            <div key={link.name} className="mt-1">
-                              <Link
-                                href={link.href}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500"
-                                onClick={() => setIsOpen(false)}
-                              >
-                                {link.name}
-                              </Link>
-                              {link.dropdownItems.length > 0 && (
-                                <div className="pl-6 ml-2 space-y-1 border-l border-gray-200">
-                                  {link.dropdownItems.map((item) => (
-                                    <Link
-                                      key={item.name}
-                                      href={item.href}
-                                      className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      {item.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
+                          {isLoading ? (
+                            <div className="px-4 py-2">
+                              <SkeletonLoader type="menu-item" count={4} />
                             </div>
-                          ))}
+                          ) : error ? (
+                            <div className="px-4 py-2 text-sm text-red-500">Error loading menu</div>
+                          ) : (
+                            menuItems.map((link) => (
+                              <div key={link.name} className="mt-1">
+                                <Link
+                                  href={link.href}
+                                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500 ${link.color || ''}`}
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {link.name}
+                                </Link>
+                                {link.dropdownItems.length > 0 && (
+                                  <div className="pl-6 ml-2 space-y-1 border-l border-gray-200">
+                                    {link.dropdownItems.map((item) => (
+                                      <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
+                                        onClick={() => setIsOpen(false)}
+                                      >
+                                        {item.name}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>

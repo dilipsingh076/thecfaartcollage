@@ -6,4 +6,5 @@
 
 export * from './useHomeData';
 export * from './useAboutData';
+export * from './useCoursesData';
 // Export other hooks as they are added 

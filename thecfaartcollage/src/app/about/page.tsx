@@ -177,28 +177,53 @@ export default function AboutPage() {
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                <div className="space-y-4 h-full">
                   {historyImages.length > 0 ? (
-                    historyImages.map((img: HistoryImage, index: number) => (
-                      <div 
-                        key={index} 
-                        className="relative h-[200px] sm:h-[250px] md:h-full rounded-xl overflow-hidden group cursor-pointer"
-                        onClick={() => handleHistoryImageClick(img)}
-                      >
-                        <img
-                          src={`${API_BASE_URL}/${img.image}`}
-                          alt={img.content || "College History"}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                        {/* <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <p className="text-white text-sm font-medium">{img.content}</p>
-                        </div> */}
-                      </div>
-                    ))
+                    <>
+                      {/* First image - larger and spans full width */}
+                      {historyImages.length > 0 && (
+                        <div 
+                          className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-xl overflow-hidden group cursor-pointer"
+                          onClick={() => handleHistoryImageClick(historyImages[0])}
+                        >
+                          <img
+                            src={`${API_BASE_URL}/${historyImages[0].image}`}
+                            alt={historyImages[0].content || "College History"}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                          {/* <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <p className="text-white text-sm font-medium">{historyImages[0].content}</p>
+                          </div> */}
+                        </div>
+                      )}
+                      
+                      {/* Remaining images in a single row */}
+                      {historyImages.length > 1 && (
+                        <div className="grid grid-cols-3 gap-4">
+                          {historyImages.slice(1, 4).map((img: HistoryImage, index: number) => (
+                            <div 
+                              key={index} 
+                              className="relative h-[150px] sm:h-[180px] rounded-xl overflow-hidden group cursor-pointer"
+                              onClick={() => handleHistoryImageClick(img)}
+                            >
+                              <img
+                                src={`${API_BASE_URL}/${img.image}`}
+                                alt={img.content || "College History"}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                              {/* <div className="absolute bottom-0 left-0 right-0 p-2">
+                                <p className="text-white text-xs font-medium truncate">{img.content}</p>
+                              </div> */}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div 
-                      className="relative h-[300px] sm:h-[400px] md:h-full rounded-xl overflow-hidden group col-span-1 sm:col-span-2 cursor-pointer"
+                      className="relative h-[300px] sm:h-[400px] md:h-full rounded-xl overflow-hidden group cursor-pointer"
                       onClick={() => handleHistoryImageClick({ content: "College History", image: aboutData?.section_1?.image || "" })}
                     >
                       <img
@@ -405,7 +430,11 @@ export default function AboutPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                {governingBodyMembers.map((member, index) => {                  
+                {governingBodyMembers.map((member, index) => {     
+                 const governingBodyMemberImage = 'image' in member && member.image 
+                    ? (getApiImageUrl(member.image) ?? "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop")
+                    : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
+                               
                   return (
                     <div
                       key={index}
@@ -415,7 +444,7 @@ export default function AboutPage() {
                         {/* Profile Image */}
                         <div className="relative w-28 h-32 rounded-lg overflow-hidden">
                           <img
-                            src={member.image|| "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop"}
+                            src={governingBodyMemberImage}
                             alt={member.name}
                             className="absolute inset-0 w-full h-full object-cover"
                           />

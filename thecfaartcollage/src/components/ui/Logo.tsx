@@ -7,7 +7,7 @@ export default function Logo() {
   return (
     // <Link href="/">
     <motion.div
-      className="font-display font-bold text-xl"
+      className="font-display font-bold text-xl bg-white/20 backdrop-blur-lg p-2 rounded-md shadow-sm"
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2 }}
     >

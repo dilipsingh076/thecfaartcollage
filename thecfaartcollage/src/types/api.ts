@@ -5,6 +5,24 @@ export interface ApiResponse<T> {
   message: string;
 }
 
+// Menu Data Types
+export interface DropdownItem {
+  name: string;
+  href: string;
+}
+
+export interface MenuItem {
+  name: string;
+  href: string;
+  color: string | null;
+  dropdownItems: DropdownItem[];
+}
+
+export interface MenuData {
+  primary: MenuItem[];
+  secondary: MenuItem[];
+}
+
 // Home Page Data Types
 export interface SeoData {
   title: string;
@@ -70,6 +88,33 @@ export interface AboutUsData {
     thumbImg: string;
     largeImg: string;
   }[];
+}
+
+// Courses Page Data Types
+export interface Course {
+  name: string;
+  slug: string;
+  description: string;
+  duration: string;
+  eligibility: string;
+  specializations: string[];
+  highlights: string[];
+  image_url: string;
+  snippet: string;
+}
+
+export interface CoursesData {
+  seo: SeoData;
+  banner: {
+    name: string;
+    banner_img: string;
+    banner_txt: string;
+  };
+  section_1: {
+    content: string;
+    image: string | null;
+  };
+  courses: Course[];
 }
 
 export interface SliderItem {
