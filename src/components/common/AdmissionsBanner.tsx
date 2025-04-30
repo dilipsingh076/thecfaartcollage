@@ -50,7 +50,9 @@ const AdmissionsBanner = () => {
                 className="pt-4 sm:pt-6"
               >
                 <Link
-                  href="/admission"
+                  href="https://karnatakaindustries.in/uploads/pdf/CFA_Admission_Form.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-[#FFA500] text-white text-base sm:text-lg md:text-xl font-semibold rounded-xl hover:bg-[#FF9000] transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:translate-y-[-2px]"
                 >
                   <span className="relative z-10">Download BVA Prospectus & Form</span>
@@ -82,7 +84,7 @@ const AdmissionsBanner = () => {
             {/* Main large image */}
             <div className="col-span-8 relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
               <Image
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071"
+                src="https://karnatakaindustries.in/uploads/img/front_2.png"
                 alt="Art Students"
                 fill
                 className="object-cover"
@@ -96,7 +98,7 @@ const AdmissionsBanner = () => {
             <div className="col-span-4 grid grid-rows-2 gap-3 sm:gap-4">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
                 <Image
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070"
+                  src="https://karnatakaindustries.in/uploads/img/misc/SUN01343.jpg?q=80&w=2070"
                   alt="Student Working"
                   fill
                   className="object-cover"
@@ -107,7 +109,7 @@ const AdmissionsBanner = () => {
               </div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
                 <Image
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070"
+                  src="https://karnatakaindustries.in/uploads/img/misc/SUN08145.JPG?q=150&w=1070"
                   alt="Creative Process"
                   fill
                   className="object-cover"

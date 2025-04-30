@@ -22,11 +22,13 @@ const SolutionsCard: React.FC<Props> = ({
             <div 
               className={styles.description}
               style={{
-                fontWeight: "500", 
-                fontSize: "16px", 
+                fontWeight: "400", 
+                fontSize: "13px", 
                 color: "#FFFFFF",
                 lineHeight: "1.6",
-                marginBottom: "20px"
+                marginBottom: "20px",
+                 textAlign: "justify"
+                
               }}
               dangerouslySetInnerHTML={{ __html: description }}
             />
