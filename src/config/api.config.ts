@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
   HOME: `${API_BASE_URL}/api/home`,
   ABOUT_US: `${API_BASE_URL}/api/about_us`,
   COURSES: `${API_BASE_URL}/api/courses`,
+  DEPARTMENTS: `${API_BASE_URL}/api/departments`,
   MENUS: `${API_BASE_URL}/api/menus`,
   // Add more endpoints as needed
 };
@@ -32,5 +33,6 @@ export const API_CACHE_CONFIG = {
   homeData: 60 * 5, // 5 minutes
   aboutUsData: 60 * 5, // 5 minutes
   coursesData: 60 * 5, // 5 minutes
+  departmentsData: 60 * 5, // 5 minutes
   menuData: 60 * 5, // 5 minutes
 }; 

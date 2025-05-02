@@ -1,6 +1,6 @@
 import { API_ENDPOINTS, API_CACHE_CONFIG, API_BASE_URL } from '../../config/api.config';
 import { fetchApi } from '../../utils/api.utils';
-import { CoursesData, CourseDetailData } from '../../types/api';
+import { DepartmentsData, DepartmentDetailData } from '../../types/api';
 
 /**
  * Cache for storing API responses
@@ -44,16 +44,16 @@ const setInCache = <T>(key: string, data: T): void => {
 };
 
 /**
- * Fetch courses page data from API
+ * Fetch departments page data from API
  * @param useCache Whether to use cache (default: true)
- * @returns Courses page data
+ * @returns Departments page data
  */
-export const getCoursesData = async (useCache: boolean = true): Promise<CoursesData> => {
-  const cacheKey = 'courses-data';
+export const getDepartmentsData = async (useCache: boolean = true): Promise<DepartmentsData> => {
+  const cacheKey = 'departments-data';
   
   // Try to get data from cache if caching is enabled
   if (useCache) {
-    const cachedData = getFromCache<CoursesData>(cacheKey, API_CACHE_CONFIG.coursesData);
+    const cachedData = getFromCache<DepartmentsData>(cacheKey, API_CACHE_CONFIG.departmentsData);
     
     if (cachedData) {
       return cachedData;
@@ -61,7 +61,7 @@ export const getCoursesData = async (useCache: boolean = true): Promise<CoursesD
   }
   
   // Fetch data from API
-  const response = await fetchApi<CoursesData>(API_ENDPOINTS.COURSES);
+  const response = await fetchApi<DepartmentsData>(API_ENDPOINTS.DEPARTMENTS);
   
   // Cache the response if caching is enabled
   if (useCache) {
@@ -72,17 +72,17 @@ export const getCoursesData = async (useCache: boolean = true): Promise<CoursesD
 };
 
 /**
- * Fetch course details by slug
- * @param slug Course slug
+ * Fetch department details by slug
+ * @param slug Department slug
  * @param useCache Whether to use cache (default: true)
- * @returns Course details
+ * @returns Department details
  */
-export const getCourseBySlug = async (slug: string, useCache: boolean = true): Promise<CourseDetailData> => {
-  const cacheKey = `course-${slug}`;
+export const getDepartmentBySlug = async (slug: string, useCache: boolean = true): Promise<DepartmentDetailData> => {
+  const cacheKey = `department-${slug}`;
   
   // Try to get data from cache if caching is enabled
   if (useCache) {
-    const cachedData = getFromCache<CourseDetailData>(cacheKey, API_CACHE_CONFIG.coursesData);
+    const cachedData = getFromCache<DepartmentDetailData>(cacheKey, API_CACHE_CONFIG.departmentsData);
     
     if (cachedData) {
       return cachedData;
@@ -90,8 +90,8 @@ export const getCourseBySlug = async (slug: string, useCache: boolean = true): P
   }
   
   // Fetch data from API
-  const courseEndpoint = `${API_BASE_URL}/api/courses/${slug}`;
-  const response = await fetchApi<CourseDetailData>(courseEndpoint);
+  const departmentEndpoint = `${API_BASE_URL}/api/departments/${slug}`;
+  const response = await fetchApi<DepartmentDetailData>(departmentEndpoint);
   
   // Cache the response if caching is enabled
   if (useCache) {
@@ -102,12 +102,12 @@ export const getCourseBySlug = async (slug: string, useCache: boolean = true): P
 };
 
 /**
- * Clear courses data cache
+ * Clear departments data cache
  */
-export const clearCoursesDataCache = (): void => {
-  // Clear all course related caches
+export const clearDepartmentsDataCache = (): void => {
+  // Clear all department related caches
   for (const key of cache.keys()) {
-    if (key.startsWith('course-') || key === 'courses-data') {
+    if (key.startsWith('department-') || key === 'departments-data') {
       cache.delete(key);
     }
   }

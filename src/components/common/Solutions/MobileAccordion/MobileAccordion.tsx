@@ -55,7 +55,7 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({ departments = [] }) =
           </div>
           <div
             className={styles.accordionContent}
-            style={{ maxHeight: activeIndex === index ? "420px" : "0" }}
+            style={{ maxHeight: activeIndex === index ? "9999px" : "0" }}
           >
             <MDXProvider>
               <div 

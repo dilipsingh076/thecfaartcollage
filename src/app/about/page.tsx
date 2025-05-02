@@ -104,26 +104,25 @@ export default function AboutPage() {
   const apiGalleryImages = aboutData?.gallery || [];
   const convertedGalleryImages = convertGalleryToGalleryImages(apiGalleryImages as GalleryItem[]);
 
-
-    // If loading, show a loading spinner
-    if (isLoading) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <LoadingSpinner size="large" color="#963B25" />
-        </div>
-      );
-    }
+  // If loading, show a loading spinner
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" color="#963B25" />
+      </div>
+    );
+  }
   
-    // If there's an error, show an error message with a retry button
-    if (error) {
-      return (
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <div className="max-w-md w-full">
-            <ErrorMessage error={error} retry={refetch} />
-          </div>
+  // If there's an error, show an error message with a retry button
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="max-w-md w-full">
+          <ErrorMessage error={error} retry={refetch} />
         </div>
-      );
-    }
+      </div>
+    );
+  }
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -328,40 +327,39 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Core Members */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                {executiveMembers.map((member, index) => {
-                  // Get image URL if available, otherwise use a placeholder
-                  const memberImage = 'image' in member && member.image 
-                    ? (getApiImageUrl(member.image) ?? "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop")
-                    : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
-                  
-                  return (
-                    <div key={index} className="group relative overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg h-[280px] flex flex-col">
-                      {/* Image Container */}
-                      <div className="relative h-48 w-full overflow-hidden flex-shrink-0">
-                        <img
-                          src={memberImage}
-                          alt={member.name}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              {/* Executive Members - Enhanced Card Design with 3D effects */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                {executiveMembers.map((member, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 relative border-t-4 border-blue-600"
+                  >
+                    <div className="p-6">
+                      {/* Member Number */}
+                      <div className="flex items-center mb-4">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg mr-3">
+                          {index + 1}
+                        </div>
+                        <div className="h-px flex-grow bg-blue-200"></div>
                       </div>
                       
-                      {/* Content */}
-                      <div className="p-4 bg-white flex-grow flex flex-col justify-between">
-                        <div>
-                          <h3 className="font-bold text-lg mb-1 text-gray-900 line-clamp-2">
-                            {(member as ExecutiveMember).name || 'Executive Member'}
-                          </h3>
-                          <p className="text-red-500 font-medium line-clamp-1">
-                            {(member as ExecutiveMember).designation || (member as ExecutiveMember).role || 'Executive Member'}
-                          </p>
-                        </div>
+                      {/* Member Info */}
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-900 mb-1">
+                          {(member as ExecutiveMember).name || 'Executive Member'}
+                        </h3>
+                        <p className="text-blue-700 font-medium">
+                          {(member as ExecutiveMember).designation || (member as ExecutiveMember).role || 'Executive Member'}
+                        </p>
+                      </div>
+                      
+                      {/* Simple decorative line */}
+                      <div className="mt-auto pt-2">
+                        <div className="h-1 w-16 bg-blue-200 rounded-full"></div>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
 
               {/* Committee Members */}
@@ -381,32 +379,61 @@ export default function AboutPage() {
                     {/* <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div> */}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  {committeeMembers.map((member, index) => {
-                    // For committee members, we'll use the provided image URL or a placeholder
-                    const memberImage = member.image 
-                      ? `${API_BASE_URL}/${member.image}` 
-                      : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
+                
+                {/* Committee Members - Simple Clean List */}
+                <div className="max-w-5xl mx-auto">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md border border-red-100">
+                    {/* Simple header */}
+                    <div className="bg-red-500 py-4 px-6 text-white">
+                      <h3 className="text-xl font-bold">Committee Members</h3>
+                    </div>
                     
-                    return (
-                      <div key={index} className="flex items-center space-x-4 p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-100 hover:shadow-md transition-all duration-300 h-[80px]">
-                        {/* Avatar with image */}
-                        <div className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden">
-                          <img 
-                            src={memberImage} 
-                            alt={member.name} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        
-                        {/* Member name */}
-                        <div className="flex-grow overflow-hidden">
-                          <p className="text-gray-800 font-medium truncate">{member.name}</p>
-                          <p className="text-sm text-gray-500">{member.designation}</p>
-                        </div>
+                    {/* Simple two-column layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-red-100">
+                      <div className="divide-y divide-red-100">
+                        {committeeMembers.slice(0, Math.ceil(committeeMembers.length/2)).map((member, index) => (
+                          <div 
+                            key={index} 
+                            className={`p-4 ${index % 2 === 0 ? 'bg-red-50' : 'bg-white'} hover:bg-red-100 transition-colors duration-200`}
+                          >
+                            <div className="flex items-center">
+                              {/* Simple numbered list */}
+                              <div className="mr-3 font-bold text-red-500 w-6 text-center">
+                                {index + 1}.
+                              </div>
+                              
+                              {/* Member Info */}
+                              <div>
+                                <h4 className="font-semibold text-gray-900">{member.name}</h4>
+                                <p className="text-sm text-red-600">{member.designation}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    );
-                  })}
+                      <div className="divide-y divide-red-100">
+                        {committeeMembers.slice(Math.ceil(committeeMembers.length/2)).map((member, index) => (
+                          <div 
+                            key={index}
+                            className={`p-4 ${index % 2 === 0 ? 'bg-red-50' : 'bg-white'} hover:bg-red-100 transition-colors duration-200`}
+                          >
+                            <div className="flex items-center">
+                              {/* Simple numbered list continuation */}
+                              <div className="mr-3 font-bold text-red-500 w-6 text-center">
+                                {index + Math.ceil(committeeMembers.length/2) + 1}.
+                              </div>
+                              
+                              {/* Member Info */}
+                              <div>
+                                <h4 className="font-semibold text-gray-900">{member.name}</h4>
+                                <p className="text-sm text-red-600">{member.designation}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -429,50 +456,47 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                {governingBodyMembers.map((member, index) => {     
-                 const governingBodyMemberImage = 'image' in member && member.image 
-                    ? (getApiImageUrl(member.image) ?? "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop")
-                    : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
-                               
-                  return (
-                    <div
-                      key={index}
-                      className="flex space-x-4 p-6 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300 bg-gradient-to-br from-white to-gray-50 items-end"
-                    >
-                      <div className="flex-shrink-0">
-                        {/* Profile Image */}
-                        <div className="relative w-28 h-32 rounded-lg overflow-hidden">
-                          <img
-                            src={governingBodyMemberImage}
-                            alt={member.name}
-                            className="absolute inset-0 w-full h-full object-cover"
-                          />
-                        </div>
-                        {/* Number Badge */}
-                        <div className="absolute -top-2 -left-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center font-semibold text-sm">
-                          {(index + 1).toString().padStart(2, '0')}
-                        </div>
-                      </div>
-
-                      <div className="flex-grow space-y-2">
-                        <div>
-                          <h3 className="text-lg font-bold text-gray-900 leading-tight">
-                            {member.name}
-                          </h3>
-                          <p className="text-red-500 font-medium text-sm">
-                            {member.designation}
-                          </p>
-                        </div>
-                        {member.message && (
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {member.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+              {/* Governing Body - Simple Table Style */}
+              <div className="max-w-5xl mx-auto">
+                <div className="bg-white overflow-hidden rounded-xl shadow-md border border-amber-200">
+                  {/* Simple header */}
+                  <div className="bg-amber-500 py-4 px-6 text-white">
+                    <h3 className="text-xl font-bold">Governing Body Members</h3>
+                  </div>
+                  
+                  {/* Simple table layout */}
+                  <div>
+                    <table className="min-w-full divide-y divide-amber-200">
+                      <thead className="bg-amber-50">
+                        <tr>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider w-16">No.</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider">Name</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider">Designation</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-amber-100">
+                        {governingBodyMembers.map((member, index) => (
+                          <tr key={index} className="hover:bg-amber-50 transition-colors duration-200">
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold">
+                                {index + 1}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm font-medium text-gray-900">{member.name}</div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-amber-700">{member.designation}</div>
+                              {member.message && (
+                                <p className="text-xs text-gray-500 mt-1 italic">&ldquo;{member.message}&rdquo;</p>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -515,11 +539,11 @@ export default function AboutPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-6">
                           <h3 className="text-2xl font-bold text-white mb-2">{dept.name}</h3>
-                          <div className="text-gray-200 line-clamp-2">
+                          {/* <div className="text-gray-200 line-clamp-2">
                             <MDXProvider>
                               <div dangerouslySetInnerHTML={{ __html: processMarkdownContent(dept.snippet) }} />
                             </MDXProvider>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="p-6">

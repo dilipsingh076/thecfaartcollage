@@ -34,14 +34,17 @@ export interface SeoData {
   og_image: string;
 }
 
+// Banner Type
+export interface Banner {
+  name: string;
+  banner_img: string;
+  banner_txt: string;
+}
+
 // About Us Page Data Types
 export interface AboutUsData {
   seo: SeoData;
-  banner: {
-    name: string;
-    banner_img: string;
-    banner_txt: string;
-  };
+  banner: Banner;
   section_1: {
     content: string;
     image: string;
@@ -105,16 +108,19 @@ export interface Course {
 
 export interface CoursesData {
   seo: SeoData;
-  banner: {
-    name: string;
-    banner_img: string;
-    banner_txt: string;
-  };
+  banner: Banner;
   section_1: {
     content: string;
     image: string | null;
   };
   courses: Course[];
+}
+
+// Course Detail Page Data Type
+export interface CourseDetailData {
+  seo: SeoData;
+  banner: Banner;
+  courses: Course;
 }
 
 export interface SliderItem {
@@ -187,6 +193,51 @@ export interface HomeData {
     image: string;
     icon: string;
   }[];
+}
+
+// Department Page Data Types
+export interface Department {
+  name: string;
+  slug: string;
+  description: string;
+  duration: string | null;
+  eligibility: string | null;
+  image: string | null;
+  snippet: string;
+}
+
+export interface Faculty {
+  name: string;
+  designation: string;
+  description: string;
+  image_url: string;
+}
+
+export interface DepartmentData {
+  name: string;
+  slug: string;
+  description: string;
+  duration: string | null;
+  eligibility: string | null;
+  image_url: string | null;
+  snippet: string;
+  faculty: Faculty[];
+}
+
+export interface DepartmentsData {
+  seo: SeoData;
+  banner: Banner;
+  section_1?: {
+    content: string;
+    image: string | null;
+  };
+  departments: Department[];
+}
+
+export interface DepartmentDetailData {
+  seo: SeoData;
+  banner: Banner;
+  department: DepartmentData;
 }
 
 // API Error Types

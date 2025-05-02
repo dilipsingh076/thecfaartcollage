@@ -11,6 +11,12 @@ const getApiImageUrl = (path: string | null | undefined): string | null => {
   return `${API_BASE_URL}/${path}`;
 };
 
+interface Banner {
+  name: string;
+  banner_img: string;
+  banner_txt: string;
+}
+
 interface CourseDetailProps {
   course: {
     name: string;
@@ -24,13 +30,22 @@ interface CourseDetailProps {
     specializations: string[];
     highlights: string[];
   };
+  banner?: Banner;
 }
 
-const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
+const CourseDetail: React.FC<CourseDetailProps> = ({ course, banner }) => {
   // Get course image URL
   const courseImageUrl = course.image_url 
     ? (getApiImageUrl(course.image_url) ?? "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop")
     : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
+
+  // Get banner image URL if available
+  const bannerImageUrl = banner?.banner_img
+    ? (getApiImageUrl(banner.banner_img) ?? courseImageUrl)
+    : courseImageUrl;
+
+  // Check if we have both description and snippet
+  const hasBothDescriptionAndSnippet = course.description && course.snippet;
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -38,7 +53,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
       <section className="relative h-[70vh] w-full">
         <div className="absolute inset-0">
           <Image
-            src={courseImageUrl}
+            src={bannerImageUrl}
             alt={course.name}
             fill
             className="object-cover"
@@ -54,8 +69,13 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
             className="max-w-3xl"
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              {course.name}
+              {banner?.name}
             </h1>
+            {banner?.banner_txt && (
+              <p className="text-xl text-white/80 mb-8">
+                {banner.banner_txt}
+              </p>
+            )}
             <div className="flex items-center gap-4">
               <div className="bg-[#FFD700] text-black px-6 py-2 rounded-full font-semibold shadow-lg">
                 {course.duration || "2 Years"}
@@ -71,6 +91,22 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left Column */}
             <div className="space-y-12">
+              {/* Quick Overview - Only show if both description and snippet are available */}
+              {hasBothDescriptionAndSnippet && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="bg-gradient-to-r from-[#FFD700]/10 to-[#FFE55C]/10 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-[#FFD700]"
+                >
+                  <h2 className="text-2xl font-bold text-[#1a1a1a] mb-3">Quick Overview</h2>
+                  <div className="prose prose-lg max-w-none">
+                    <div dangerouslySetInnerHTML={{ __html: processMarkdownContent(course.snippet || '') }} />
+                  </div>
+                </motion.div>
+              )}
+
               {/* Course Overview */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
