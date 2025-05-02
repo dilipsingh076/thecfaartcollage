@@ -240,6 +240,33 @@ export interface DepartmentDetailData {
   department: DepartmentData;
 }
 
+// Info Page Data Types
+export interface InfoData {
+  success: boolean;
+  data: {
+    seo?: SeoData;
+    banner?: {
+      id?: number;
+      name?: string;
+      slug?: string;
+      caption?: string;
+      snippet?: string;
+      category?: string;
+      author?: string | null;
+      description?: string;
+      banner_img?: string;
+      banner_txt?: string | null;
+      status?: string;
+      views?: number | null;
+      seo_id?: number;
+      user_id?: number;
+      created_at?: string | null;
+      updated_at?: string | null;
+    }
+  };
+  message: string;
+}
+
 // API Error Types
 export interface ApiError {
   success: false;

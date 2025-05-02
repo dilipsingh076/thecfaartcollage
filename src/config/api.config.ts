@@ -35,4 +35,5 @@ export const API_CACHE_CONFIG = {
   coursesData: 60 * 5, // 5 minutes
   departmentsData: 60 * 5, // 5 minutes
   menuData: 60 * 5, // 5 minutes
+  infoData: 60 * 5, // 5 minutes
 }; 
