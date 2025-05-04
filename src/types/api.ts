@@ -241,28 +241,46 @@ export interface DepartmentDetailData {
 }
 
 // Info Page Data Types
+export interface InfoBanner {
+  id?: number;
+  name?: string;
+  slug?: string;
+  caption?: string;
+  snippet?: string;
+  category?: string;
+  author?: string | null;
+  description?: string;
+  banner_img?: string;
+  banner_txt?: string | null;
+  status?: string;
+  views?: number | null;
+  seo_id?: number;
+  user_id?: number;
+  created_at?: string | null;
+  updated_at?: string | null;
+}
+
 export interface InfoData {
   success: boolean;
+  seo?: SeoData;
+  banner?: InfoBanner;// Make it flexible to handle different response structures
+  message: string;
+}
+
+export interface InfoListItem {
+  id: number;
+  name: string;
+  slug: string;
+  caption?: string;
+  snippet?: string;
+  description?: string;
+  banner_img?: string;
+}
+
+export interface InfoListData {
+  success: boolean;
   data: {
-    seo?: SeoData;
-    banner?: {
-      id?: number;
-      name?: string;
-      slug?: string;
-      caption?: string;
-      snippet?: string;
-      category?: string;
-      author?: string | null;
-      description?: string;
-      banner_img?: string;
-      banner_txt?: string | null;
-      status?: string;
-      views?: number | null;
-      seo_id?: number;
-      user_id?: number;
-      created_at?: string | null;
-      updated_at?: string | null;
-    }
+    pages: InfoListItem[];
   };
   message: string;
 }

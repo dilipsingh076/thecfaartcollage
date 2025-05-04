@@ -1,6 +1,6 @@
 import { API_BASE_URL, API_CACHE_CONFIG } from '../../config/api.config';
 import { fetchApi } from '../../utils/api.utils';
-import { InfoData } from '../../types/api';
+import { InfoData, InfoListData } from '../../types/api';
 
 /**
  * Cache for storing API responses
@@ -64,6 +64,35 @@ export const getInfoData = async (slug: string, useCache: boolean = true): Promi
   // Fetch data from API
   const url = `${API_BASE_URL}/api/info/${slug}`;
   const response = await fetchApi<InfoData>(url);
+  
+  // Cache the response if caching is enabled
+  if (useCache) {
+    setInCache(cacheKey, response.data);
+  }
+  
+  return response.data;
+};
+
+/**
+ * Fetch all info pages from API
+ * @param useCache Whether to use cache (default: true)
+ * @returns List of info pages
+ */
+export const getAllInfoPages = async (useCache: boolean = true): Promise<InfoListData> => {
+  const cacheKey = 'info-pages-list';
+  
+  // Try to get data from cache if caching is enabled
+  if (useCache) {
+    const cachedData = getFromCache<InfoListData>(cacheKey, API_CACHE_CONFIG.infoData || 300);
+    
+    if (cachedData) {
+      return cachedData;
+    }
+  }
+  
+  // Fetch data from API
+  const url = `${API_BASE_URL}/api/info`;
+  const response = await fetchApi<InfoListData>(url);
   
   // Cache the response if caching is enabled
   if (useCache) {
