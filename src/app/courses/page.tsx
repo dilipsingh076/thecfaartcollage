@@ -156,9 +156,8 @@ export default function CoursesPage() {
             <div className="space-y-40">
               {coursesData.courses.map((course, index) => {
                 // Get course image URL
-                const courseImageUrl = 'image' in course && course.image_url ?  (getApiImageUrl(course.image_url) ?? "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop")
-                    : "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop";
-                  
+                const courseImageUrl = getApiImageUrl(course?.image_url) || 
+                  "https://images.unsplash.com/photo-1515405295579-ba7b45403062?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80";
                 return (
                   <motion.div
                     key={course.slug}
@@ -173,13 +172,11 @@ export default function CoursesPage() {
                     {/* Image Section */}
                     <div className="w-full lg:w-1/2">
                       <div className="relative h-full min-h-[500px] overflow-hidden">
-                        <Image
+                        <img
                           src={courseImageUrl}
                           alt={course.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="object-cover w-full h-full"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         {/* Duration Badge */}
                         <div className="absolute top-6 right-6 bg-[#FFD700] text-black px-4 py-2 rounded-full font-semibold shadow-lg">
                           {course.duration || "Duration: 2 Years"}
