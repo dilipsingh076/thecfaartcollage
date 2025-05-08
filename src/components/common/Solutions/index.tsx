@@ -70,7 +70,7 @@ export const Solutions: React.FC<SolutionsProps> = ({ departments = [] }) => {
       <SectionTitle
         boldCaption={"Departments"}
         boldTitle={"Build your Future with us!"}
-        description={"Comprehensive Solutions to Drive Your Digital Success"}
+        description={"Holistic pedagogical framework for Visual Arts education"}
       />
 
       <MobileAccordion departments={departments} />

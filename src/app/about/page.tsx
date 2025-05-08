@@ -1,6 +1,6 @@
 'use client';
 
-import { ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
+import {  AdmissionsBanner,ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { aboutPageContent } from '@/src/constants/content';
 import ImageViewer from '@/src/components/common/ImageViewer';
@@ -253,12 +253,12 @@ export default function AboutPage() {
                   <div className="flex items-center gap-3 mb-4 justify-center">
                     <div className="h-[1px] w-12 bg-blue-600"></div>
                     <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                      Leadership
+                     Messages
                     </span>
                     <div className="h-[1px] w-12 bg-blue-600"></div>
                   </div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    College Leadership
+                    From the College Leaders
                   </h2>
                   <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
                 </div>
@@ -308,198 +308,219 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
+          {/* End President Message */}
 
-            {/* Executive Members Section */}
-            <div className="space-y-6">
-              <div className="mb-16 text-center">
-                <div className="inline-block">
-                  <div className="flex items-center gap-3 mb-4 justify-center">
-                    <div className="h-[1px] w-12 bg-blue-600"></div>
-                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                      Executive Members
-                    </span>
-                    <div className="h-[1px] w-12 bg-blue-600"></div>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    {aboutPageContent.executiveMembers.title}
-                  </h2>
-                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
-                </div>
-              </div>
-
-              {/* Executive Members - Enhanced Card Design with 3D effects */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {executiveMembers.map((member, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 relative border-t-4 border-blue-600"
-                  >
-                    <div className="p-6">
-                      {/* Member Number */}
-                      <div className="flex items-center mb-4">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg mr-3">
-                          {index + 1}
-                        </div>
-                        <div className="h-px flex-grow bg-blue-200"></div>
-                      </div>
-                      
-                      {/* Member Info */}
-                      <div className="mb-4">
-                        <h3 className="text-xl font-bold text-gray-900 mb-1">
-                          {(member as ExecutiveMember).name || 'Executive Member'}
-                        </h3>
-                        <p className="text-blue-700 font-medium">
-                          {(member as ExecutiveMember).designation || (member as ExecutiveMember).role || 'Executive Member'}
-                        </p>
-                      </div>
-                      
-                      {/* Simple decorative line */}
-                      <div className="mt-auto pt-2">
-                        <div className="h-1 w-16 bg-blue-200 rounded-full"></div>
-                      </div>
+            {/* GS Message */}
+            <div className="space-y-6">              
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* GS's Image Column */}
+                <div className="lg:col-span-1">
+                  <div className="space-y-4">
+                    <div className="relative h-[500px] rounded-xl overflow-hidden">
+                      <img
+                        src="https://karnatakaindustries.in/uploads/img/misc/GS_Sir_1.png"
+                        alt="General Secretary IMg"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
+                      />
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Committee Members */}
-              <div className="mt-12">
-                <div className="mb-16 text-center">
-                  <div className="inline-block">
-                    <div className="flex items-center gap-3 mb-4 justify-center">
-                      <div className="h-[1px] w-12 bg-blue-600"></div>
-                      <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                        Committee Members
-                      </span>
-                      <div className="h-[1px] w-12 bg-blue-600"></div>
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold">Sri. Shashidhar Rao S. N</h3>
+                      <p className="text-red-500 font-medium text-lg">General Secretary</p>
                     </div>
-                    {/* <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                      Committee Members
-                    </h2> */}
-                    {/* <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div> */}
                   </div>
                 </div>
-                
-                {/* Committee Members - Simple Clean List */}
-                <div className="max-w-5xl mx-auto">
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md border border-red-100">
-                    {/* Simple header */}
-                    <div className="bg-red-500 py-4 px-6 text-white">
-                      <h3 className="text-xl font-bold">Committee Members</h3>
+
+                {/* GS's Message Column */}
+                <div className="lg:col-span-2">
+                  <div className="space-y-6">
+                    <div className="inline-block">
+                      <h3 className="text-2xl font-bold mb-2">Message from the General Secretary</h3>
+                      <div className="h-1 w-20 bg-blue-500"></div>
                     </div>
-                    
-                    {/* Simple two-column layout */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-red-100">
-                      <div className="divide-y divide-red-100">
-                        {committeeMembers.slice(0, Math.ceil(committeeMembers.length/2)).map((member, index) => (
-                          <div 
-                            key={index} 
-                            className={`p-4 ${index % 2 === 0 ? 'bg-red-50' : 'bg-white'} hover:bg-red-100 transition-colors duration-200`}
-                          >
-                            <div className="flex items-center">
-                              {/* Simple numbered list */}
-                              <div className="mr-3 font-bold text-red-500 w-6 text-center">
-                                {index + 1}.
-                              </div>
-                              
-                              {/* Member Info */}
-                              <div>
-                                <h4 className="font-semibold text-gray-900">{member.name}</h4>
-                                <p className="text-sm text-red-600">{member.designation}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="divide-y divide-red-100">
-                        {committeeMembers.slice(Math.ceil(committeeMembers.length/2)).map((member, index) => (
-                          <div 
-                            key={index}
-                            className={`p-4 ${index % 2 === 0 ? 'bg-red-50' : 'bg-white'} hover:bg-red-100 transition-colors duration-200`}
-                          >
-                            <div className="flex items-center">
-                              {/* Simple numbered list continuation */}
-                              <div className="mr-3 font-bold text-red-500 w-6 text-center">
-                                {index + Math.ceil(committeeMembers.length/2) + 1}.
-                              </div>
-                              
-                              {/* Member Info */}
-                              <div>
-                                <h4 className="font-semibold text-gray-900">{member.name}</h4>
-                                <p className="text-sm text-red-600">{member.designation}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+
+                    <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
+                    <p>On behalf of our institution, it gives me great pleasure to welcome you to our thriving community
+of artists, designers and creative practitioners.
+With a distinguished legacy spanning six decades,
+we have established ourselves as a trailblazer in
+visual arts education. This prospectus, alongside
+our digital platforms, offers an insight into our
+vibrant academic environment, exceptional
+facilities and dynamic creative culture that bridges
+traditional craftsmanship with cutting-edge digital
+practices.</p>
+
+<p>Our stimulating environment provides the ideal
+foundation for your holistic development as an
+artist. Our graduates' strong employment
+outcomes testify to the quality of our programmes,
+with alumni making their mark across diverse
+sectors including arts institutions, advertising,
+scientific illustration, medical visualisation,
+journalism, cinematography and corporate
+creative roles. We regularly host eminent alumni
+and industry leaders who provide invaluable networking and mentoring opportunities, while our
+faculty of accomplished artists ensures rigorous
+training through masterclasses and personalised
+tuition that balances technical precision with
+conceptual innovation.</p>
+
+<p>Beyond formal instruction, our campus functions
+as an active artistic laboratory where students
+engage with practicing artists-in-residence,
+participate in live exhibition curation, and
+collaborate on community art projects. These
+experiential learning opportunities allow you to
+test ideas in real-world contexts while developing
+professional competencies. Our interdisciplinary
+approach encourages cross-pollination between
+mediums - from traditional painting and sculpture
+to digital fabrication and immersive media -
+preparing you for the evolving contemporary art
+landscape.</p>
+
+<p>The Visual Arts degree at our college develops both
+technical proficiency and theoretical
+understanding, producing adaptable practitioners
+equipped for professional success. Karnataka
+Chitrakala Parishath's remarkable campus, with its
+multiple galleries and museums, serves as an
+extraordinary resource, showcasing everything
+from international exhibitions to traditional Mysore
+and Tanjore paintings that connect you directly
+with India's rich artistic heritage.</p>
+
+<p>As you commence your journey with the College of
+Fine Arts, Karnataka Chitrakala Parishath, prepare
+to realise your creative potential through our
+pedagogy that cultivates personal expression
+while developing professional competencies.
+Welcome to a transformative journey where
+technical excellence and creativity unite to forge
+the visionary artists of tomorrow - innovative,
+culturally-grounded practitioners who will
+simultaneously preserve heritage and revolutionise
+the frontiers of visual expression through inspired
+imagination and bold experimentation.</p>
+
+                    </div>
+
+                    {/* Signature */}
+                    <div className="pt-4 flex items-center space-x-4">
+                      <div className="flex-1 border-t border-gray-200"></div>
+                      <div className="text-gray-500 italic text-sm">Sri. Shashidhar Rao S. N</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            {/* End GS Message */}
 
-            {/* Governing Body Section */}
-            <div className="space-y-6">
-              <div className="mb-16 text-center">
-                <div className="inline-block">
-                  <div className="flex items-center gap-3 mb-4 justify-center">
-                    <div className="h-[1px] w-12 bg-blue-600"></div>
-                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
-                      Governing Body
-                    </span>
-                    <div className="h-[1px] w-12 bg-blue-600"></div>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    {aboutPageContent.governingBody.title}
-                  </h2>
-                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
-                </div>
-              </div>
-
-              {/* Governing Body - Simple Table Style */}
-              <div className="max-w-5xl mx-auto">
-                <div className="bg-white overflow-hidden rounded-xl shadow-md border border-amber-200">
-                  {/* Simple header */}
-                  <div className="bg-amber-500 py-4 px-6 text-white">
-                    <h3 className="text-xl font-bold">Governing Body Members</h3>
-                  </div>
-                  
-                  {/* Simple table layout */}
-                  <div>
-                    <table className="min-w-full divide-y divide-amber-200">
-                      <thead className="bg-amber-50">
-                        <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider w-16">No.</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider">Name</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-amber-700 uppercase tracking-wider">Designation</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-amber-100">
-                        {governingBodyMembers.map((member, index) => (
-                          <tr key={index} className="hover:bg-amber-50 transition-colors duration-200">
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold">
-                                {index + 1}
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-medium text-gray-900">{member.name}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-amber-700">{member.designation}</div>
-                              {member.message && (
-                                <p className="text-xs text-gray-500 mt-1 italic">&ldquo;{member.message}&rdquo;</p>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+            {/* Principal Message */}
+            
+            <div className="space-y-6">             
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* President's Image Column */}
+                <div className="lg:col-span-1">
+                  <div className="space-y-4">
+                    <div className="relative h-[500px] rounded-xl overflow-hidden">
+                      <img
+                        src="https://karnatakaindustries.in/uploads/img/misc/Principal_Madam_1.png"
+                        alt="Principal"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
+                      />
+                    </div>
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold">Dr. Gomathi Gowda</h3>
+                      <p className="text-red-500 font-medium text-lg">Principal</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
+                {/* Principal's Message Column */}
+                <div className="lg:col-span-2">
+                  <div className="space-y-6">
+                    <div className="inline-block">
+                      <h3 className="text-2xl font-bold mb-2">Message from the Principal</h3>
+                      <div className="h-1 w-20 bg-red-500"></div>
+                    </div>
+
+                    <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
+                    <p>Step into the College of Fine Arts – a sanctuary
+where artistic dreams take form and creative
+pioneers flourish. Within these walls, you'll
+encounter a dynamic crucible of artistic
+innovation, where tradition and avant-garde
+expression collide to spark extraordinary visions.</p>
+
+<p>Our Bengaluru campus, strategically positioned in
+the city's academic nucleus, represents our
+unwavering dedication to cultivating world-class
+visual artists through intentionally designed
+spaces that stimulate creative breakthroughs.</p>
+
+<p>State-of-the-art studios flooded with natural light,
+cutting-edge digital laboratories, a
+research-intensive art library, and
+professional-grade exhibition spaces form the
+backbone of our creative infrastructure. These
+facilities don't merely support your education –
+they actively elevate your practice, providing the
+tools to transform raw talent into professional
+mastery. Here, you'll join a thriving collective of
+artists and designers where daily exchanges of
+ideas fuel unexpected creative synergies.</p>
+
+<p>Under the mentorship of our distinguished faculty
+practicing artists and industry leaders you'll
+develop both the technical virtuosity and
+conceptual depth demanded by today's evolving
+art world.</p>
+
+<p>For six decades, CFA has been the launchpad for
+visionaries who redefine visual culture across
+global galleries, studios, and creative enterprises.
+As you become part of this legacy, you'll gain
+access to Cross-disciplinary collaborations that
+shatter creative boundaries, Masterclasses with
+internationally acclaimed visiting artists, Critical
+dialogues that refine your artistic philosophy,
+Professional frameworks for sustainable creative
+careers.</p>
+
+<p>We champion art as a transformative force – a
+universal language that bridges cultures and drives
+societal evolution. Our curriculum balances
+rigorous skill-building with fearless
+experimentation, empowering you to develop a
+distinctive creative signature while engaging with
+global art narratives. Beyond technical training, we
+cultivate the resilience, adaptability and visionary
+thinking that distinguishes true cultural innovators.</p>
+
+<p>The CFA journey will profoundly challenge you to
+embrace bold creative risks, and cultivate the
+courageous vision to share your artistic ideology
+with the world. This is where passion powerfully
+converges with professional purpose within our
+luminous studios buzzing with creative ferment,
+alongside inspired peers, all supported by an
+institution deeply invested in your growth as both
+an accomplished artist and meaningful cultural
+innovator. Your extraordinary artistic destiny finds
+it’s beginning here.</p>
+                    </div>
+
+                    {/* Signature */}
+                    <div className="pt-4 flex items-center space-x-4">
+                      <div className="flex-1 border-t border-gray-200"></div>
+                      <div className="text-gray-500 italic text-sm">Dr. Gomathi Gowda</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>           
+             {/* End Principal Message */}
             {/*GallerySection */}
               <GallerySection images={convertedGalleryImages} />
 
@@ -564,35 +585,13 @@ export default function AboutPage() {
                 })}
               </div>
             </div>
-            {/* Stats Section - New */}
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-red-500">1964</div>
-                  <div className="text-gray-600 mt-2">Established</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-red-500">500+</div>
-                  <div className="text-gray-600 mt-2">Students</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-red-500">50+</div>
-                  <div className="text-gray-600 mt-2">Faculty Members</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-red-500">4</div>
-                  <div className="text-gray-600 mt-2">Departments</div>
-                </div>
-              </div>
-            </div>
-
-
+           
           </div>
         </div>
 
 
-        {/* Chitrasanthe Welcome Banner */}
-        <ChitrasantheBanner />
+         {/* Admissions Banner Section */}
+        <AdmissionsBanner />
       </section>
 
 

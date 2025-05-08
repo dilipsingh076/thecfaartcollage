@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ChitrasantheBanner, LoadingSpinner, ErrorMessage } from '@/src/components/common';
+import { AdmissionsBanner, LoadingSpinner, ErrorMessage } from '@/src/components/common';
 import { MDXProvider } from '@mdx-js/react';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 import { API_BASE_URL } from '@/src/config/api.config';
@@ -88,7 +88,7 @@ export default function DepartmentsPage() {
         <section className="py-32 bg-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 via-transparent to-[#FFD700]/5"></div>
           <div className="container mx-auto px-4 relative">
-            <div className="max-w-4xl mx-auto">
+            <div className="mx-auto">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ export default function DepartmentsPage() {
                       <div className="h-[1px] w-12 bg-blue-600"></div>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                      Welcome to The College of Fine Art
+                     Shaping the Future of Creative Practice
                     </h2>
                     <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
                   </div>
@@ -117,7 +117,7 @@ export default function DepartmentsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="space-y-8 text-xl text-gray-700 leading-relaxed"
+                className="space-y-8 text-gray-700 leading-relaxed"
               >
                   <p>
                     The College Of Fine Art has a leading reputation internationally attracting students from all over the world. The departments of The college of fine arts pioneers in new approaches to fine art teaching and practice-based research. The cosmopolitan nature of the student body and the thriving intellectual culture of the department together provide many and various opportunities to develop cross-cultural collaborations within the field.
@@ -199,7 +199,7 @@ export default function DepartmentsPage() {
                               {department.name}
                             </h2>
                           </div>
-                          <div className="text-gray-600 leading-relaxed text-xl mb-10">
+                          <div className="text-gray-600 leading-relaxed mb-10">
                             {department.snippet ? (
                               <div dangerouslySetInnerHTML={{ __html: processMarkdownContent(department.snippet) }} />
                             ) : (
@@ -210,7 +210,7 @@ export default function DepartmentsPage() {
                             href={`/departments/${department.slug}`}
                             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FFD700] to-[#FFE55C] text-black px-10 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
                           >
-                            Learn More
+                            More Details
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
@@ -279,8 +279,8 @@ export default function DepartmentsPage() {
             </motion.div>
           </div>
         </section>
-        {/* Chitrasanthe Welcome Banner */}
-        <ChitrasantheBanner />
+       {/* Admissions Banner Section */}
+        <AdmissionsBanner />
       </main>
     </MDXProvider>
   );

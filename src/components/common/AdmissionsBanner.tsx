@@ -33,12 +33,12 @@ const AdmissionsBanner = () => {
               >
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">
-                    Admissions Open
+                    Admissions Open for BVA Courses
                   </span>
                   <span className="block mt-2 sm:mt-3 text-[#FFA500]">2025-2026</span>
                 </h2>
                 <p className="text-white/90 text-lg sm:text-xl md:text-2xl font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Join our prestigious art programs
+                  Join our prestigious Visual Arts programs
                 </p>
               </motion.div>
 

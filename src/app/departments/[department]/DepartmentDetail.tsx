@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import { useState } from "react";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { Banner } from '@/src/types/api';
+import {  AdmissionsBanner,ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
 
 // Helper function to get complete image URL
 const getApiImageUrl = (path: string | null | undefined): string | null => {
@@ -106,9 +108,9 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({
       </section>
 
       {/* Main Content */}
-      <section className="py-20">
+     <section className="pt-20 md:pt-40">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 mx-auto">
             {/* Department Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -117,7 +119,22 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({
               viewport={{ once: true }}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <h2 className="text-3xl font-bold text-[#1a1a1a] mb-6">Department Overview</h2>
+             <div className="mb-16 text-center">
+                <div className="inline-block">
+                  <div className="flex items-center gap-3 mb-4 justify-center">
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                      Department
+                    </span>
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    {department.name} Department Overview
+                  </h2>
+                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+                </div>
+              </div>   
+               
               <div className="prose prose-lg max-w-none">
                 <div dangerouslySetInnerHTML={{ __html: department.description }} />
               </div>
@@ -142,69 +159,58 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({
         </div>
       </section>
 
-      {/* Department Snippet Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="bg-gradient-to-r from-[#FFD700]/10 to-[#FFE55C]/10 rounded-2xl p-8 shadow-lg border-l-4 border-[#FFD700]">
-              <h2 className="text-3xl font-bold text-[#1a1a1a] mb-6">About This Department</h2>
-              <div className="prose prose-lg max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: department.snippet }} />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
+      
       {/* Faculty Section */}
-      {faculty.length > 0 && (
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="max-w-4xl mx-auto text-center mb-16"
-            >
-              <h2 className="text-4xl font-bold text-[#1a1a1a] mb-4">Our Faculty</h2>
-              <p className="text-xl text-gray-600">Meet our expert instructors who will guide you through your learning journey</p>
-            </motion.div>
+{faculty.length > 0 && (
+  <section className="py-20 bg-gray-50">
+    <div className="container mx-auto px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-4xl mx-auto text-center mb-16"
+      >
+        <h2 className="text-4xl font-bold text-[#1a1a1a] mb-4">Our Faculty</h2>
+        <p className="text-xl text-gray-600">Meet our expert instructors who will guide you through your learning journey</p>
+      </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {faculty.map((member, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
-                >
-                  <div className="h-64 relative overflow-hidden">
-                    <img
-                      src={getApiImageUrl(member.image_url) || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop'}
-                      alt={member.name}
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105 w-full h-full"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-2">{member.name}</h3>
-                    <p className="text-[#FFD700] font-medium mb-4">{member.designation}</p>
-                    <p className="text-gray-700 line-clamp-3">{member.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        {faculty.map((member, index) => (
+         <motion.div
+  key={index}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+  viewport={{ once: true }}
+  className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+>
+  {/* Image */}
+  <div className="w-full h-[400px]">
+    <img
+      src={getApiImageUrl(member.image_url) || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop'}
+      alt={member.name}
+      className="object-cover object-top w-full h-full"
+    />
+  </div>
+
+  {/* Overlay Text */}
+  <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-4">
+    <h3 className="text-base font-semibold text-[#1a1a1a] mb-1 leading-tight">{member.name}</h3>
+    <p className="text-[#FFD700] text-sm font-medium mb-1 leading-snug">{member.designation}</p>
+    <p className="text-gray-700 text-sm">
+      <a href="/faculty/details" className="text-blue-600 hover:underline">Read More</a>
+    </p>
+  </div>
+</motion.div>
+
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
 
       {/* Contact Section */}
       <section className="py-20 bg-gray-50 relative overflow-hidden">
@@ -273,6 +279,9 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({
             </div>
           </motion.div>
         </div>
+        
+         {/* Admissions Banner Section */}
+        <AdmissionsBanner />
       </section>
     </main>
   );

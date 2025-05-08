@@ -5,6 +5,7 @@ import Footer from '../components/common/Footer';
 import { API_ENDPOINTS } from '../config/api.config';
 import { SeoData } from '../types/api';
 import Header from '../components/layouts/Header';
+import NProgressProvider from "./providers/nprogress-provider";
 
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <Header/>
         {/* <Navbar/> */}
+         <NProgressProvider />
         {children}
         <Footer />
       </body>

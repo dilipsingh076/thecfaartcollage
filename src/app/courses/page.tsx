@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ChitrasantheBanner, ErrorMessage, LoadingSpinner } from '@/src/components/common';
+import { AdmissionsBanner, ErrorMessage, LoadingSpinner } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { useCoursesData } from '@/src/hooks';
 import { MDXProvider } from '@mdx-js/react';
@@ -91,7 +91,7 @@ export default function CoursesPage() {
         <section className="py-32 bg-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 via-transparent to-[#FFD700]/5"></div>
           <div className="container mx-auto px-4 relative">
-            <div className="max-w-4xl mx-auto">
+            <div className="mx-auto">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -321,8 +321,8 @@ export default function CoursesPage() {
           </div>
         </section>
 
-        {/* Chitrasanthe Welcome Banner */}
-        <ChitrasantheBanner />
+        {/* AdmissionsBanner Welcome Banner */}
+        <AdmissionsBanner />
       </main>
     </MDXProvider>
   );

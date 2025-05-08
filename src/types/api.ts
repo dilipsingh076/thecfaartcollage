@@ -128,6 +128,7 @@ export interface SliderItem {
   description: string;
   image: string;
   link: string;
+  button: string;
 }
 
 export interface Notice {

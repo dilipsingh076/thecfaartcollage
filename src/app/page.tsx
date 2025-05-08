@@ -101,6 +101,8 @@ const convertSliderToSlides = (sliderItems: SliderItem[]) => {
     variant: index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'tertiary',
     heroTitle: item.title,
     heroDescription: item.description,
+    buttonLink: item.link,
+    buttonText: item.button,
     imageUrl: 'https://tabula.bold-themes.com/sunny/wp-content/uploads/sites/2/2019/03/hero_home_01.jpg', // Fallback image
     circleContent: (
       <div className="w-[235px] sm:w-[250px] md:w-[375px] lg:w-[530px] h-[200px] sm:h-[250px] md:h-[320px] lg:h-[450px] 2xl:h-[550px] 2xl:w-[660px]">
@@ -245,8 +247,7 @@ export default function HomePage() {
           departments_activities={departments_activities}
         />
 
-        {/* Awards & Achievements Section */}
-        <AwardsSection awards={awards} testimonials={finalTestimonials} />
+       
 
         {/* Section 2 Content */}
         {section_2 && (
@@ -316,8 +317,8 @@ export default function HomePage() {
         {/* Gallery Section */}
         <GallerySection images={apiGalleryImages} />
         
-        {/* Chitrasanthe Welcome Banner */}
-        <ChitrasantheBanner />
+        {/* Admissions Banner Section */}
+        <AdmissionsBanner />
       </div>
     </main>
   );

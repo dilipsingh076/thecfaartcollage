@@ -5,7 +5,7 @@ import { SeoData } from '@/src/types/api';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 // Next.js App Router doesn't use Head component
 import { useEffect } from 'react';
-import { ChitrasantheBanner } from '@/src/components/common';
+import { AdmissionsBanner } from '@/src/components/common';
 
 // Helper function to get complete image URL
 const getApiImageUrl = (path: string | null | undefined): string => {
@@ -106,7 +106,7 @@ const InfoDetail: React.FC<InfoDetailProps> = ({ banner, seo }) => {
       {/* Main Content Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-12 mx-auto">
             {/* Main Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -114,8 +114,22 @@ const InfoDetail: React.FC<InfoDetailProps> = ({ banner, seo }) => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <h2 className="text-3xl font-bold text-[#1a1a1a] mb-6">{title} Details</h2>
+            ><div className="mb-16 text-center">
+                <div className="inline-block">
+                  <div className="flex items-center gap-3 mb-4 justify-center">
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                    <span className="text-blue-600 font-medium uppercase tracking-wider text-sm">
+                     College of Fine Arts
+                    </span>
+                    <div className="h-[1px] w-12 bg-blue-600"></div>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                   {title} Details
+                  </h2>
+                  <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto rounded-full"></div>
+                </div>
+              </div>
+             
               {description ? (
                 <div className="prose prose-lg max-w-none">
                   <div dangerouslySetInnerHTML={{ __html: processMarkdownContent ? processMarkdownContent(description) : description }} />
@@ -143,7 +157,7 @@ const InfoDetail: React.FC<InfoDetailProps> = ({ banner, seo }) => {
           </div>
         </div>
       </section>
-      <ChitrasantheBanner />
+      <AdmissionsBanner />
     </main>
   );
 };

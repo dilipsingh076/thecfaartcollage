@@ -11,6 +11,8 @@ interface HeroSectionProps {
     heroTitle: string;
     heroDescription: string;
     imageUrl: string;
+    buttonLink: string;
+    buttonText: string;
     circleContent: React.ReactNode;
   }[];
 }
@@ -24,7 +26,7 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
     
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
 
     return () => {
       clearInterval(timer);
@@ -72,13 +74,15 @@ const HeroSection = ({ slides }: HeroSectionProps) => {
 </p>
 
                     <div className="mt-8 flex justify-center lg:justify-start">
-                      <button 
-                        className="bg-[#95131D] cursor-pointer text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#8b2e1d] transition-colors duration-300 text-sm sm:text-base"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
-                      >
-                        Learn More
-                      </button>
+                      <a
+  href={slide.buttonLink}
+  target="_blank"
+  className="bg-[#95131D] cursor-pointer text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg hover:bg-[#8b2e1d] transition-colors duration-300 text-sm sm:text-base inline-block"
+  onMouseEnter={() => setIsPaused(true)}
+  onMouseLeave={() => setIsPaused(false)}
+>
+  {slide.buttonText}
+</a>
                     </div>
                   </div>
                 </div>

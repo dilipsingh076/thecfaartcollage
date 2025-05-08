@@ -81,12 +81,8 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
           <div className="flex justify-between items-center py-1">
             <div className="flex items-center space-x-6 text-sm">
               <div className="flex items-center">
-                <ClockIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>Mon - Fri 8 AM - 5 PM</span>
-              </div>
-              <div className="flex items-center">
                 <PhoneIcon className="w-4 h-4 mr-2 text-red-500" />
-                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>+63649 17676</span>
+                <span className={scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`}>+91 63649 17676</span>
               </div>
               <div className="flex items-center">
                 <LocationIcon className="w-4 h-4 mr-2 text-red-500" />
