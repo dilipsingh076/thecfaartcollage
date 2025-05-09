@@ -63,6 +63,7 @@ export const Solutions: React.FC<SolutionsProps> = ({ departments = [] }) => {
     features: Solutionsfeatures,
     bgColor: dept.bg_color,
     image: dept.image,
+    slug: dept.slug,
   }));
 
   return (

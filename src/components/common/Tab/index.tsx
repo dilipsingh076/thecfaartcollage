@@ -99,6 +99,7 @@ export const Tabs: React.FC<TabProps> = ({ tabs, content, className }) => {
             features={activeTabContent?.features}
             images={activeTabContent?.image}
             bgColor={activeTabContent?.bgColor}
+            slug={activeTabContent?.slug}
           />
         ) : (
           <div>No content available for this tab</div>

@@ -47,17 +47,38 @@ const AdmissionsBanner = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="pt-4 sm:pt-6"
+                className="pt-4 sm:pt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
                 <Link
                   href="https://karnatakaindustries.in/uploads/pdf/CFA_Admission_Form.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-[#FFA500] text-white text-base sm:text-lg md:text-xl font-semibold rounded-xl hover:bg-[#FF9000] transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:translate-y-[-2px]"
+                  className="group relative inline-flex items-center px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 lg:py-2.5 bg-[#FFA500] text-white text-xs sm:text-sm lg:text-base font-medium rounded-md hover:bg-[#FF9000] transition-all duration-300 shadow hover:shadow-md transform hover:translate-y-[-1px]"
                 >
-                  <span className="relative z-10">Download BVA Prospectus & Form</span>
+                  <span className="relative z-10">Download BVA Prospectus</span>
                   <svg 
-                    className="w-5 h-5 sm:w-6 sm:h-6 ml-2 transform group-hover:translate-x-1 transition-transform" 
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 ml-1.5 lg:ml-2 transform group-hover:translate-x-1 transition-transform" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                    />
+                  </svg>
+                </Link>
+                <Link
+                  href="https://karnatakaindustries.in/uploads/pdf/CFA_Admission_Form.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 lg:py-2.5 bg-white text-[#1A2B5F] text-xs sm:text-sm lg:text-base font-medium rounded-md hover:bg-gray-100 transition-all duration-300 shadow hover:shadow-md transform hover:translate-y-[-1px]"
+                >
+                  <span className="relative z-10">Download BVA Application Form</span>
+                  <svg 
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 ml-1.5 lg:ml-2 transform group-hover:translate-x-1 transition-transform" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"

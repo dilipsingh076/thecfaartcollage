@@ -1,6 +1,6 @@
 'use client';
 
-import {  AdmissionsBanner,ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
+import {  AdmissionsBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { aboutPageContent } from '@/src/constants/content';
 import ImageViewer from '@/src/components/common/ImageViewer';
@@ -38,10 +38,7 @@ const convertGalleryToGalleryImages = (galleryItems: GalleryItem[]) => {
 
 // Helper function to safely construct API image URL
 const getApiImageUrl = (path: string | null | undefined): string | null => {
-   console.log("check path before", path, API_BASE_URL);
-
   if (!path || !API_BASE_URL) return null;
-  console.log("check path", path);
   return `${API_BASE_URL}/${path}`;
 };
 
@@ -77,19 +74,6 @@ export default function AboutPage() {
   
   // Parse president message from API if available
   const presidentMessage = aboutData?.president_message?.content;
-
-  
-  // Use executive members from API if available
-  const executiveMembers = aboutData?.["Executive Members"] || [];
-  const committeeMembers = aboutData?.["Committee Members"] || [];
-  const governingBodyMembers = aboutData?.["Governing Body"] || [];
-  // Define the type for executive members
-  type ExecutiveMember = {
-    name: string;
-    designation?: string;
-    role?: string;
-    image?: string;
-  };
   
   // Use departments from API if available
   const departments = aboutData?.departments || aboutPageContent.departments.list.map(name => ({
@@ -190,7 +174,7 @@ export default function AboutPage() {
                             alt={historyImages[0].content || "College History"}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                          <div className="absolute inset-0 " />
                           {/* <div className="absolute bottom-0 left-0 right-0 p-4">
                             <p className="text-white text-sm font-medium">{historyImages[0].content}</p>
                           </div> */}
@@ -211,7 +195,7 @@ export default function AboutPage() {
                                 alt={img.content || "College History"}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                              <div className="absolute inset-0" />
                               {/* <div className="absolute bottom-0 left-0 right-0 p-2">
                                 <p className="text-white text-xs font-medium truncate">{img.content}</p>
                               </div> */}
@@ -352,7 +336,7 @@ practices.</p>
 
 <p>Our stimulating environment provides the ideal
 foundation for your holistic development as an
-artist. Our graduates' strong employment
+artist. Our graduates&apos; strong employment
 outcomes testify to the quality of our programmes,
 with alumni making their mark across diverse
 sectors including arts institutions, advertising,
@@ -383,12 +367,12 @@ landscape.</p>
 technical proficiency and theoretical
 understanding, producing adaptable practitioners
 equipped for professional success. Karnataka
-Chitrakala Parishath's remarkable campus, with its
+Chitrakala Parishath&apos;s remarkable campus, with its
 multiple galleries and museums, serves as an
 extraordinary resource, showcasing everything
 from international exhibitions to traditional Mysore
 and Tanjore paintings that connect you directly
-with India's rich artistic heritage.</p>
+with India&apos;s rich artistic heritage.</p>
 
 <p>As you commence your journey with the College of
 Fine Arts, Karnataka Chitrakala Parishath, prepare
@@ -448,13 +432,13 @@ imagination and bold experimentation.</p>
                     <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
                     <p>Step into the College of Fine Arts – a sanctuary
 where artistic dreams take form and creative
-pioneers flourish. Within these walls, you'll
+pioneers flourish. Within these walls, you&apos;ll
 encounter a dynamic crucible of artistic
 innovation, where tradition and avant-garde
 expression collide to spark extraordinary visions.</p>
 
 <p>Our Bengaluru campus, strategically positioned in
-the city's academic nucleus, represents our
+the city&apos;s academic nucleus, represents our
 unwavering dedication to cultivating world-class
 visual artists through intentionally designed
 spaces that stimulate creative breakthroughs.</p>
@@ -464,23 +448,23 @@ cutting-edge digital laboratories, a
 research-intensive art library, and
 professional-grade exhibition spaces form the
 backbone of our creative infrastructure. These
-facilities don't merely support your education –
+facilities don&apos;t merely support your education –
 they actively elevate your practice, providing the
 tools to transform raw talent into professional
-mastery. Here, you'll join a thriving collective of
+mastery. Here, you&apos;ll join a thriving collective of
 artists and designers where daily exchanges of
 ideas fuel unexpected creative synergies.</p>
 
 <p>Under the mentorship of our distinguished faculty
-practicing artists and industry leaders you'll
+practicing artists and industry leaders you&apos;ll
 develop both the technical virtuosity and
-conceptual depth demanded by today's evolving
+conceptual depth demanded by today&apos;s evolving
 art world.</p>
 
 <p>For six decades, CFA has been the launchpad for
 visionaries who redefine visual culture across
 global galleries, studios, and creative enterprises.
-As you become part of this legacy, you'll gain
+As you become part of this legacy, you&apos;ll gain
 access to Cross-disciplinary collaborations that
 shatter creative boundaries, Masterclasses with
 internationally acclaimed visiting artists, Critical
@@ -508,7 +492,7 @@ alongside inspired peers, all supported by an
 institution deeply invested in your growth as both
 an accomplished artist and meaningful cultural
 innovator. Your extraordinary artistic destiny finds
-it’s beginning here.</p>
+it&apos;s beginning here.</p>
                     </div>
 
                     {/* Signature */}

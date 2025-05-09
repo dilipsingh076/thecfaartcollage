@@ -6,6 +6,7 @@ import { API_ENDPOINTS } from '../config/api.config';
 import { SeoData } from '../types/api';
 import Header from '../components/layouts/Header';
 import NProgressProvider from "./providers/nprogress-provider";
+import { Toaster } from 'react-hot-toast';
 
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
@@ -71,6 +72,7 @@ export default function RootLayout({
          <NProgressProvider />
         {children}
         <Footer />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

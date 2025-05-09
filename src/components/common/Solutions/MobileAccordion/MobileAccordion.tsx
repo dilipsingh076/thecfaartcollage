@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./MobileAccordion.module.css";
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import { MDXProvider } from "@mdx-js/react";
+import Link from 'next/link';
 
 interface Department {
   name: string;
@@ -22,6 +23,8 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({ departments = [] }) =
   const handleClick = (index: number) => {
     setActiveIndex(index === activeIndex ? null : index);
   };
+
+  console.log("departments", departments, activeIndex)
 
   return (
     <div className={styles.accordion}>
@@ -63,12 +66,12 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({ departments = [] }) =
                 dangerouslySetInnerHTML={{ __html: dept.snippet }}
               />
             </MDXProvider>
-            <div className={styles.explore}>
+            <Link href={`/departments/${dept.slug}`} className={styles.explore}>
               <h6 className={styles.exploreContent}>
                 Explore
               </h6>
               {/* <Image src={ArrowUpIcon} alt={"arrowIcon.jpeg"} /> */}
-            </div>
+            </Link>
           </div>
         </div>
       ))}

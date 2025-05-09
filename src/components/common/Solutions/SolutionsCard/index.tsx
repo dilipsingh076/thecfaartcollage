@@ -5,11 +5,13 @@ import { Props } from "./type";
 import Image from "next/image";
 import { API_BASE_URL } from "@/src/config/api.config";
 import { MDXProvider } from '@mdx-js/react';
+import Link from 'next/link';
 // import Image from "next/image";
 const SolutionsCard: React.FC<Props> = ({
   title,
   description,
   images,
+  slug
 }) => {
   return (
     <div className={styles.container}>
@@ -35,7 +37,9 @@ const SolutionsCard: React.FC<Props> = ({
           </MDXProvider>
         </div>
         <div className={styles.buttonContainer}>
-          <button className={styles.button}>Explore</button>
+          <Link href={`/departments/${slug}`} className={styles.button}>
+            Explore
+          </Link>
         </div>
       </div>
       <div className={styles.imageContainer}>

@@ -13,4 +13,5 @@ export interface Props {
   features: Feature[];
   images: StaticImageData;
   bgColor?: string;
+  slug: string;
 }

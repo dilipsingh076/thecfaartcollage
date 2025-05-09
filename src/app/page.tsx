@@ -271,10 +271,10 @@ export default function HomePage() {
             
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                {/* Left Side - Image */}
-                <div className="flex justify-center">
+                {/* Left Side - Image with Founder Info */}
+                <div className="flex flex-col items-center">
                   {section_2.image && (
-                    <div className="relative">
+                    <div className="relative mb-8">
                       <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-100 rounded-lg z-0"></div>
                       <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-lg z-0"></div>
                       <img 
@@ -284,6 +284,22 @@ export default function HomePage() {
                       />
                     </div>
                   )}
+                  
+                  {/* Founder Info - Simple Design */}
+                  <div className="text-center max-w-md">
+                    <div className="inline-block px-4 py-2 bg-gradient-to-r from-blue-600 to-amber-500 rounded-full mb-4">
+                      <span className="text-white font-medium">Founder</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      Prof. M. S. Nanjunda Rao
+                    </h3>
+                    <p className="text-lg text-blue-600 font-medium">
+                      Founder Secretary
+                    </p>
+                    <p className="text-gray-600">
+                      Karnataka Chitrakala Parishath
+                    </p>
+                  </div>
                 </div>
                 
                 {/* Right Side - Content */}
@@ -297,11 +313,13 @@ export default function HomePage() {
                     />
                   )}
                   
-                  <div className="mt-8 flex items-center gap-4">
-                    <div className="h-12 w-1 bg-gradient-to-b from-blue-600 to-amber-500 rounded-full"></div>
-                    <p className="text-blue-800 font-medium italic">
-                      &ldquo;Art is not what you see, but what you make others see.&rdquo; - Edgar Degas
-                    </p>
+                  <div className="mt-8 space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-1 bg-gradient-to-b from-blue-600 to-amber-500 rounded-full"></div>
+                      <p className="text-blue-800 font-medium italic">
+                        &ldquo;Art is not what you see, but what you make others see.&rdquo; - Edgar Degas
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
