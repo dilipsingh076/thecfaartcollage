@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { AdmissionsBanner, ErrorMessage, LoadingSpinner } from '@/src/components/common';
+import { AdmissionsBanner, ErrorMessage, LoadingSpinner, Hero } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { useCoursesData } from '@/src/hooks';
 import { MDXProvider } from '@mdx-js/react';
@@ -56,36 +55,12 @@ export default function CoursesPage() {
   return (
     <MDXProvider>
       <main className="min-h-screen bg-gray-50">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src={bannerImageUrl}
-              alt="Art Courses Hero"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80" />
-            <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.1)_0%,transparent_70%)]"></div>
-          </div>
-          <div className="relative container mx-auto px-4 text-center h-full flex flex-col justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl mx-auto"
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-center">
-                {coursesData.banner.name || "Transform Your Creative Journey"}
-              </h1>
-              <p className="text-lg sm:text-xl text-gray-200 text-center max-w-2xl sm:max-w-3xl mx-auto px-4">
-              {coursesData.banner.banner_txt || "Discover our comprehensive range of art programs designed to nurture your artistic talent and develop professional skills"}
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <Hero 
+          title={coursesData.banner.name}
+          subtitle={coursesData.banner.banner_txt}
+          imageUrl={bannerImageUrl}
+          imageAlt="Art Courses Hero"
+        />
 
         {/* Introduction Section */}
         <section className="py-32 bg-white relative overflow-hidden">

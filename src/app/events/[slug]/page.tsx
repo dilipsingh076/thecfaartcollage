@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
-import { getEventBySlug, EventDetailData } from '@/src/services/api/events.service';
+import { getEventBySlug } from '@/src/services/api/events.service';
 import { API_BASE_URL } from '@/src/config/api.config';
-import { LoadingSpinner } from '@/src/components/common';
+import { LoadingSpinner, Hero } from '@/src/components/common';
+import { EventDetailData } from '@/src/types/api';
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -19,7 +20,6 @@ export default function EventDetailPage() {
       try {
         const slug = params.slug as string;
         const response = await getEventBySlug(slug, false);
-        console.log("Fetched fresh event data:", response);
         setEventData(response);
       } catch (err: unknown) {
         console.error("Error fetching event details:", err);
@@ -55,37 +55,12 @@ export default function EventDetailPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
-        <Image
-          src={heroImage}
-          alt={banner.name}
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/40 via-black/60 to-black/80" />
-        </div>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative h-full flex items-center justify-center px-4"
-        >
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block px-4 py-1 bg-[#FFD700] text-black font-semibold rounded-full text-sm mb-6">
-              {event.category}
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-              {event.title}
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
-              {event.snippet}
-            </p>
-          </div>
-        </motion.div>
-      </section>
+      <Hero 
+        title={event.title}
+        subtitle={event.snippet}
+        imageUrl={heroImage}
+        imageAlt={banner.name}
+      />
 
       {/* Event Details */}
       <section className="py-16 sm:py-20 lg:py-24">
@@ -130,7 +105,7 @@ export default function EventDetailPage() {
                 </div>
                 <div className="relative h-64 md:h-full rounded-2xl overflow-hidden">
                   <Image
-                    src={event.thumbImg}
+                    src={`${API_BASE_URL}/${event.thumbImg}`}
                     alt={event.title}
                     fill
                     className="object-cover"

@@ -60,3 +60,8 @@ body {
 .hover\:-translate-y-1:hover {
   transform: translateY(-0.25rem);
 }
+
+/* Hide Next.js Route Handler Overlay in local development */
+[data-nextjs-dialog], .nextjs-portal {
+  display: none !important;
+}

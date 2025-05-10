@@ -5,7 +5,7 @@ import { SeoData } from '@/src/types/api';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 // Next.js App Router doesn't use Head component
 import { useEffect } from 'react';
-import { AdmissionsBanner } from '@/src/components/common';
+import { AdmissionsBanner, Hero } from '@/src/components/common';
 
 // Helper function to get complete image URL
 const getApiImageUrl = (path: string | null | undefined): string => {
@@ -68,40 +68,12 @@ const InfoDetail: React.FC<InfoDetailProps> = ({ banner, seo }) => {
   
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative h-[70vh] w-full">
-        <div className="absolute inset-0">
-          <img
-            src={bannerImageUrl}
-            alt={title}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.src = '/vercel.svg';
-              e.currentTarget.classList.add('bg-gray-700');
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/90" />
-        </div>
-        
-        <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              {title}
-            </h1>
-
-            {subtitle && (
-              <p className="text-xl text-gray-200 mb-8">
-                {subtitle}
-              </p>
-            )}
-          </motion.div>
-        </div>
-      </section>
+      <Hero 
+        title={title}
+        subtitle={subtitle}
+        imageUrl={bannerImageUrl}
+        imageAlt={title}
+      />
       
       {/* Main Content Section */}
       <section className="py-20">

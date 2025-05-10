@@ -129,9 +129,13 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                   <div key={link.name} className="relative group">
                     <Link 
                       href={link.href}
-                      className={`text-base font-medium transition-colors duration-300 ${
-                        scrolled ? 'text-gray-800' : `${isHomePage ? 'text-gray-800' : 'text-white'}`
-                      } hover:text-red-500 ${link.color || ''}`}
+                      className={`text-base font-medium transition-all duration-300 relative ${
+                        pathname === link.href 
+                          ? 'text-[#95131d] font-semibold after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                          : scrolled 
+                            ? 'text-gray-800' 
+                            : `${isHomePage ? 'text-gray-800' : 'text-white'}`
+                      } hover:text-[#95131d] ${pathname !== link.href ? link.color || '' : ''}`}
                       onMouseEnter={() => link.dropdownItems.length > 0 ? setActiveDropdown(index) : undefined}
                       onMouseLeave={() => link.dropdownItems.length > 0 ? setActiveDropdown(null) : undefined}
                     >
@@ -161,7 +165,11 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                                 <Link
                                   key={item.name}
                                   href={item.href}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-500 transition-colors duration-200"
+                                  className={`block px-4 py-2 text-sm ${
+                                    pathname === item.href 
+                                      ? 'text-[#95131d] font-semibold bg-gray-50 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                                      : 'text-gray-700'
+                                  } hover:bg-gray-50 hover:text-[#95131d] ${pathname !== item.href ? item.color || '' : ''}`}
                                   onClick={() => setActiveDropdown(null)}
                                 >
                                   {item.name}
@@ -243,7 +251,11 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                               <div key={link.name} className="mt-1">
                                 <Link
                                   href={link.href}
-                                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500 ${link.color || ''}`}
+                                  className={`block px-4 py-2 text-sm ${
+                                    pathname === link.href 
+                                      ? 'text-[#95131d] font-semibold bg-gray-50 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                                      : 'text-gray-700'
+                                  } hover:bg-gray-50 hover:text-[#95131d] ${pathname !== link.href ? link.color || '' : ''}`}
                                   onClick={() => setIsOpen(false)}
                                 >
                                   {link.name}
@@ -254,7 +266,11 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                                       <Link
                                         key={item.name}
                                         href={item.href}
-                                        className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
+                                        className={`block py-2 text-sm ${
+                                          pathname === item.href 
+                                            ? 'text-[#95131d] font-semibold bg-gray-50 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                                            : 'text-gray-600'
+                                        } hover:bg-gray-50 hover:text-[#95131d]`}
                                         onClick={() => setIsOpen(false)}
                                       >
                                         {item.name}
@@ -302,7 +318,11 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                               <div key={link.name} className="mt-1">
                                 <Link
                                   href={link.href}
-                                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500 ${link.color || ''}`}
+                                  className={`block px-4 py-2 text-sm ${
+                                    pathname === link.href 
+                                      ? 'text-[#95131d] font-semibold bg-gray-50 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                                      : 'text-gray-700'
+                                  } hover:bg-gray-50 hover:text-[#95131d] ${pathname !== link.href ? link.color || '' : ''}`}
                                   onClick={() => setIsOpen(false)}
                                 >
                                   {link.name}
@@ -313,7 +333,11 @@ export default function Navbar({ menuItems, secondaryMenuItems, isLoading, error
                                       <Link
                                         key={item.name}
                                         href={item.href}
-                                        className="block py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-orange-500"
+                                        className={`block py-2 text-sm ${
+                                          pathname === item.href 
+                                            ? 'text-[#95131d] font-semibold bg-gray-50 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#95131d]' 
+                                            : 'text-gray-600'
+                                        } hover:bg-gray-50 hover:text-[#95131d]`}
                                         onClick={() => setIsOpen(false)}
                                       >
                                         {item.name}

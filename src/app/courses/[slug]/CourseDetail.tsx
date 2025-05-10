@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 import { API_BASE_URL } from '@/src/config/api.config';
+import { Hero } from '@/src/components/common';
 
 // Helper function to safely construct API image URL
 const getApiImageUrl = (path: string | null | undefined): string | null => {
@@ -49,41 +49,12 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, banner }) => {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Course Hero - Simplified */}
-      <section className="relative h-[70vh] w-full">
-        <div className="absolute inset-0">
-          <Image
-            src={bannerImageUrl}
-            alt={course.name}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/90" />
-        </div>
-        <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              {banner?.name}
-            </h1>
-            {banner?.banner_txt && (
-              <p className="text-xl text-white/80 mb-8">
-                {banner.banner_txt}
-              </p>
-            )}
-            <div className="flex items-center gap-4">
-              <div className="bg-[#FFD700] text-black px-6 py-2 rounded-full font-semibold shadow-lg">
-                {course.duration || "2 Years"}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Hero 
+        title={banner?.name || course.name}
+        subtitle={banner?.banner_txt || course.snippet || ""}
+        imageUrl={bannerImageUrl}
+        imageAlt={course.name}
+      />
 
       {/* Main Content */}
       <section className="py-20">

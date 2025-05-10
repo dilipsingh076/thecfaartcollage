@@ -1,11 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
-import { useState } from "react";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { Banner } from '@/src/types/api';
-import {  AdmissionsBanner,ChitrasantheBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
+import { AdmissionsBanner, Hero } from '@/src/components/common';
 
 // Helper function to get complete image URL
 const getApiImageUrl = (path: string | null | undefined): string | null => {
@@ -60,52 +58,11 @@ const DepartmentDetail: React.FC<DepartmentDetailProps> = ({
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Department Hero */}
-      <section className="relative h-[70vh] w-full">
-        <div className="absolute inset-0">
-          <Image
-            src={bannerImageUrl}
-            alt={department.name}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/90" />
-        </div>
-        <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              {department.name}
-            </h1>
-
-            <div className="flex flex-wrap gap-4">
-              {department.duration && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
-                  <span className="text-[#FFD700] font-semibold">Duration:</span>
-                  <span className="text-white ml-2">{department.duration}</span>
-                </div>
-              )}
-              {department.eligibility && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
-                  <span className="text-[#FFD700] font-semibold">Eligibility:</span>
-                  <span className="text-white ml-2">{department.eligibility}</span>
-                </div>
-              )}
-              {faculty.length > 0 && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
-                  <span className="text-[#FFD700] font-semibold">Faculty:</span>
-                  <span className="text-white ml-2">{faculty.length}</span>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Hero 
+        title={department.name}
+        imageUrl={bannerImageUrl}
+        imageAlt={department.name}
+      />
 
       {/* Main Content */}
      <section className="pt-20 md:pt-40">

@@ -13,6 +13,7 @@ export { default as TriangleCarousel } from './TriangleCarousel';
 export { default as ArtImage } from './ArtImage';
 
 // New components
+export { default as Hero } from './Hero';
 export { default as HeroSection } from './HeroSection';
 export { default as AdmissionsBanner } from './AdmissionsBanner';
 export { default as AboutSection } from './AboutSection';

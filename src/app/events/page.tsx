@@ -4,9 +4,29 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ChitrasantheBanner, LoadingSpinner } from '@/src/components/common';
-import { getEventsData, EventsData } from '@/src/services/api/events.service';
+import { ChitrasantheBanner, LoadingSpinner, Hero } from '@/src/components/common';
+import { getEventsData } from '@/src/services/api/events.service';
 import { API_BASE_URL } from '@/src/config/api.config';
+
+interface Event {
+  slug: string;
+  title: string;
+  category: string;
+  date: string;
+  time?: string;
+  venue: string;
+  snippet: string;
+  thumbImg: string;
+}
+
+interface EventsData {
+  banner: {
+    name: string;
+    banner_txt: string;
+    banner_img: string;
+  };
+  events: Event[];
+}
 
 export default function EventsPage() {
   const [eventsData, setEventsData] = useState<EventsData | null>(null);
@@ -50,34 +70,12 @@ export default function EventsPage() {
   return (
     <>
       <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
-          <Image
-            src={heroImage}
-            alt={eventsData?.banner?.name}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/40 via-black/60 to-black/80" />
-          </div>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative h-full flex items-center justify-center px-4"
-          >
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-                {eventsData?.banner?.name}
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
-                {eventsData?.banner?.banner_txt}
-              </p>
-            </div>
-          </motion.div>
-        </section>
+        <Hero 
+          title={eventsData?.banner?.name}
+          subtitle={eventsData?.banner?.banner_txt}
+          imageUrl={heroImage}
+          imageAlt={eventsData?.banner?.name}
+        />
 
         {/* Events Grid */}
         <section className="py-16 sm:py-20 lg:py-24">
@@ -99,7 +97,7 @@ export default function EventsPage() {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
-              {eventsData?.events?.map((event, index) => (
+              {eventsData?.events?.map((event: Event, index: number) => (
                 <motion.div
                   key={event.slug}
                   initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,6 @@
 'use client';
 
-import {  AdmissionsBanner, ErrorMessage, GallerySection, LoadingSpinner } from '@/src/components/common';
+import {  AdmissionsBanner, ErrorMessage, GallerySection, LoadingSpinner, Hero } from '@/src/components/common';
 import { API_BASE_URL } from '@/src/config/api.config';
 import { aboutPageContent } from '@/src/constants/content';
 import ImageViewer from '@/src/components/common/ImageViewer';
@@ -109,23 +109,12 @@ export default function AboutPage() {
   }
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
-        <img
-          src={heroImage}
-          alt="CFA Banner"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/50 to-black/70" />
-        <div className="absolute inset-0 flex flex-col justify-center items-center container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-center">
-            {heroTitle}
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-200 text-center max-w-2xl sm:max-w-3xl mx-auto px-4">
-            {heroSubtitle}
-          </p>
-        </div>
-      </section>
+      <Hero 
+        title={heroTitle}
+        subtitle={heroSubtitle}
+        imageUrl={heroImage}
+        imageAlt="CFA Banner"
+      />
       
       {/* Content Sections */}
       <section className="pt-20 md:pt-40">

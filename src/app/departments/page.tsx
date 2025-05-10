@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { AdmissionsBanner, LoadingSpinner, ErrorMessage } from '@/src/components/common';
+import { AdmissionsBanner, LoadingSpinner, ErrorMessage, Hero } from '@/src/components/common';
 import { MDXProvider } from '@mdx-js/react';
 import { processMarkdownContent } from '@/src/utils/content.utils';
 import { API_BASE_URL } from '@/src/config/api.config';
@@ -10,7 +10,6 @@ import { useDepartmentsData } from '@/src/hooks/useDepartmentsData';
 
 // Helper function to get complete image URL
 const getApiImageUrl = (path: string | null | undefined): string | null => {
-  console.log("check path", path);
   if (!path) return null;
   return path.startsWith('http') ? path : `${API_BASE_URL}/${path}`;
 };
@@ -44,45 +43,12 @@ export default function DepartmentsPage() {
   return (
     <MDXProvider>
       <main className="min-h-screen bg-gray-50">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
-          <div className="absolute inset-0">
-            <img
-              src={`${API_BASE_URL}/${data?.banner?.banner_img}`}
-              alt="Art Department Hero"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-          </div>
-          <div className="relative container mx-auto px-4 text-center h-full flex flex-col justify-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight"
-            >
-              {data?.banner?.name || "Our Departments"}
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
-            >
-              {data?.banner?.banner_txt || "Pioneering new approaches to fine art teaching and practice-based research"}
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8"
-            >
-              <a href="#departments" className="inline-block bg-[#FFD700] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#FFE55C] transition-all duration-300 transform hover:scale-105">
-                Explore Departments
-              </a>
-            </motion.div>
-          </div>
-        </section>
+        <Hero 
+          title={data?.banner?.name}
+          subtitle={data?.banner?.banner_txt}
+          imageUrl={`${API_BASE_URL}/${data?.banner?.banner_img}`}
+          imageAlt="Art Department Hero"
+        />
 
         {/* Introduction Section */}
         <section className="py-32 bg-white relative overflow-hidden">

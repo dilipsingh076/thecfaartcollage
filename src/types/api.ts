@@ -139,15 +139,16 @@ export interface Notice {
 }
 
 export interface Event {
+  id: number;
   title: string;
   slug: string;
-  snippet: string;
-  date: string;
   category: string;
-  time: string;
+  date: string;
+  time?: string;
   venue: string;
+  snippet: string;
+  description: string;
   thumbImg: string;
-  featuredImg: string;
 }
 
 export interface GalleryItem {
@@ -294,4 +295,28 @@ export interface ApiError {
     code: string;
     details?: string;
   };
+}
+
+export interface EventsSEO {
+  title: string;
+  description: string;
+  keywords: string;
+}
+
+export interface EventsBanner {
+  name: string;
+  banner_img: string;
+  banner_txt: string;
+}
+
+export interface EventsData {
+  seo: EventsSEO;
+  banner: EventsBanner;
+  events: Event[];
+}
+
+export interface EventDetailData {
+  seo: EventsSEO;
+  banner: EventsBanner;
+  events: Event;
 } 

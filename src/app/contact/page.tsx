@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChitrasantheBanner } from "@/src/components/common";
+import { ChitrasantheBanner, Hero } from "@/src/components/common";
 import { contactInfo } from "@/src/constants/content";
 import { getContactData, submitContactForm, ContactResponse, ContactFormData } from '@/src/services/api/contact.service';
 import { toast } from 'react-hot-toast';
@@ -102,31 +102,12 @@ export default function ContactPage() {
   const backgroundImageUrl = getApiImageUrl(contactData?.banner?.banner_img) || 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070&auto=format&fit=crop';
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url('${backgroundImageUrl}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: '0.4'
-          }}
-        />
-        
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-center">
-            {contactData?.banner.name}
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-200 text-center max-w-2xl sm:max-w-3xl mx-auto px-4">
-            {contactData?.banner.banner_txt}
-            </p>
-          </div>
-        </div>
-      </section>
+      <Hero 
+        title={contactData?.banner?.name || "Contact Us"}
+        subtitle={contactData?.banner?.banner_txt || "Get in touch with us"}
+        imageUrl={backgroundImageUrl}
+        imageAlt="Contact Us Banner"
+      />
 
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">

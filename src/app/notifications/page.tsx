@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { useHomeData } from '../../hooks';
-import { LoadingSpinner, ErrorMessage, ChitrasantheBanner } from '../../components/common';
+import { LoadingSpinner, ErrorMessage, ChitrasantheBanner, Hero } from '../../components/common';
 import { convertNoticesToNotifications } from '../../utils/notification.utils';
 import { Notification } from '../../utils/notification.utils';
 import { API_BASE_URL } from '@/src/config/api.config';
@@ -57,46 +56,12 @@ export default function NotificationsPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full">
-        <div className="absolute inset-0">
-          <div 
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: 'url("https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80")',
-            }}
-          ></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        </div>
-        <div className="relative container mx-auto px-4 text-center h-full flex flex-col justify-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight"
-          >
-            Notifications
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
-          >
-            Stay updated with the latest announcements, events, and important information from the College of Fine Arts.
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8"
-          >
-            <a href="#notifications-content" className="inline-block bg-[#FFD700] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#FFE55C] transition-all duration-300 transform hover:scale-105">
-              View Notifications
-            </a>
-          </motion.div>
-        </div>
-      </section>
+      <Hero 
+        title="Notifications"
+        subtitle="Stay updated with the latest announcements, events, and important information from the College of Fine Arts."
+        imageUrl="https://images.unsplash.com/photo-1557683311-eac922347aa1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80"
+        imageAlt="Notifications Banner"
+      />
 
       {/* Main Content */}
       <div id="notifications-content" className="container mx-auto px-4 py-12">
