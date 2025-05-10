@@ -42,13 +42,26 @@ export default function InstitutionalNavbar({ menuItems, isLoading, error }: Ins
                 <div key={link.name} className="relative group">
                   <Link 
                     href={link.href}
-                    className="px-3 py-2 text-sm font-medium hover:bg-orange-600 rounded-md transition-colors duration-200 whitespace-nowrap flex items-center"
+                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap flex items-center ${
+                      link.name.toLowerCase() === 'admission' 
+                        ? 'bg-[#95131d] text-white hover:bg-[#7a0f17] shadow-sm hover:shadow-md border border-[#95131d] hover:border-[#7a0f17] relative overflow-hidden group' 
+                        : 'hover:bg-orange-600 text-white'
+                    }`}
                     onMouseEnter={() => link.dropdownItems.length > 0 ? setActiveDropdown(index) : undefined}
                     onMouseLeave={() => link.dropdownItems.length > 0 ? setActiveDropdown(null) : undefined}
                   >
-                    {link.name}
+                    <span className="relative z-10">
+                      {link.name}
+                    </span>
                     {link.dropdownItems.length > 0 && (
-                      <DropdownIcon className="ml-1 w-3 h-3 text-white" />
+                      <DropdownIcon className={`ml-1 w-3 h-3 transition-all duration-200 ${
+                        link.name.toLowerCase() === 'admission' 
+                          ? 'text-white group-hover:rotate-180 relative z-10' 
+                          : 'text-white'
+                      }`} />
+                    )}
+                    {link.name.toLowerCase() === 'admission' && (
+                      <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-200"></span>
                     )}
                   </Link>
 

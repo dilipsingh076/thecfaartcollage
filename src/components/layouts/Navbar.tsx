@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../ui/Logo';
 import DropdownIcon from '../common/svg/DropdownIcon';
 import PhoneIcon from '../common/svg/PhoneIcon';
-import ClockIcon from '../common/svg/ClockIcon';
 import LocationIcon from '../common/svg/LocationIcon';
 import FacebookIcon from '../common/svg/FacebookIcon';
 import YoutubeIcon from '../common/svg/YoutubeIcon';
@@ -19,6 +18,7 @@ import SkeletonLoader from '../common/SkeletonLoader';
 interface DropdownItem {
   name: string;
   href: string;
+  color: string | null;
 }
 
 interface MenuItem {
