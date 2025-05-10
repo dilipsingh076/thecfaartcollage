@@ -44,7 +44,7 @@ export default function DepartmentsPage() {
     <MDXProvider>
       <main className="min-h-screen bg-gray-50">
         <Hero 
-          title={data?.banner?.name}
+          title={data?.banner?.name || ""}
           subtitle={data?.banner?.banner_txt}
           imageUrl={`${API_BASE_URL}/${data?.banner?.banner_img}`}
           imageAlt="Art Department Hero"
